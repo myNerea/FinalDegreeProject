@@ -14,7 +14,7 @@ Este trabajo, se fundamente principalmente en la teoría de juegos, siendo algun
 My undergraduate dissertation can be found in this repository.
 This work is primarily grounded in game theory, and addresses topics such as:
 
--Negotiation
+- Negotiation
 - Collaboration
 - Utility functions
 - Nash equilibria
