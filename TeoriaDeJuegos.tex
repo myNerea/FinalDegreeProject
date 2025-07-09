@@ -1,0 +1,3208 @@
+\documentclass[10pt,a4paper]{book}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{listings}
+\setcounter{tocdepth}{4}
+
+%\author{Nerea Almenta Camacho}
+%\title{Teoría de juegos}
+%\date{1 de junio de 2024}
+
+\begin{document}
+
+\begin{titlepage}
+\centering
+{\includegraphics[width=0.2\textwidth]{logo_us.png}\par}
+\vspace{1cm}
+{\bfseries\LARGE Universidad de Sevilla \par}
+\vspace{1cm}
+{\scshape\Large Grado en estad\'itica \par}
+\vspace{3cm}
+{\scshape\Huge Teor\'ia de juegos \par}
+\vspace{3cm}
+{\itshape\Large Nerea Almenta Camacho \par}
+\vfill
+{\Large Tutorizado por: \par}
+{\Large Antonio Rufián Lizana \par}
+\vfill
+{\Large 1 Junio 2024 \par}
+\end{titlepage} 
+
+\tableofcontents
+	
+\newpage
+	
+	
+\chapter{Una breve historia}
+
+En 1944 Jonh Von Neuman y Oskar Morgenstern escribieron la obra seminal
+más importante de la teoría de juegos:The Theory of Games and Economic
+Behavior. En este libro, Neuman y Morgenstern sientan las bases científicas de
+la teoría de juegos. Aunque la idea original fue la racionalización de la economía con el propósito de suplir de forma constructiva las lagunas de la teoría económica y establecer una metodología analítica que resolviera el problema, esta ciencia encontró aplicaciones en otros ámbitos como la política, sociología o incluso la estrategia militar.
+Habiéndose construido las bases de esta teoría tan recientemente, un joven John Forbes Nash las revoluciono por completo con su tesis doctoral Non-cooperative
+Games, la cual fue presentada en 1950. Asimismo, Nash hallo las condiciones
+para que un juego tuviera equilibrio. Para entender como de grande fue la aportación de Nash, veremos el dilema del prisionero. El cual originalmente fue desarrollado en 1950 por los matemáticos Merrill M. Flood y Melvin Dresher aunque el nombre lo obtuvo por parte de Albert Tucker(director de la tesis de Nash).	Otra aplicación de esta gran aportación se daría en la guerra fría, en la que según los hallazgos de John Von Neuman y Okar Morgenstern, tanto Estados unidos como Rusia deberían haber invertido el dinero en sus conciudadanos en vez de en una carrera armamentística que llevaba a la amenaza de una destrucción mutua. \\
+En este aspecto, podemos ver al igual que veremos en el dilema del prisionero,  el equilibrio supuesto por los padres de la teoría de juegos no se correspondía con lo que lo jugadores realizaban en la realidad ya que el equilibrio era otro, en concreto el ofrecido por Nash.\\
+
+Estas aportaciones y el surgimiento de esta nueva disciplina ha sido tan importante, que han encontrado ámbitos de aplicación en lugares tan inesperados como las subastas. Un ejemplo de ello es la denominada mayor subasta de la historia, en la que el gobierno de estados unidos vendió una buena parte de su espacio radioeléctrico. En la cual, haciendo uso de la teoría de juegos se consiguió maximizar el beneficio del estado y la eficiente asignación de las licencias.\\
+
+	
+\chapter{Introducción}	
+
+	
+Habiendo visto este repaso por la historia, pasemos ahora a la definición de algunos conceptos importantes para la comprensión de la teoría de juegos.\\
+
+Esta teoría está basada en el concepto de un juego, el cual podemos definirlo de la siguiente forma:\\
+
+
+\textit{\textbf{Definición 1.1}} Un juego es un modelo matemático, en el que se encuentran dos o más jugadores, donde la decisión de un jugador afecta a los demás jugadores. Esto implica que los diferentes jugadores pueden encontrarse en un conflicto de intereses.\\
+
+
+Habitualmente, entendemos como juegos aquellos como el ajedrez, el domino o las cartas, pero no son los únicos. Otro juego podría ser, el consistente en determinar el sueldo que recibe un trabajador. En este juego, la empresa y el trabajador tratan de obtener el máximo beneficio posible, pero sus intereses son contrapuestos, ya que si el trabajador gana mucho entonces el empresario ganará menos, mientras que si el trabajador gana menos, el empresario ganará más.\\
+
+Podemos ver pues que el juego no es más que el conjunto de reglas que lo definen, las cuales definen el espacio donde se juega. Así, en el juego del ajedrez tenemos un tablero con unas piezas, pero estas piezas solo pueden realizar ciertos movimientos.\\
+
+Sobre este espacio, surge el concepto de partida. \\\\
+
+
+
+\textit{\textbf{Definición 1.2}} Cada uno de los desarrollos del juego desde un inicio hasta el final es una partida.\\
+
+
+Vista la definición de un juego y de partida, podemos observar cómo ha ido surgiendo otro concepto fundamental a través de los ejemplos y en la propia definición de juego. Este concepto no es más que la noción de jugador. A continuación, definiremos que consideraremos en lo sucesivo como jugador y que características presenta.\\
+
+
+\textit{\textbf{Definición 1.3}} Un jugador, es todo individuo físico o colectivo de individuos con un mismo objetivo. Por tanto, en un juego los jugadores podrían ser personas, pero también podrían ser empresas o estados.\\
+
+Dichos jugadores presentan tres características principales:\\
+1)	Los jugadores se suponen racionales, es decir, se supone que su interés es maximizar su utilidad independientemente del perjuicio que pueda causar a otros jugadores. Así, si durante una partida en el póker tiene una mano alta, tratará de sacarle el máximo provecho a esto en vez de retirarse por el posible perjuicio que pueda causar a los demás.\\
+
+2)	Los jugadores conocen los patrones de preferencia de los otros jugadores.\\
+
+3)	Los jugadores tienen la capacidad de determinar la situación del juego.\\
+
+En base al número de jugadores que tiene un juego, podemos distinguir diversos tipos de juegos.\\
+
+
+\textit{\textbf{Definición 1.4}} Podemos definir los juegos bipersonales como aquellos en los que solo participan dos personas y los n-personales cuando participan más de dos. Así, el ajedrez sería un juego bipersonal, mientras que el póker sería un juego n-personal.\\
+
+
+Supongamos ahora un juego de n jugadores denotados como $K_k$ con $k=1, \ldots, n$. El juego es una secuencia de movimientos denotados por $\mathfrak{M}_k$. Un movimiento, es un conjunto de alternativas entre las cuales la elección tiene lugar. Estas alternativas puede ser de dos tipos: \\
+
+\textbf{- Movimientos Personales:} Son realizados por un jugador concreto, dependiendo de su decisión y de nada más. Para este tipo de movimientos, se debe especificar qué jugador realizó el movimiento.\\
+
+\textbf{- Movimiento de suerte:} Es una elección que depende de algún tipo de mecánica lo cual hace que sea fortuito. Este tipo de movimientos, tienen asociados una probabilidad. Esta probabilidad que notaremos como $p_k$ tiene que cumplir que $p_k \geq 0$ y que $\sum p_k=1$ en cada movimiento.\\
+
+Así por ejemplo, cualquier movimiento en ajedrez sería un movimiento personal, mientras que en el póker el reparto de cada una de las cartas sería un movimiento de suerte. Teniendo que cada una de las cartas tiene una probabilidad de encontrarse en una mano. \\
+
+De aquí surge la noción de juegos mixtos, siendo un juego mixto aquel que combina movimientos personales con movimientos de suerte. Siendo el póker un buen ejemplo de este tipo de juegos.\\
+
+
+Supongamos ahora un jugador $K_k$ con $k=1, \ldots, n$. La información de este jugador en $\mathfrak{M}_k$, es decir, en el k-esimo movimiento, consiste en toda la información de los movimientos previos a ese movimiento. Por ende, el jugador sabe lo que ha pasado pero no sabe lo que pasará(ha visto el pasado, pero no sabe el futuro).\\ 
+
+Está información pasada no tiene por qué ser completa, es decir, el jugador no tiene por qué conocer todo lo que ha pasado. De esto surgen dos conceptos como son la anterioridad y la preliminaridad.\\
+ 
+\textit{\textbf{Definición 1.5}} La anterioridad es el orden cronológico en que los movimientos suceden, cumpliendo así una propiedad transitiva, es decir, si A ocurre antes que B y B antes que C entonces A ocurre antes que C.\\\\
+
+\textit{\textbf{Definición 1.6}} La preliminaridad, es todos aquellos movimientos que hayan ocurrido con anterioridad a la elección presente del jugador, y cuya información sea conocida para el jugador.\\\\
+
+En juegos como el ajedrez tenemos que el concepto de preliminar coincide con el de anterioridad. \\
+
+Para explicar este concepto imaginemos la siguiente situación:\\
+
+Supongamos que estamos jugando al ajedrez y tenemos que decidir que pieza mover. En este caso, nuestra elección de movimiento se llevará a cabo sabiendo todos los movimientos que se han realizado antes, tanto por nosotros como por el adversario. Por ello, si la secuencia ha sido, e4, e5, d3 (Es decir, ha movido el peón de rey las blancas dos posiciones, después las negras han movido el peón de rey dos posiciones y por último las blancas han movido una casilla el peón de dama). Entonces tenemos que e4 ha ocurrido con anterioridad a e5 porque ha ocurrido antes en el tiempo, pero también ha sido preliminar porque el jugador que jugaba con negras, conocía el movimiento que habían hecho las blancas antes de realizar su movimiento, es decir, el movimiento de e4 era conocido por las negras antes de realizar e5.\\
+
+Por el contrario, imaginemos que estamos jugando al póker y tenemos que decir si apostamos o nos retiramos. En este caso, el otro jugador ya ha realizado su elección. Vemos como aquí, se ha llevado acabo la siguiente secuencia de movimientos:\\
+
+Reparto de la mano al jugador 1, Reparto de la mano al jugador 2, Movimiento del jugador 1.\\
+
+Aquí, cada jugador conoce únicamente su mano. Teniendo esto presente, sabemos que el reparto de la mano de jugador 2 es anterior al movimiento del jugador 1 porque ha ocurrido antes en el tiempo, pero no es preliminar porque el jugador 1 no lo conocía antes de realizar su movimiento. Por este mismo motivo, la mano del jugador 1 es anterior a su movimiento y por ende al movimiento del jugador dos, pero para el jugador dos solo es preliminar el movimiento del jugador 1 porque es lo que conoce, ya que el segundo jugador desconoce cuál es la mano del primer jugador.\\
+
+Vemos con esto que la principal diferencia es que, anterioridad implica todo lo que se haya realizado, en el orden cronológico en el que se ha realizado. Mientras que preliminaridad incluye todo lo que el jugador que se dispone a realizar su elección, ha observado con anterioridad al momento de tener que elegir. Por ende, el reparto de la mano al primer jugador es anterior al movimiento del segundo jugador, pero no es preliminar al movimiento del segundo jugador.\\
+
+
+Este concepto nos permite clasificar un juego en función de la información que tienen cada uno de los jugadores que lo juegan.\\
+Así, por ejemplo el ajedrez es un juego de información perfecta, ya que cada uno de los jugadores conoce todos los movimientos que ha realizado el adversario, y puede intuir todas los posibles movimientos que hará. Por el contrario, el póker es un juego de información imperfecta, puesto que cada uno de los jugadores conoce únicamente su mano y las acciones de los otros jugadores, pero nunca, conoce la mano de los demás jugadores.\\
+El conocimiento parcial de la información implica que en juegos como el poker surja el concepto de señal.\\
+Así, si tenemos dos jugadores, si el primero decide apostar fuerte puede implicar que tiene una buena mano. Para el segundo jugador solo existe la información de lo que ha hecho el primer jugador, que es apostar fuerte. Sin embargo esto proporciona un poco de información acerca de lo "buena" que es la mano de su adversario.\\
+
+Hasta ahora sabemos que un juego es jugado por un jugador el cual para jugarlo realiza una serie de movimientos en base a una cierta información. Bajo este punto podemos preguntarnos ¿cómo ganará el jugador el juego? Para responder a esta pregunta, analizaremos el concepto de estrategia.\\
+
+
+\textit{\textbf{Definición 1.7}} Una estrategia es el proceso de elección de un movimiento en una posición determinada en base a la información que conoce el jugador. Pudiendo considerarse como el plan según el cual un jugador jugará el juego.\\ 
+
+Básicamente es cada una de las secuencias de movimientos que realizará un jugador en función de los movimientos realizados por los demás jugadores.\\
+
+Dentro de las estrategias podemos considerar dos tipos:\\
+
+1)	Si ante la misma posición el jugador siempre elige la misma alternativa, entonces el jugador esta siguiendo una estrategia pura.\\
+
+2)	Por el contrario, si el juego incluye elementos estadísticos, es decir, ante la misma situación no siempre se lleva a cabo la misma estrategia, si no que la estrategia realizada viene dada por una distribución de probabilidad, entonces el jugador esta siguiendo una estrategia mixta.\\
+
+Las estrategias mixtas, consisten pues en una distribución de probabilidad de un conjunto de estrategias puras. Se cumple además, que todas estas probabilidades son mayores que 0 y que su suma es igual que 1.\\
+
+Notemos por tanto que las estrategias puras son un caso particular de las estrategias mixtas.\\
+
+Recapitulando, una estrategia pura es aquella en la que siempre en la misma situación se elige el mismo movimiento. Mientras que una estrategia mixta es aquella en la que en una misma situación la elección de movimiento pasa por una distribución de probabilidad, es decir, se realiza de forma aleatoria.\\
+
+Un ejemplo de esto podría ser:\\
+1) Tenemos un conjunto de movimientos legales en la posición P. Supongamos que los tenemos en una lista y la lista siempre la ponemos de la misma forma. Entonces elegir el primer elemento de la lista. Esto sería una estrategia pura.\\
+Un ejemplo práctico de ello sería:\\
+Imaginémonos que estamos jugando al ajedrez. Somos negras y tenemos que realizar nuestro primer movimiento, el jugador rival ha movido su peón de rey dos posiciones, ante esta situación, nosotros como novatos, decidimos mover el peón de rey dos posiciones igual que el contrario por simetría. Vemos que esto es una estrategia pura. Esto es debido a que siempre ante la misma situación haremos lo mismo, es decir, frente a que el enemigo mueva el peón del rey, nosotros haremos el mismo movimiento.\\
+
+2) Supongamos ahora que tenemos nuevamente la lista de movimientos legales en la posición P, si ahora elegimos un movimiento de esta lista aleatoriamente, esto constituiría una estrategia mixta.\\
+
+Veamos un ejemplo práctico:\\
+
+Supongamos nuevamente que nos encontramos jugando al ajedrez. En este caso somos las blancas y tenemos que realizar nuestro primer movimiento. Conocemos muchas aperturas por lo que tenemos que decantarnos por una de ellas. En este caso la elección de la apertura que vamos a realizar y con ello el primer movimiento se realizará de forma aleatoria, de tal forma que la siguiente vez que nos encontremos en esta situación puede que no hagamos la misma apertura. Por lo que  en este caso la elección del primer movimiento de blancas constituye una estrategia mixta ya que cada vez que lo realice, ejecutaré un movimiento diferente.\\
+
+Hemos podido observar con la descripción anterior, que un juego puede tener tanto estrategias mixtas como estrategias puras, pero esto no es siempre así. Para ilustrar esto veamos un ejemplo.\\
+
+Sea el juego de piedra, papel o tijera. Y supongamos que juegan a el dos jugadores. Si el primero de ellos siempre juego piedra, entonces el segundo jugador siempre elegirá papel. Por tanto el primer jugador siempre perdería si siguiese esa estrategia. Vemos en este caso, que si un jugador siempre sigue una estrategia pura entonces siempre perderá. Por ello, es necesario para ambos jugadores utilizar una estrategia mixta con la que evitar que el otro jugador pueda predecir que es lo próximo que sacará. \\
+El estudio de este juego ha sido muy breve ya que necesitamos nociones que todavía no tenemos, posteriormente cuando veamos el equilibrio y el teorema MiniMax ahondaremos en el estudio de este juego.\\
+
+
+Es necesario en este punto añadir una nota explicativa. \\
+
+Supongamos un juego con dos estrategias, y supongamos por simplicidad que la primera estrategia se elige con probabilidad $\alpha$ y la segunda con probabilidad $1- \alpha$. En este caso, si $\alpha$ y $1-\alpha$ toman valores en el conjunto $\{0,1\}$, es decir, o valen cero o valen 1, entonces la estrategia es pura. Por el contrario, si toman valores en el intervalo (0,1), es decir, solo puede tomar valores fraccionarios la probabilidad, esto implica que la estrategia es mixta. \\
+
+Bajo estos conceptos, surge una noción de juegos:\\
+
+Sea un juego de dos jugadores, jugador1 y jugador2, los cuales tienen ambos dos estrategias, estrategia1 y estrategia2. Supongamos, por simplicidad, que cada uno de los jugadores le asigna una probabilidad a cada una de las estrategias para indicar que tan posible es que elija esa estrategia. Supongamos pues, que la probabilidad asignada por el jugador uno a la primera estrategia es denotada por $\alpha$, mientras que la probabilidad asignada por el primer jugador a la segunda estrategia es $1-\alpha$. Análogamente, la probabilidad asignada a la primera estrategias por el segundo jugador es $\beta$ y la probabilidad asignada a la segunda estrategia es $1-\beta$.\\
+De este supuesto surge la noción de tres tipos de juegos:\\
+
+1) Si todas las probabilidades toman valores en $\{0,1\}$, es decir, todas son o 0 o 1 entonces en ese caso el juego es un juego puro.\\
+Así si $\alpha=0$ y $\beta=1$ esto sería un juego puro ya que $\alpha=0, 1-\alpha=1, \beta=1, 1-\beta=0$, por lo que todas las probabilidades tomarían los valores o 0 o 1. \\
+En este caso, que $\alpha=0$ indica que el primer jugador jugará seguro la segunda estrategia en una situación determinada. Mientras que $\beta=1$ indica que el jugador2 jugará su primera estrategia siempre en una situación determinada.\\
+
+2) Si las probabilidades están todas en el intervalo [0,1] entonces el juego es un juego mixto.\\
+Así, en el ejemplo anterior, $\alpha=0$ y $\beta=\dfrac{1}{2}$ sería un juego mixto, porque todas las probabilidades toma valores en el intervalo [0,1]. \\
+Que $\beta=\dfrac{1}{2}$ implica que el segundo jugador elegirá su segunda estrategia con la mitad de probabilidad, es decir, este jugador elegirá que estrategia usar, tirando una moneda al aire.\\
+
+3) Por último, si las probabilidades están todas en el intervalo (0,1), es decir, ninguna toma los valores 0 o 1, entonces el juego se dice totalmente mixto.\\
+Así, el juego anterior sería totalmente mixto si $\alpha=\dfrac{3}{4}$ y $\beta=\dfrac{1}{2}$.\\
+
+
+Recordemos ahora nuestra pregunta acerca de cómo podíamos ganar el juego. Y planteémonos un análisis del ajedrez. \\
+
+
+Sabemos que el ajedrez es un juego bipersonal, ya que es jugado por dos jugadores, sin lugar para los movimientos de suerte. Además, en este juego ambos jugadores tienen intereses claramente opuestos, debido a que lo que gana uno lo pierde el otro y viceversa. \\
+
+Bajo estas condiciones Zermelo se preguntó, \\
+
+1) ¿Qué significa que un jugador este en una posición ganadora? ¿Es posible definirlo de una forma matemáticamente objetiva?\\
+
+2) ¿Si el jugador está en una posición ganadora, puede ser determinado el número de movimientos necesarios para ganar?\\
+
+Para responder a la primera pregunta, basándonos en el teorema de Zermelo, necesitaremos definir tres subconjuntos.\\
+
+El primero de ellos es el que contiene todas las secuencias de posibles movimientos que hacen ganar a las blancas independientemente de lo que jueguen las negras. Si está vació, las blancas a lo sumo podrán hacer tablas desde su posición.\\
+
+El segundo subconjunto, sería el subconjunto de las tablas, en este caso, el jugador puede posponer su derrota indefinidamente, lo que se considera como tablas.\\
+Por último, si este segundo subconjunto está vacío, solo queda un subconjunto que es el que contiene todas las posibles secuencias que hacen perder al jugador. En este último subconjunto haga lo que haga el jugador (las blancas), solo puede posponer la derrota si su contrincante juega correctamente. \\
+
+La posibilidad de que tanto el subconjunto ganador para las blancas como el subconjunto de tablas puedan estar vacíos, implica que las blancas no tienen garantía de que no puedan perder. Llegando así a una contradicción con “el primer movimiento tiene ventaja" de Dimand and Dimand (1996). Por esto, podemos decir, que las blancas al principio de la partida tienen una estrategia ganadora. \\
+
+En respuesta a la segunda pregunta, Zermelo indicó que el número máximo de movimientos será como mucho el número de posiciones del juego. Notar que este número no es despreciable, en tanto que su tamaño es del orden de $10^{120}$.\\
+
+Este número es conocido como el número de Shannon, el cual nos permite apreciar que el ajedrez solo tiene un número finito de posiciones posibles, pero que podría volverse infinito si eliminamos las reglas del juego.\\
+
+Este número finito de posibilidades, pero tan sumamente grande que podría considerarse infinito surge a partir de una construcción basada en dos conceptos. El primero de ellos es que, en cada movimiento, existen en media 30 movimientos legales. Asimismo, como segundo concepto notar que en media una partida suele durar 40 movimientos hasta la rendición de uno de los dos jugadores, pudiéndose incrementar hasta llegar a un jaque mate. \\
+
+Hemos visto lo que un jugador puede realizar para intentar ganar en solitario. Pero no hemos tenido en cuenta que a veces cooperar con otros jugadores le es más conveniente al jugador. \\
+La cooperación es aquella en la que dos o más jugadores cooperan(deciden en conjunto) para obtener un beneficio mayor al que obtendrían por separado.\\
+De este concepto, surge dos tipos de juegos:\\
+1) No cooperativos. Este tipo de juegos no permite la cooperación entre los jugadores. \\
+2) Cooperativos. Este tipo de juegos permite la cooperación entre los jugadores.\\
+En ellos los jugadores deciden si cooperar con otros o no en función de si esta cooperación les reporta mayores beneficios que la actuación en solitario.\\
+En capítulos sucesivos se tratará este tema en mayor profundidad.\\
+
+Tras un repaso de todo el conocimiento anterior, podemos observar como un juego se puede clasificar en función de diversos elementos:\\
+
+1) En número de jugadores que participaban en el juego.\\
+Así, podemos distinguir dos tipos de juegos principales:\\
+	- \textbf{Juegos bipersonales.} Son aquellos que se desarrollan únicamente con dos jugadores. Es decir, solo dos jugadores juegan al juego.\\
+	-\textbf{Juegos n-personales.} Son aquellos en lo que juegan más de dos personas al juego.\\
+
+2) La información que tienen los jugadores.\\
+Así, podemos distinguir dos tipos de juegos:\\
+	-\textbf{ Juegos de información perfecta.} Son aquellos en los que todos los jugadores conocen todo lo que ha ocurrido en el juego.\\
+	-\textbf{Juegos de información imperfecta.} Son aquellos en los que los jugadores no saben todo lo que ha ocurrido en el juego.\\
+
+3) El tipo de estrategia del jugador.\\
+Así podíamos distinguir tres tipos de juegos:\\
+	- \textbf{Juegos puros.} En los que las estrategias se elegían con probabilidad uno o cero, es decir, ambos jugadores elegían estrategias puras.\\
+	- \textbf{Juegos mixtos.} En los que las estrategias se elegían en el intervalo [0,1]. Es decir, la estrategia de algunos jugadores era una estrategia mixta y la de otros era una estrategia pura.\\
+	- \textbf{Totalmente mixtos.} En los que las estrategias se elegían en el intervalo (0,1). Es decir, todos los jugadores elegían estrategias mixtas.\\
+
+
+4) Si se permite o no la cooperación entre jugadores.\\
+Así, podemos distinguir dos tipos de juegos:\\
+	-\textbf{Juegos no cooperativos.} En estos juegos no se permite la cooperación entre los jugadores a lo largo del juego.\\
+	-\textbf{Juegos cooperativos.} En estos juegos se permite la cooperación entre jugadores a lo largo del juego.\\
+	
+
+Por último, para finalizar este primer capitulo y tras un repaso de todos los conceptos fundamentales de la teoría de juego, es necesario recoger la forma de representación de un juego.\\	
+	
+	
+Un juego puede ser entendido como un árbol. Con un conjunto finito de nodos denominados vértices (las alternativas) unidos por lineas denominadas arcos.  \\
+Estos nodos tienen algunas propiedades:\\
+1) Un nodo B es inmediato a otro C si B sigue a C y existe un arco que los une.\\
+2) Un nodo B sigue a un vértice C si la secuencia de arcos que unen A con B pasan por C.\\
+Asimismo, para cada alternativa elegida en cada uno de los nodos , se obtiene un resultado final que tiene asociado un valor en la función de pago.\\	
+
+Veamos un ejemplo ilustrativo de como sería esta representación de un juego: \\
+
+\begin{center}
+\setlength{\unitlength}{1cm}
+\begin{picture}(15,13)
+\put(3.5,11.4){\framebox(3,1.5){$\begin{array}{c} \mbox{Nodo raíz} \end{array}$}}
+\put(0,8.55){\framebox(3,1.5){$\begin{array}{c} A \end{array}$}} \put(2.5,10.05){\line(3,2){2}} %
+\put(9,8.55){\framebox(3,1.5){$\begin{array}{c} B \end{array}$}} \put(9,9.05){\line(-3,2){3.5}} %
+\put(0.9,10.55){$p_1$} %cartel izqda
+\put(7,10.55){$p_2$} %cartel dcha
+
+\put(-3,5.7){\framebox(3,1.5){$\begin{array}{c} C \end{array}$}} \put(-1.5,7.2){\line(3,2){2}} %
+\put(3,5.7){\framebox(3,1.5){$\begin{array}{c} D \end{array}$}} \put(4.5,7.2){\line(-3,2){2}} %
+\put(-2,7.7){$p_3$} %cartel izqda
+\put(4,7.7){$p_4$} %cartel dcha
+
+
+\put(0,2.85){\framebox(3,1.5){$\begin{array}{c} E \\ \end{array}$}} \put(7,4.35){\line(-3,2){2}} %
+\put(6,2.85){\framebox(3,1.5){$\begin{array}{c} F \end{array}$}} 
+\put(2,4.35){\line(3,2){2}} %
+\put(0.9,4.85){$p_5$} %cartel izqda
+\put(6.9,4.85){$p_6$} %cartel dcha
+
+
+\put(7.5,5.7){\framebox(3,1.5){$\begin{array}{c} G \end{array}$}} \put(8.5,7.2){\line(3,2){2}} %
+\put(11.5,5.7){\framebox(3,1.5){$\begin{array}{c} H \end{array}$}} \put(12.5,7.2){\line(-3,2){2}} %
+\put(8,7.7){$p_7$} %cartel izqda
+\put(13,7.7){$p_8$} %cartel dcha
+
+
+
+\end{picture}
+\end{center}
+
+
+Vemos como partimos de un nodo raíz, el cual es la decisión inicial del jugador. \\ 
+A continuación, el jugador elige cada una de las alternativas con una determinada probabilidad.\\
+Por ejemplo, la alternativa A ha sido elegida con una probabilidad $p_1$.\\
+Notemos que en este caso $p_2$ es básicamente $1-p_1$.\\
+Si continuamos por el árbol, podemos observar como el nodo C, es decir el que contiene a la alternativa C, es inmediato al A. Esto implica que si el jugador elige A, a continuación volverá a realizar una elección, y esta será entre C y D.\\
+Además, por esto mismo vemos como C sigue a A.\\
+Al final de cada uno de estos nodos, tendríamos la función de pago resultante, es decir, tendríamos el valor que obtendría el jugador por elegir cada una de las secuencias de nodos.\\
+
+La función de pago, se dará en aquellos nodos que sean terminales, es decir, que no tengan ninguna ramificación más. Así, en este caso en el nodo C daríamos la función de pago pero en el D no.\\
+
+Notar que las probabilidades entre diversas opciones no tienen porque coincidir, es decir $p_1$ no tiene porque ser igual a $p_3$.\\
+
+Visto las definiciones necesarias y la representación gráfica, vamos a introducir un concepto que posteriormente puede llegar a ser útil. \\
+
+\textit{\textbf{Definición 1.8}} El termino n-tupla siempre se referirá a un conjunto de items, donde cada uno de los items esta asociado a un jugador.\\
+
+\newpage
+
+\section{El pago}
+
+Hemos hablado en el capitulo anterior sobre el pago recibido por un jugador. En esta sección recogeremos este elemento de la teoría de juegos.\\
+
+El pago que recibe un jugador por la elección de sus alternativas viene dado por  la función de pago.\\
+
+\textit{\textbf{Definición 1.9}} La función de pago es el valor que un individuo espera obtener por la elección de una alternativa.\\
+
+El pago recibido para cada una de las alternativas se representa en la matriz de pagos.\\
+
+
+Supongamos que tenemos dos jugadores A y B, que tienen dos posibles estrategias. \\
+Sus matrices de pago son respectivamente $A=(A_{i,j})$ y $B=(B_{i,j})$ con $i,j=1,2$. En este caso, las matrices son de la forma:\\ 
+
+\begin{equation}
+	A= \begin{pmatrix}
+		a_{11} & a_{12}\\
+		a_{21} & a_{22}
+	\end{pmatrix}
+	B= \begin{pmatrix}
+		b_{11} & b_{12}\\
+		b_{21} & b_{22}
+	\end{pmatrix}
+\end{equation} 
+
+
+
+Donde las filas representan la elección del primer jugador y las columnas la elección del segundo jugador.\\
+Aquí la celda $a_{11}$ indicaría el pago que recibe el primer jugador cuando el primer jugador y el segundo jugador han elegido su primera alternativa.\\
+
+El análisis para la matriz del segundo jugador B sería análogo al anterior realizado para A.\\
+
+Habitualmente, ambas matrices de pago se muestran unidas(salvo en los casos de juegos de suma nula) viéndose de la siguiente forma:\\
+
+\begin{equation}
+	\begin{pmatrix}
+		(a_{11},b_{11}) & (a_{12}, b_{12})\\
+		(a_{21},b_{21}) & (a_{22},b_{22})
+	\end{pmatrix}	
+\end{equation} 
+
+De tal forma que si ambos jugadores eligen su primera estrategia, entonces el pago recibido sería $a_{11}$ para el primer jugador y $b_{11}$ para el segundo jugador.\\
+
+
+
+Las probabilidades para cada una de las estrategias las denotaremos por $a_1$,$a_2$ para A y  $b_1$ y $b_2$ para B. \\
+La función de pago del primer jugador para la primera alternativa vendría dada por:\\
+
+$ \pi_A= \Sigma^{2}_{j=1} A_{1,j}*a_1*b_j$\\
+
+$ A_{1,j}$ representa la primera fila de la matriz. Es decir, esto nos daría los elementos $(a_{11} \thinspace a_{12})$.\\
+Por lo que esa suma lo que esta haciendo es multiplicar la primera fila de la matriz, es decir la primera elección del primer jugador, por la probabilidad de que el primer jugador la elija y por la probabilidad de que el segundo jugador elija cada una de las alternativas.\\
+Esto nos muestra para una alternativa del primer jugador, cual es el valor que el jugador puede esperar recibir si juega esa alternativa.\\
+
+La función de pago de A será:\\
+
+$ \pi_A= \Sigma^{2}_{i,j=1} A_{i,j}*a_i*b_j$\\
+
+Análogamente, la función de pago de B será:\\
+
+$ \pi_B= \Sigma^{2}_{i,j=1} B_{i,j}*b_j*a_i$\\
+
+Veamos un ejemplo para describir esto:\\
+
+La caza del ciervo: Dos cazadores tienen dos posibles estrategias puras cada uno: estar atento para cazar a un ciervo entre los dos o bien abandonar su puesto para cazar un conejo por su cuenta. Si los dos cazadores están atentos, entonces cazan al ciervo y cada uno se lleva la mitad. Si algún cazador deja de estar atento para cazar un conejo, entonces el ciervo escapa y el conejo pertenece al cazador que lo cogió. Se supone que para cazar un conejo basta con un cazador y que hay al menos un conejo para cada uno. Supongamos, por ejemplo, que medio ciervo vale lo mismo que cincuenta conejos.\\
+
+Definamos un orden para cada una de las estrategias para aclarar la explicación:\\
+Estrategia 1: Esperar al ciervo(permanecer en el puesto)\\
+Estrategia 2: Coger el conejo(abandonar el puesto)\\
+
+Ambas estrategias tienen una probabilidad asociada, que es la probabilidad de que el cazador 1 o 2 la elijan.\\
+
+Así tendremos que a es la probabilidad de que el cazador1 elija la primera estrategia, mientras que 1-a, será la probabilidad de elegir la segunda estrategia.\\
+Análogamente, la probabilidad b corresponda a que el segundo jugador elija la primera estrategia, frente a la probabilidad 1-b de que elija la segunda.\\
+
+Asimismo, en las matrices de pago denotaremos al cazador1 como C1 y al cazador2 como C2.\\
+
+Con estos conceptos definidos, la matriz de pago del primer cazador es:\\
+
+
+
+\begin{center}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		 & C2 mantenerse en  puesto & C2 caza conejo \\
+		\hline
+		C1  mantenerse en  puesto & 50 & 0 \\
+		\hline
+		C1 caza conejo & 1 & 1 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Teniendo esto, la función de pago del primer cazador sería:\\
+
+$ \pi_A= 50*a*b + 0*a*(1-b) + 1*(1-a)*b + 1*(1-a)*(1-b)$ \\
+
+En este caso, si sabemos que $a=0$ entonces eliminaríamos toda la primera alternativa del jugador A, quedando su función de pago como:\\
+
+$ \pi_A=  1*b + 1*(1-b)$ \\
+
+En este caso vemos que si el primer jugador elige la segunda alternativa, haga lo que haga el otro jugador obtendrá el conejo.\\
+
+Si análogamente el jugador B sabemos seguro que elegirá su primera opción, es decir, $b=1$ entonces la función de pago quedaría:\\
+
+$ \pi_A= 50*a* + 1*(1-a)$ \\
+
+En este caso, podemos observar que dependiendo de lo que elija el primer jugador, recibirá un pago u otro.\\
+
+Análogamente la función de pago del segundo jugador sería:\\
+
+$ \pi_B= 50*b*a + 1*b*(1-a)+ 0*(1-b)*a +  + 1*(1-b)*(1-a)$ \\
+
+
+\newpage
+
+\section{El equilibrio}		
+
+Definamos a continuación el equilibrio según Nash.\\
+	
+\textit{\textbf{Definición 2}} Existe un punto de equilibrio cuando una vez elegida las estrategias por cada uno de los jugadores, ningún jugador puede incrementar su ganancia cambiando su estrategia mientras las estrategias de los demás jugadores permanecen fijas.\\
+
+Esto implica que una vez terminado el juego ningún jugador se arrepiente de su elección. Esto es debido a que no puede mejorar su pago cambiando de elección.\\
+
+
+Veamos a continuación, algunos ejemplos de juegos, que resolviéndose mediante una estrategia pura tienen equilibrio de Nash.\\ 
+
+
+\begin{center}
+	$1. \quad$
+	\begin{tabular}{|c|c|c|}
+		\hline
+		A/B & $b_1$ & $b_2$ \\
+		\hline
+		$a_1$ & (2,1) & (0,0) \\
+		\hline
+		$a_2$ & (0,0) & (1,2) \\
+		\hline
+	\end{tabular}
+\end{center}
+
+En este juego la celda $c_{11}$ y $c_{22}$ son celdas donde se encuentra el equilibrio. Veamos por qué son celdas de equilibrio, para ello cogeré la celda  $c_{11}$ siendo el análisis de la otra celda análogo. En está celda, el jugador A estaría recibiendo un pago de 2, mientras que el jugador B estaría obteniendo un pago de 1. Si el jugador uno decide cambiar su elección de $a_1$ a $a_2$ entonces ahora estaría recibiendo un pago de cero, por lo que en este caso estaría perdiendo dinero. Por esto, a A no le conviene cambiar su elección si sabe que B no la va a cambiar. Esto mismo ocurre con B si decide cambiar su elección de $b_1$ a $b_2$.\\
+Notar, que el primer valor corresponde a lo obtenido por $a_i$ y el segundo el que corresponde a $b_i$ con i=1,2.\\
+
+\textbf{Nota:} Vemos como el número de estrategias que puede tomar el primer jugador es igual al número de filas de la matriz. Y el número de estrategias que puede tomar el segundo jugador es igual al número de columnas de la matriz.
+
+
+
+Veamos ahora un segundo juego, en este no existe equilibrio para una estrategia pura:\\
+
+
+\begin{center}
+		$2. \quad$
+	\begin{tabular}{|c|c|c|}
+		\hline
+		A/B & $b_1$ & $b_2$ \\
+		\hline
+		$a_1$ & (-1,1) & (1,-1) \\
+		\hline
+		$a_2$ & (1,-1) & (-1,1) \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Aquí no existe un equilibrio ya que si nos encontramos en la celda (-1,1) entonces A cambiará su decisión de $a_1$ a $a_2$ para pasar a (1,-1), teniendo así que en la nueva posición gana una unidad monetaria, a diferencia de la posición anterior, en la que la perdía. Asimismo, si este cambio se produce, B querría cambiar su opción de $b_1$ a $b_2$ para pasar de perder dinero a ganarlo. Pero en este caso nuevamente A cambiaría su elección de $a_2$ a $a_1$ ya que en caso contrario, estaría perdiendo dinero cuando podría estar ganándolo. Vemos que nuevamente B querría cambiar su estado, eligiendo ahora $b_1$, por lo que llegaríamos a la situación de partida. Vemos pues que en este caso no existe un equilibrio ya que cuando uno se encuentra en una "buena"  posición, el otro se encuentra con que tiene un alternativa para estar mejor, por lo que se produce un cambio.\\
+
+
+Notemos que el juego de piedra papel o tijeras constituye un problema similar al anterior con la excepción de que es un matriz $3*3$ en vez de $2*2$. Por ello el análisis de ese problema será análogo al de este otro problema.\\
+
+
+\textit{\textbf{Ejemplo 1: El dilema del prisionero}} \\
+
+El equilibrio de Nash, fue mostrado por primera vez con el famoso dilema del prisionero. Este dilema reza de la siguiente forma:\\
+
+La policía arresta a dos sospechosos, pero no hay pruebas suficientes para
+condenarlos. Tras haberlos separado, se les ofrece el mismo trato. Si uno confiesa y su cómplice no, el cómplice será condenado a la pena total, diez años, y el primero será liberado. Si uno calla y el cómplice confiesa, el primero recibirá esa pena y será el cómplice quien salga libre. Si ambos confiesan, ambos serán condenados a seis años. Si ambos lo niegan, todo lo que podrán hacer será encerrarlos durante dos años por un cargo menor. Lo que puede resumirse con la siguiente matriz de pagos:
+
+\begin{center}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		 & Preso2 confiesa & Preso2 no confiesa \\
+		\hline
+		P1 confiesa & 6 años cada uno & Preso1 libre, Preso2 10 años. \\
+		\hline
+		P1 no confiesa & Preso1 10 años, preso2 libre & 2 años cada uno \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Aquí, para Neuman y Morgenstern el equilibrio se encuentra en la cooperación,es decir, que ninguno confiese. Ya que así, ambos presos obtendrían únicamente dos años de prisión siendo este mejor resultado que no cooperando. Por el contrario, para Nash el equilibrio se encuentra en que ambos confiesen. Ya que existe un equilibrio cuando ningún jugador puede incrementar su ganancia cambiando su estrategia mientras que las otras permanecen fijas.Es decir, una vez realizada la alternativa, ningún jugador se arrepiente de su elección.\\
+Este es el equilibrio desarrollado ya que ninguno de los jugadores puede asumir que su cómplice vaya a callar, por lo que suponiendo que habla la mejor opción para él, es hablar también. \\
+
+\textbf{Nota:} Hemos denotado por P1 al preso1 para estilizar la tabla.\\
+
+\textit{\textbf{Ejemplo 2: La tragedia de los comunes}} \\
+
+Otro ejemplo de esto pero para el caso de n jugadores puede ser la tragedia de los comunes: \\
+
+Supongase un pasto en el que varios ganaderos(no importa cuantos) llevan sus cabezas de ganado. Cada ganadero tiene una cantidad de cabezas de ganado que puede llevar. Aun así, un día uno de ellos ve que existe mucha cantidad de pasto sin utilizar, por lo que decide llevar una nueva cabeza de ganado. Así, él está obteniendo el beneficio de la cabeza de ganado mientras el coste de la esquilmación del terreno es repartido entre todos los ganaderos. Es decir, el ganadero obtiene el beneficio completo, pero reparte el coste entre los otros.\\
+En este caso, la estrategia racional de cada ganadero según Nash es añadir una cabeza de ganado, esto lleva al resultado inevitable de la devastación común.\\
+Por tanto el equilibrio se encuentra en la destrucción mutua.\\
+Esto es debido a que si existe un ganadero ecologista, incurrirá en gastos adicionales generados por las cabezas de ganado extra de sus compañeros. Esto implicaría una expulsión de este ganadero y consecuentemente se llegaría nuevamente a la devastación común.\\
+
+La elección de la devastación común es la mejor estrategia, porque si ninguno de los otros ganaderos cambia su estrategia, el ganadero en cuestión no se arrepentirá de su elección. Esto es debido a que si decide no añadir cabezas de ganado, entonces además de la devastación común, habrá sufrido el sobrecoste de las cabezas de ganado de los demás ganaderos, por lo que su situación sería peor. Por el contrario, si el resto de los ganaderos decide no añadir cabezas de ganado, entonces le conviene añadir la cabeza de ganado puesto que así estaría obteniendo mayor beneficio que perjuicio, ya que el perjuicio se reparte entre todos. Por ello la mejor estrategia para todos los ganaderos es la destrucción común.\\
+
+
+
+Tras estos ejemplos,veamos ahora como juegos que se encontraban en equilibrio con ligeros cambios dejan de estarlo.\\
+
+
+\begin{center}
+		$2. \quad$
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		A/B & $b_1$ & $b_2$ & $b_3$ \\
+		\hline
+		$a_1$ & (9,1) & (1,9) & (2,8)\\
+		$a_2$ & (6,4) & (5,5) & (4,6) \\
+		$a_3$ & (7,3) & (8,2) &(3,7) \\
+		\hline
+	\end{tabular}
+\end{center}
+
+En este ejemplo usaremos el teorema de minimax que explicaremos posteriormente. En resumidas cuentas, cada jugador trata de minimizar sus perdidas. Debido a esto, el jugador A, observa cuales son las peores opciones que puede obtener por fila y después elije aquella que es la mejor. Equivalentemente el jugador B hace lo propio pero por columnas. \\
+
+Notemos que el primer número se corresponde con el valor de la función de pago que obtendrá el primer jugador, y el segundo el que obtendrá el segundo jugador.\\
+
+Bajo estas indicaciones veamos un análisis de este juego. \\
+Comencemos por el jugador A.\\
+Podemos ver que el menor valor que puede obtener para la primera fila es 1. \\
+Asimismo, el menor valor que puede obtener para la segunda fila es 4.\\
+Por último, el menor valor que puede obtener para la tercera fila es 3.\\
+Por lo que el jugador A elegirá su segunda estrategia puesto que es aquella en la que en el peor de los casos recibirá más.\\
+
+
+Hagamos ahora este mismo análisis para el segundo jugador.\\
+Vemos como en la primera columna el menor valor que puede obtener es 1.\\
+Asimismo, en la segunda columna el menor valor que puede obtener es 2.\\
+Por último en la última columna el menor valor que puede obtener es 6.\\
+
+Por lo que el jugador B elegirá su tercera opción puesto que es aquella en la que más obtendría en el peor de los casos.\\
+
+Así, podemos observar que la casilla $a_{2,3}$ de la matriz es un punto de equilibrio, puesto que ninguno de los jugadores esta tentado de cambiar su elección sabiendo fija la elección del oponente. \\
+Esto último lo podemos observar debido a que si el jugador A decide cambiar su estrategia entonces estaría ganando o 2 o 3 unidades(si cambia a su primera o tercera estrategia), lo cual es menos que las 4 unidades que ya esta ganando. Análogamente, si nos fijamos en el jugador B podemos observar como si cambia su estrategia pasará a ganar 4 o 5 unidades (en función de si cambia a su primera o a su segunda estrategia) en vez de las 6 unidades que esta obteniendo actualmente.\\
+
+Veamos ahora como un ligero cambio en esta matriz de pagos puede hacer que este equilibrio desaparezca completamente.\\
+
+Sea ahora la matriz de pagos:\\
+
+\begin{center}
+		$2. \quad$
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		A/B & $b_1$ & $b_2$ & $b_3$ \\
+		\hline
+		$a_1$ & (9,1) & (1,9) & (2,8)\\
+		$a_2$ & (6,4)  & (4,6) & (5,5) \\
+		$a_3$ & (7,3) & (8,2) &(3,7) \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Notar que únicamente hemos permutado las celdas $a_{2,2}$ y $a_{2,3}$.\\
+
+Realicemos ahora el mismo análisis que hemos realizado anteriormente.\\
+
+Veamos para el jugador A.\\
+
+Vemos como para la primera fila lo mínimo que puede obtener es 1 unidad.\\
+Asimismo, para la segunda fila lo mínimo que puede obtener son 4 unidades.\\
+Por último para la última fila lo mínimo que puede obtener son 3 unidades.\\
+
+Vemos como el mínimo por filas es el mismo que antes. Por lo que la elección nuevamente será la segunda estrategia.\\
+
+Veamos ahora para el jugador B.\\
+
+Ahora el mínimo de la primera columna es 1.\\
+Además, el mínimo de la segunda columna es 6.\\
+Y por último el mínimo de la tercera columna es 5.\\
+
+Vemos como ahora el segundo jugador elegirá su segunda estrategia. \\
+
+Pero ahora el punto $a_{22}$ no es un punto de equilibrio. \\
+Esto es debido a que si el jugador A conoce que el jugador B no va a cambiar su estrategia, es decir, va a seguir utilizando su segunda estrategia, entonces le conviene elegir su tercera estrategia puesto que aumentaría su ganancia.\\
+
+Si este cambio se produce, el jugador B pasaría de estar conforme con su elección a preferir su tercera estrategia en la que ganaría 7 unidades monetarias frente a las 2 que estaría ganando.\\
+
+En este punto el jugador A querría volver a cambiar su estrategia, esta vez por la segunda estrategia ya que sale más beneficiado de ella. \\
+
+Por último el jugador B querrá cambiar nuevamente a su segunda estrategia, volviendo así al punto de partida.\\
+
+Observamos pues que no existe el equilibrio para este juego que es una simple variación del primero presentado.\\
+
+\newpage
+
+\chapter{Juegos de suma nula}	
+
+\section{Bipersonales}
+
+\textit{\textbf{Definición 2.1}} Un juego de suma nula es aquel en el que en cada vértice terminal, la función de pago $(p_1 \ldots p_n)$ satisface que $\Sigma_{i=1}^{n} p_i= 0 $\\
+Esto implica, que lo que gana un jugador lo pierde el otro.\\ 
+Un ejemplo de este tipo de juegos sería el ajedrez, en el que si yo pierdo, necesariamente mi oponente ha tenido que ganar.\\
+Debido a la condición anterior, solo es necesario dar lo que yo voy a ganar para saber lo que el contrario va a perder. Esto se debe a que es un juego bipersonal.\\
+
+Lo que obtiene el primer jugador, o primera componente de la función de pago, se denomina el pago, y se entiende que el segundo jugador tendrá que realizarlo al primero.\\
+
+
+Recordemos un ejemplo visto anteriormente.\\
+
+\begin{center}
+		$2. \quad$
+	\begin{tabular}{|c|c|c|}
+		\hline
+		A/B & $b_1$ & $b_2$ \\
+		\hline
+		$a_1$ & (-1,1) & (1,-1) \\
+		\hline
+		$a_2$ & (1,-1) & (-1,1) \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Este ejemplo al ser un juego de suma nula, no es necesario escribir el pago recibido por los dos jugadores en cada opción. Esto es debido a que lo que gana un jugador lo pierde el otro, por lo que indicando cuanto ganará o perderá un jugador, implícitamente estamos diciendo cuanto ganará o perderá el otro. Así, la matriz de pago anterior debería expresarse como:\\
+
+\begin{center}
+		$2. \quad$
+	\begin{tabular}{|c|c|c|}
+		\hline
+		A/B & $b_1$ & $b_2$ \\
+		\hline
+		$a_1$ & -1 & 1 \\
+		\hline
+		$a_2$ & 1 & -1 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Notar que en este juego no hay lugar para coaliciones o negociaciones puesto que lo que gana uno lo pierde el otro.\\
+
+Veamos el árbol de un juego de suma cero.\\
+
+Si cae cara la moneda recibo 1 €  y si cae cruz mi hermana recibe 1 €.
+Aquí partimos del nodo raíz,ausencia de movimiento. Tenemos dos ramas, en función de la cual se obtiene un resultado u otro. \\
+
+
+\begin{center}
+\setlength{\unitlength}{1cm}
+\begin{picture}(9,4.5)
+\put(3,2.85){\framebox(3,1.5){$\begin{array}{c} \mbox{Tirar moneda} \end{array}$}}
+\put(0,0){\framebox(3,1.5){$\begin{array}{c} Cara \\ (1,0) \end{array}$}} \put(1.5,1.5){\line(3,2){2}} %
+\put(6,0){\framebox(3,1.5){$\begin{array}{c} cruz \\ (0,1) \end{array}$}} \put(7.5,1.5){\line(-3,2){2}} %
+\put(0.9,2){$p_1 =0.5$} %cartel izqda
+\put(6.9,2){$p_2 =0.5$} %cartel dcha
+\end{picture}
+\end{center}
+
+En la imagen anterior (1,0) indica que ha ganado 1 € el $J_1$(jugador 1).\\
+Vemos que tenemos dos posibles alternativas para una tirada, o bien el jugador 1 le da un euro al jugador dos o bien es al revés.
+
+Esto mismo podría repetirse al mejor de tres. Quedando una sería de alternativas en las que dependiendo de lo que salga el resultado será uno u otro.\\
+
+\begin{center}
+\setlength{\unitlength}{1cm}
+\begin{picture}(15,13)
+\put(3.5,11.4){\framebox(3,1.5){$\begin{array}{c} \mbox{Tirar moneda} \end{array}$}}
+\put(0,8.55){\framebox(3,1.5){$\begin{array}{c} Cara \\ (1,0) \end{array}$}} \put(2.5,10.05){\line(3,2){2}} %
+\put(9,8.55){\framebox(3,1.5){$\begin{array}{c} Cruz \\ (0,1) \end{array}$}} \put(9,9.05){\line(-3,2){3.5}} %
+\put(0.9,10.55){$p_1 =0.5$} %cartel izqda
+\put(7,10.55){$p_2 =0.5$} %cartel dcha
+
+\put(-3,5.7){\framebox(3,1.5){$\begin{array}{c} Cara \\ (1,0) \end{array}$}} \put(-1.5,7.2){\line(3,2){2}} %
+\put(3,5.7){\framebox(3,1.5){$\begin{array}{c} Cruz \\ (0,0) \end{array}$}} \put(4.5,7.2){\line(-3,2){2}} %
+\put(-2,7.7){$p_1 =0.5$} %cartel izqda
+\put(4,7.7){$p_2 =0.5$} %cartel dcha
+
+
+\put(0,2.85){\framebox(3,1.5){$\begin{array}{c} Cara \\ (1,0) \\ \end{array}$}} \put(7,4.35){\line(-3,2){2}} %
+\put(6,2.85){\framebox(3,1.5){$\begin{array}{c} Cruz \\ (0,1) \end{array}$}} 
+\put(2,4.35){\line(3,2){2}} %
+\put(0.9,4.85){$p_1 =0.5$} %cartel izqda
+\put(6.9,4.85){$p_2 =0.5$} %cartel dcha
+
+
+\put(7.5,5.7){\framebox(3,1.5){$\begin{array}{c} Cruz \\ (0,1) \end{array}$}} \put(8.5,7.2){\line(3,2){2}} %
+\put(11.5,5.7){\framebox(3,1.5){$\begin{array}{c} Cara \\ (0,0) \end{array}$}} \put(12.5,7.2){\line(-3,2){2}} %
+\put(8,7.7){$p_1 =0.5$} %cartel izqda
+\put(13,7.7){$p_2 =0.5$} %cartel dcha
+
+
+\put(9.5,2.8){\framebox(3,1.5){$\begin{array}{c} Cara \\ (1,0) \end{array}$}} \put(11,4.3){\line(3,2){2}} %
+\put(13,2.8){\framebox(3,1.5){$\begin{array}{c} Cruz \\ (0,1)\end{array}$}} \put(15,4.25){\line(-3,2){2}} %
+\put(10,5){$p_1 =0.5$}  %cartel izqda
+\put(14.5,5){$p_2 =0.5$}%cartel dcha
+
+
+\end{picture}
+\end{center}
+
+Notar que en el árbol (0,0) indica empate entre ambas partes, por haber salido una cara y una cruz.\\
+
+Al final de cada nodo terminal tenemos el resultado para cada una de las posibilidades, así si salen dos caras seguidas el primer jugador es el que obtendría la moneda.\\
+
+Hemos visto como la forma normal de un juego bipersonal de suma nula es una matriz con tantas filas como estrategias tiene el primer jugador y tantas columnas como estrategias tiene el segundo jugador.\\
+
+El pago esperado, asumiendo que el primer jugador elige su ith estrategia y el segundo jugador escoge su jth estrategia, será el elemento $a_{ij}$ para el primer jugador y $-a_{ij}$ para el segundo. Teniendo que $a_{ij}$ indica que es la ith fila de la matriz y la jth columna de la matriz de pagos.\\
+
+Definamos ahora aquellos puntos a través de los cuales nos vienen dadas las estrategias óptimas para lo jugadores.\\
+
+\textit{\textbf{Definición 2.2}} Un punto de silla o punto de equilibrio es aquel que cumple que es la máxima entrada en la columna y la mínima entrada en la fila. En caso de existencia, esa será la estrategia optima para cada uno de los jugadores.\\
+
+Vemos como la siguiente matriz tiene un punto de silla o de equilibrio.\\
+
+
+\begin{center}
+		$2. \quad$
+	\begin{tabular}{|c|c|c|}
+		\hline
+		A/B & $b_1$ & $b_2$ \\
+		\hline
+		$a_1$ & 5 & 1 \\
+		\hline
+		$a_2$ & 3 & 2 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+En este caso el punto de silla sería el elemento de la segunda fila y segunda columna. \\
+Esto se debe a que es el mayor elemento de su columna. Y además, es el menor elemento de su fila. \\
+Si por el contrario miramos la otra columna, el mayor elemento de ella es el primer elemento es decir, el 5, pero este no es el menor elemento de su fila ya que el 1 es menor que el.\\
+
+
+Notar que no siempre existe este punto, por ejemplo en la siguiente tabla no existe ningún punto de equilibrio:
+
+\begin{center}
+		$2. \quad$
+	\begin{tabular}{|c|c|c|}
+		\hline
+		A/B & $b_1$ & $b_2$ \\
+		\hline
+		$a_1$ & -1 & 1 \\
+		\hline
+		$a_2$ & 1 & -1 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Aquí, al no tener punto de equilibrio ambos jugadores deben guardar en secreto sus estrategias para que el contrario no las descubra puesto que si las descubre, entonces saldrían perdiendo.\\
+
+Estos dos juegos llevan a una tremenda diferencia. En el segundo, el secreto acerca de la estrategia que se va a jugar es importante, mientras que en el primer es irrelevante. Esto es debido a que el primer juego tiene puntos de equilibrio.\\
+
+La existencia del punto de equilibrio supone que si el segundo jugador conoce la estrategia del primer jugador, esto no afectará a lo mínimo que puede obtener este jugador en su función de pago.\\
+
+
+
+¿Cómo sabemos entonces si existe un equilibrio?\\
+
+\textit{\textbf{Teorema 1 (Teorema de Existencia)}} Si el conjunto de estrategias de cada jugador es de dimensión finita y la función de pago es una función continua de sus variables y lineal respecto al conjunto de estrategias cuando las demás variables se dejen fijas, entonces existe al menos un punto de equilibrio.\\
+
+
+Vemos como el análisis anterior nos indica como jugar un juego con puntos de equilibrio, pero no nos indica nada sobre aquellos que no lo tienen.\\
+
+Imaginemos para el estudio de los juegos sin punto de equilibrio el siguiente ejemplo:\\
+
+
+\begin{center}
+		$2. \quad$
+	\begin{tabular}{|c|c|c|}
+		\hline
+		A/B & $b_1$ & $b_2$ \\
+		\hline
+		$a_1$ & 4 & 2 \\
+		\hline
+		$a_2$ & 1 & 3 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Además, supongamos que nuestro oponente no solo es impredecible si no que también es omnisciente, es decir siempre acertará correctamente lo que decidamos.\\
+
+En este caso si fueras el primer jugador, siempre elegiríamos nuestra primera estrategia. Ya que si el oponente lo averigua, lo mínimo que ganaremos serán dos unidades, frente a la unidad que ganaríamos usando la otra estrategia.\\
+
+Esto implica que el primer jugador no puede ganar menos de dos unidades monetarias.\\
+
+Esta certeza de que al menos ganará dos, se denomina "gain-floor" y lo denotaremos como $v_I$. Esto viene definido de la siguiente forma:\\
+
+\begin{center}
+
+$v_I=max_i\left\lbrace min_j a_{ij} \right\rbrace $
+
+\end{center}
+
+Esto implica que de los mínimos que puede obtener en cada una de las columnas de la matriz de pagos, elegirá el máximo.\\
+
+Vemos pues que si el primer jugador deja que su oponente averigüe su estrategia, lo máximo que ganará será $v_I$.\\
+
+Si ahora nos ponemos en la piel del segundo jugador, este elegirá su segunda estrategia. Ya que si el oponente lo averigua, lo máximo que vamos a perder serían tres unidades monetarias frente a las 4 que perderíamos eligiendo la primera estrategia.\\
+
+Esta cantidad nos da el "loss-ceiling", es decir, el techo de perdida. El cual denotaremos como $v_{II}$ y viene dado por:\\
+
+\begin{center}
+
+$v_{II}= min_j \left\lbrace max_i a_{ij} \right\rbrace $
+
+\end{center}
+
+En este caso, el segundo jugador quiere minimizar su perdida. Ya que recordemos, que al estar en juegos de suma nula, lo que ganará el segundo jugador sera lo contrario a lo que gane el primer jugador. Y puesto que está matriz de pagos es referente a lo que gana el primer jugador y todos los elementos son positivos, nos referimos entonces a reducir la perdida del segundo jugador.\\
+
+Aquí, el segundo jugador elige lo máximo que puede perder en cada una de las filas y de ello selecciona el mínimo.\\
+
+Notemos que sería absurdo esperar que la ganancia del primer jugador supere a la perdida del segundo, tenemos por tanto que :\\
+
+\begin{center}
+
+$v_I \leq v_{II}$
+
+\end{center}
+
+
+Si se da la igualdad tendremos un juego con punto de silla, por el contrario si no se da, el juego no tendrá punto de equilibrio.\\
+
+Veamos otro ejemplo de ello:\\
+
+\begin{center}
+		$2. \quad$
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		A/B & $b_1$ & $b_2$ & $b_3$ \\
+		\hline
+		$a_1$ & 1 & 3 & 7 \\
+		\hline
+		$a_2$ & 7 & 9 & 10 \\
+		\hline
+		$a_3$ & 3 & 5 & 8 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Veamos primero la estrategia a seguir por el jugador A. Primero veamos lo mínimos por fila. En este caso son 1,7 y 3 respectivamente. Ahora el primer jugador deberá elegir el máximo de estos mínimos, en concreto el 7. Por lo que la estrategia que seguirá el jugador A es $a_2$. Se ha seguido este criterio porque, lo mínimo en la fila es lo mínimo que ganará (recordemos que queremos ganar lo máximo posible), de lo mínimo que podemos ganar con cualquiera de las opciones, escogeremos la opción que sea mayor, ya que es la que más beneficios me reportará.\\
+ Veamos ahora la estrategia a seguir para el jugador B. Este quiere minimizar. Su perdida consiste en el beneficio de A. Por lo que tendrá que elegir aquella estrategia que le permita pagar la menor cantidad posible. Primero mirará el máximo por columnas, que son respectivamente 7,9 y 10. Y de estos elegirá el mínimo, que en concreto es 7. Por lo que el punto de equilibrio se encuentra en la elección por parte de b de $b_1$. Se mira el máximo por columnas, porque dependiendo de lo que elija el primer jugador, es lo máximo que tendrá que pagar. Y esto se intenta minimizar puesto que la intención es pagar lo menos posible.\\
+
+
+Hemos visto como en un juego sin puntos de equilibrio, lo máximo que el primer jugador puede esperar ganar si permite a su oponente conocer su jugada es $v_I$.  Si quisiese aumentar esta cantidad tendría que ser evitando que su oponente conociera su estrategia. Pero si juega de forma racional, su oponente podrá replicar su estrategia y responder ante ella. Por tanto el jugador deberá jugar de forma irracional, es decir, su estrategia será elegir aleatoriamente entre las posibles estrategias.\\
+
+Hagamos aquí un pequeño inciso para recordarle al lector que eran las estrategias puras y que eran las estrategias mixtas:\\
+
+1)	Si ante la misma posición el jugador siempre elige la misma alternativa, entonces el jugador esta siguiendo una estrategia pura.\\
+
+2)	Por el contrario, si el juego incluye elementos estadísticos, es decir, ante la misma situación no siempre se lleva a cabo la misma estrategia, si no que la estrategia realizada viene dada por una distribución de probabilidad, entonces el jugador esta siguiendo una estrategia mixta.\\
+
+Veamos ahora como los criterios anteriores se aplicarían a este caso.\\
+
+Sea el conjunto de probabilidad asociadas a cada una de las alternativas del primer jugador $S_1$ definido como sigue:\\
+
+\begin{center}
+
+$ S_1 = \{ x=(x_1, \ldots x_n), \quad x_i \geq 0 , \quad \Sigma_i x_i=1  \} $
+
+\end{center}
+
+Definamos de forma análoga el conjunto de probabilidades asociadas a cada una de las alternativas del segundo jugador $S_2$:\\
+
+\begin{center}
+
+$ S_2 = \{ y=(y_1, \ldots y_n), \quad y_i \geq 0 , \quad \Sigma_i y_i=1  \} $
+
+\end{center}
+
+
+En este caso nuevamente el primer jugador tratará de maximizar su pago, para ello buscará dentro de las posibles estrategias mixtas, aquella que minimice el valor que puede obtener por cada una de sus filas y de ellas escogerá la mayor. Es decir, va a observar lo menor que puede obtener de cada una de sus estrategias en función de las posibles estrategias mixtas y a partir de ellas elegirá aquella en la que obtenga mayor beneficio.\\
+
+Por tanto el valor esperado de "gain floor" por el primer jugador es:\\
+
+\begin{center}
+
+$ v^{'}_I= max_{x \in S_1} min_{y \in S_2} \Sigma^n_{i=1} \Sigma^m_{j=1} x_i a_{ij} y_j$
+
+\end{center}
+
+Bajo el mismo razonamiento que antes, el jugador dos tratará de minimizar su perdida. Para ello tendrá en cuenta lo máximo que puede perder en base a las posibles estrategias mixtas, y de ellas elegirá con la que menos pierda.\\
+
+Por ello su valor esperado de "loss ceiling" viene definido como:\\
+
+
+\begin{center}
+
+$ v^{'}_{II}=  min_{y \in S_2} max_{x \in S_1} \Sigma^n_{i=1} \Sigma^m_{j=1} x_i a_{ij} y_j$
+
+\end{center}
+
+
+Teniendo que al igual que antes que cumple:\\
+
+
+\begin{center}
+
+$v^{'}_I \leq v^{'}_{II}$
+
+\end{center}
+
+
+Teniendo en cuenta lo anterior, vamos a unificar ambos conceptos generalizando. Para ello presentamos el teorema MiniMax.\\
+
+\textit{\textbf{Teorema 2 (MiniMax)}} Para cualquier función F(x,y) definido para cualquier producto cartesiano $X \times Y$ se cumple:\\
+
+\begin{center}
+
+$ max_{x \in X} min_{y \in Y} F(x,y) \leq min_{y \in Y} max_{x \in X} F(x,y)$
+
+\end{center}
+
+En este caso podemos nuevamente definir:\\
+
+\begin{center}
+
+$v^{''}_I \leq v^{''}_{II}$
+
+\end{center}
+
+Este se define de forma análoga a como habíamos definido $v_I \leq v_{II}$ antes. En este caso, se prueba que \\
+
+\begin{center}
+
+$v^{''}_I = v^{''}_{II}$
+
+\end{center}
+
+Con esto tenemos que aunque puede no existir un punto de  equilibrio para estrategias puras, siempre existirá un punto de equilibrio para estrategias mixtas.\\
+
+Puede ocurrir que en función de la estrategia mixta que utilicemos, un jugador salga ganando a largo plazo. Para ilustrar esto veamos un ejemplo:\\
+
+Sea nuevamente el juego:\\
+
+
+$$
+\left(
+\begin{array}{cccc}
+1 & -1  \\
+-1 & 1 \\
+
+\end{array}
+\right)
+$$
+
+Supongamos que elegimos las siguientes estrategias mixtas para cada uno de los jugadores. $x=(\dfrac{3}{4},\dfrac{1}{4})$ para el primer jugador y $y=(\dfrac{2}{3},\dfrac{1}{3})$ para el segundo jugador. \\
+Veamos como las probabilidades de x implica que el primer jugador jugará con una probabilidad de $\dfrac{3}{4}$  su primera estrategia y con la probabilidad restante su segunda estrategia.\\
+Teniendo así que la nueva matriz de pago obtenida de multiplicar cada una de las componentes de cada uno de los vectores entre ellas y después multiplicarlo por la matriz de pagos original, es:\\
+
+
+$$
+\left(
+\begin{array}{cccc}
+\dfrac{1}{2} &  -\dfrac{1}{4} \\
+\\
+-\dfrac{1}{6} & \dfrac{1}{12} \\
+
+\end{array}
+\right)
+$$
+
+Si con esta matriz de pagos calculamos la esperanza de ganancia del primer jugador. Que recordemos viene dada por la formula:\\
+
+\begin{center}
+
+$ E(G_1)=\Sigma_i p_i\Pi_{ij}p_j$
+
+\end{center}
+
+Es decir, la esperanza se obtiene de multiplicar las probabilidades de que cada jugador elija una alternativa por el pago recibido por esa alternativa.\\
+
+Notemos que esto ya se ha calculado en la matriz de pago anterior, por lo que únicamente tenemos que realizar la suma.\\
+
+Por tanto la esperanza de ganancia del primer jugador es:\\
+
+\begin{center}
+
+$ E(G_1)=\dfrac{1}{2}-\dfrac{1}{4}-\dfrac{1}{6}+\dfrac{1}{12}= \dfrac{1}{6} >0$
+
+\end{center}
+
+Por lo que vemos como el juego no esta equilibrado ya que a largo plazo saldría ganando el primer jugador. \\
+Recordemos que al ser de suma nula en este caso la ganancia esperada del segundo jugador sería:\\
+
+\begin{center}
+
+$ E(G_2)=-\dfrac{1}{6} <0$
+
+\end{center}
+
+Cambiemos ahora las probabilidades:\\
+
+Sea ahora la probabilidad dada por $x=(\dfrac{4}{5},\dfrac{1}{5})$ para las estrategias del primer jugador y por $y=(\dfrac{1}{5},\dfrac{4}{5})$ para las estrategias del segundo jugador.\\
+
+Veamos la nueva matriz de pagos:\\
+
+
+$$
+\left(
+\begin{array}{cccc}
+\dfrac{4}{25} &  -\dfrac{16}{25} \\
+\\
+-\dfrac{1}{25} & \dfrac{4}{25} \\
+
+\end{array}
+\right)
+$$
+
+Podemos ver que la esperanza de ganancia del primer jugador es:\\
+
+\begin{center}
+
+$E(G_1)=-\dfrac{9}{25}$
+
+\end{center}
+
+Por lo que en este caso a largo plazo el segundo jugador obtendría más beneficio que el primero, es decir saldría ganando.\\
+
+Veamos una última distribución de las probabilidades.\\
+
+Ahora las probabilidades son $x=(\dfrac{1}{2},\dfrac{1}{2})$ para las estrategias del primer jugador. Y $y=(\dfrac{1}{2},\dfrac{1}{2})$ para las estrategias del segundo jugador.\\
+
+La nueva matriz de pagos quedaría:\\
+
+$$
+\left(
+\begin{array}{cccc}
+\dfrac{1}{4} &  -\dfrac{1}{4} \\
+\\
+-\dfrac{1}{4} & \dfrac{1}{4} \\
+
+\end{array}
+\right)
+$$
+
+Y en este caso la ganancia esperada por el segundo jugador sería:\\
+
+\begin{center}
+
+$E(G_1)=\dfrac{1}{4}-\dfrac{1}{4}-\dfrac{1}{4}+\dfrac{1}{4}=0$
+
+\end{center}
+
+Vemos que en este caso el juego estaría equilibrado y que si algo cambia en la política de uno de los jugadores, sería fácil para el otro encontrar decisiones que le hagan ganar.\\
+
+Por tanto la estrategia  $x=(\dfrac{1}{2},\dfrac{1}{2})$ para las estrategias del primer jugador. Y $y=(\dfrac{1}{2},\dfrac{1}{2})$ para las estrategias del segundo jugador, es un punto de equilibrio. Además es un equilibrio de Nash porque ninguno de los jugadores saca ventaja al cambiar de estrategia.\\
+
+Recordemos momentáneamente el juego de piedra, papel o tijeras. En capítulos anteriores dijimos que el análisis es análogo al de este juego que acabamos de analizar. \\
+
+En este caso, el juego de piedra papel o tijeras no tiene un equilibrio con estrategias puras. Esto es debido a que si un jugador siempre juega piedra, el otro al conocer esto siempre usará papel para ganarle.\\
+Asimismo, y de forma análoga a este juego, la mejor estrategia mixta es asignar a cada una de las opciones la misma probabilidad de sacarlo, es decir, $\dfrac{1}{3}$ esto es debido a que cualquier otra distribución de probabilidad puede ser aprovechada por el adversario para obtener ventaja. Así si tenemos tendencia a sacar más veces papel, entonces el contrario asignará mayor probabilidad a sacar tijeras. Asignando esta probabilidad en base a la frecuencia que observe en nuestra distribución de sacar papel.\\
+
+
+Veremos en un capitulo posterior como resolver aquellos casos en los que no existe un punto de equilibrio mediante estrategias mixtas usando programación lineal. \\
+Ahora nos centraremos en el estudio de aquellos casos en los que si existe un punto de equilibrio. Para ello usaremos las estrategias dominadas.\\
+
+
+
+\textit{\textbf{Definición 2.3}}\textbf{Dominación} En una matriz A, decimos que la ith fila domina a la kth fila si $a_{ij} \geq a_{kj}$ para todo j y  $a_{ij} > a_{kj}$ para al menos un j.\\
+Similarmente decimos que la jth columna domina a la lth columna si $a_{ij} \leq a_{il}$ para todo i y  $a_{ij} < a_{il}$ para al menos un i.\\
+
+Una estrategia pura domina a otra, si la elección de la primera estrategia es al menos igual de buena que la segunda y en algunos casos mejor. Así, una estrategia dominada nunca será usada frente a otras que no lo sean. \\
+Además, si en la matriz eliminamos las filas o columnas dominadas, la solución resulta ser equivalente a la matriz original.\\
+
+Veamos un ejemplo de ello:
+
+
+\begin{equation}
+	\begin{pmatrix}
+		2 & 0 & 1 & 4\\
+		1 & 2 & 5 & 3\\
+		4 & 1 & 3 & 2
+	\end{pmatrix}
+\end{equation} 
+
+Vemos que la segunda columna domina la cuarta puesto que los valores de la segunda columna son menores para todas las filas que los de la cuarta columna. Por lo que el segundo jugador nunca elegirá su cuarta estrategia. Por lo tanto podemos eliminarla.
+
+
+\begin{equation}
+	\begin{pmatrix}
+		2 & 0 & 1 & 4\\
+		1 & 2 & 5 & 3\\
+		4 & 1 & 3 & 2
+		\makebox(-6,0){\rule[5ex]{.8pt}{8ex}} % vertical
+
+	\end{pmatrix}
+\end{equation} 
+% el primero es lo que se sale por arriba, el tercero es la longitud de la linea. Esto en lo de rule. La segundo es la longitud en anchura.
+
+Vemos ahora que la tercera fila domina la primera porque para todos los valores restantes(si no miramos los elementos tachados), es superior a la primera. Por lo que el primer jugador elegirá nunca su primera estrategia.
+
+\begin{equation}
+	\begin{pmatrix}
+		2 & 0 & 1 & 4\\
+		1 & 2 & 5 & 3\\
+		4 & 1 & 3 & 2
+		\makebox(-6,0){\rule[5ex]{.8pt}{8ex}} % vertical
+		\makebox(-52,2){\rule[12ex]{12ex}{.5pt}} % horizontal
+	\end{pmatrix}
+\end{equation}
+
+Vemos que en la matriz que nos queda, la columna tercera es dominada por la segunda columna, por lo que la podemos eliminar.
+
+
+\begin{equation}
+	\begin{pmatrix}
+		2 & 0 & 1 & 4\\
+		1 & 2 & 5 & 3\\
+		4 & 1 & 3 & 2
+		\makebox(-6,0){\rule[5ex]{.8pt}{8ex}} % vertical
+		\makebox(-52,2){\rule[12ex]{12ex}{.5pt}} % horizontal
+		\makebox(-34,0){\rule[5ex]{.8pt}{8ex}} % vertical
+	\end{pmatrix}
+\end{equation}
+
+Por lo que la matriz final es una matriz dos por dos de la forma:
+
+\begin{equation}
+	\begin{pmatrix}
+		1 & 2 \\
+		4 & 1 
+	\end{pmatrix}
+\end{equation}
+
+
+Veamos a continuación algunos ejemplos especiales de juego de suma cero.\\
+
+\subsection{Juegos 2x2}
+
+Estos juegos son aquellos que como matriz de pago, generan una matriz 2x2.\\
+
+
+\begin{equation}
+A=	\begin{pmatrix}
+		a_{11} & a_{12} \\
+		a_{21} & a_{22}
+	\end{pmatrix}
+\end{equation}
+
+Aquí se nos presentan dos posibles opciones:\\
+1) Que haya un punto de silla, en cuyo caso no habría problema. Ese sería al punto óptimo.\\
+2) Si A no tiene ningún punto de silla, entonces la única estrategia optima y su valor vienen dados por:\\
+
+\begin{center}
+$x=\dfrac{JA^{*}}{JA^{*}J^{T}} \quad y=\dfrac{A^{*}J^{T}}{JA^{*}J^{T}} \quad v=\dfrac{|A|}{JA^{*}J^{T}}$
+\end{center}
+
+Donde $A^{*}$ es la matriz adjunta de A, y $|A|$ es el determinante de A. Además, el vector $J= (1,1)$\\
+
+Siendo "x" la estrategia del primer jugador, "y" la del segundo y "v" el pago recibido por el primero.\\
+
+Veamos un ejemplo de la teoría anterior:\\
+
+Queremos resolver la siguiente matriz:\\
+
+\begin{equation}
+	\begin{pmatrix}
+		1 & 0 \\
+		-1 & 2 
+	\end{pmatrix}
+\end{equation}
+
+Podemos observar que no tiene punto de silla o de equilibrio. Esto es debido a que si consideramos la matriz, como el pago recibido por el primer jugador. Si el primer jugador elige la primer estrategia, y el segundo también, entonces una vez realizado esto, al segundo le convendrá cambiar su estrategia a su segunda posibilidad ya que pasaría de perder 1 unidad a no perder nada. Estando ahí, al primer jugador le conviene cambiar su estrategia a su segunda posibilidad puesto que pasaría de no ganar nada a ganar 2. En el siguiente paso, al segundo jugador le convendría nuevamente elegir su primera estrategia en la que en vez de perder 2 unidades ganaría una. Por último habiendo pasado esto, al primer jugador le convendría elegir su primera estrategia volviendo así al punto de inicio.\\
+
+Con esto podemos ilustrar que no existe punto de silla o de equilibrio en el sentido de estrategias puras. Por lo que para lograr una solución óptima utilizaremos una estrategia mixta que vendrá dada por las formulas anteriores. Así para nuestro problema:\\
+
+Tenemos que la matriz adjunta del problema es:\\
+
+\begin{equation}
+A^{*}=\begin{pmatrix}
+		2 & 0 \\
+		1 & 1 
+	\end{pmatrix}
+\end{equation}
+
+Y 
+\begin{center}
+$|A|=2,\quad  JA^{*}=(3,1), \quad A^{*}J^{T}=(2,2), \quad JA^{*}J^{T}=4$
+\end{center}
+
+Teniendo así que:\\
+
+\begin{center}
+$x=(\dfrac{3}{4},\dfrac{1}{4}), \quad y=(\dfrac{1}{2},\dfrac{1}{2}),\quad v=\dfrac{1}{2}
+$
+\end{center}
+
+
+Por lo que, el primer jugador usará una estrategia mixta en la que con $\dfrac{3}{4}$ de probabilidad elegirá su primera estrategia y con $\dfrac{1}{4}$ elegirá su segunda estrategia. Análogamente, el segundo jugador , seleccionará su primera estrategia con $\dfrac{1}{2}$ de probabilidad, y su segunda estrategia con la misma probabilidad.\\
+Además, ambos jugadores tienen asegurado un valor en la función de pago de $\dfrac{1}{2}$.\\
+
+
+
+\subsection{Solución por un juego ficticio}
+Supongamos dos niños sin conocimientos de teoría de juegos, que deciden asignar el control del mando del televisor a aquel que gane la mayoría de las partidas a piedra, papel o tijera. En ello, los niños deciden realizarlo al mejor de 9.\\
+Cada uno de los niños, trata de adivinar la elección del otro teniendo en cuenta las veces que el otro ha sacado alguna de las tres opciones, es decir, si uno de los niños ve que el otro le gusta mucho sacar piedra, será más propenso a sacar papel para ganarle.\\
+Por impresionante que parezca, la estrategia de estos niños de observar la distribución empírica del contrario tenderá a una estrategia optima.\\
+
+Esto es debido a que el limite de cualquier subconjunto convergente, será una estrategia optima.\\
+Matemáticamente hablando, si $x^{N}$ es la estrategia del primer niño y $y^{N}$ es la estrategia del segundo, entonces la siguiente ecuación se cumple:
+
+\begin{center}
+
+$lim_{N \longrightarrow \infty}\{v(y^{N})-v(x^{N})\}=0$
+
+\end{center}
+
+\subsection{Juegos simétricos}
+
+Un juego simétrico es aquel en el que la matriz de pago de un jugador es la transpuesta de otro.\\
+Esto es, la matriz del jugador 1 es de la forma $A=(a_{ij})$, y la del jugador 2, sus componentes son de la forma $a_{ij}=-a_{ji}$ para todo i,j.\\
+
+Esto indica que si una estrategia es óptima para el primer jugador, también lo será para el segundo.\\
+Así, el valor de un juego simétrico de suma nula es 0.\\
+
+Esto podemos generalizarlo a los juegos de suma general que veremos posteriormente. En estos juegos la suma del juego no tiene porque valer cero.\\
+Así, en los juegos de suma general, el juego es simétrico si siendo la matriz del primer jugador de la forma $A=(a_{ij})$ entonces los componentes de la matriz del segundo jugador son de la forma $a_{ij}=a_{ji}$.\\
+
+Esto implica que el pago recibido es el mismo independientemente de quien sea el jugador que realiza la elección. \\
+
+En este caso, al igual que ocurría en los juegos simétricos de suma nula, la estrategia óptima para el primer jugador también lo será para el segundo jugador.\\
+
+Veamos ahora un ejemplo del segundo tipo de juego simétrico.\\
+
+Recordando el ejemplo dado anteriormente en el capítulo sobre el pago que trataba sobre la caza del ciervo, podemos observar que este problema es simétrico, es decir, la matriz de pago del segundo cazador es la transpuesta a la matriz de pago del primero.\\
+
+Esto es debido a que la matriz de pago del primer cazador era de la forma:\\
+
+\begin{center}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		 & C2 mantenerse en puesto & C2 caza conejo \\
+		\hline
+		C1 mantenerse en puesto & 50 & 0 \\
+		\hline
+		C1 caza conejo & 1 & 1 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Mientras que la del segundo cazador es de la forma:\\
+
+
+
+\begin{center}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		  & C2 mantenerse en puesto & C2 caza conejo  \\
+		\hline
+		C1 se mantenerse en puesto & 50 & 1 \\
+		\hline
+		C1 caza conejo & 0 & 1 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Asimismo, podemos observar que su función de pago es la misma, lo único que tenemos que cambiar es donde antes ponía "a" poner "b" y donde antes ponía "b" poner "a".\\
+
+Es decir, si la función de pago del primer cazador era: \\
+$ \pi_A= 50*a*b + 0*a*(1-b) + 1*(1-a)*b + 1*(1-a)*(1-b)$ \\
+
+La función de pago del segundo jugador se obtiene de esta sustituyendo "a" por "b", es decir, cambiando las letras unas por las otras. Esto es, donde antes estaba "a", poner "b" y donde antes estaba "b" poner "a".\\
+
+$ \pi_B= 50*b*a + 1*b*(1-a)+ 0*(1-b)*a +  + 1*(1-b)*(1-a)$ \\
+
+En el propio enunciado del problema podíamos vislumbrar que el juego era simétrico, esto es debido a que lo que se recibía en función de la alternativa elegida no variaba en función del jugador que realizará la elección.\\
+
+\textbf{Nota:} Esto no es exclusivo de juegos con dos jugadores y dos alternativas, pero por simplicidad y claridad hemos preferido reducirlo a este caso. \\
+
+
+\section{De 3 jugadores}
+
+En este caso, a diferencia de lo que ocurría en el caso de dos jugadores, puede ocurrir que dos jugadores quieran cooperar entre ellos porque les sea más provechoso. Es decir, dos jugadores pueden ganar más a costa de un tercero si cooperan a si no lo hacen.\\
+
+Dos conceptos tendrán que tenerse en cuenta para el posterior análisis de este tipo de juegos. El primero de ellos, es el simple hecho de que si un jugador solo tiene una coalición posible, no es claro que esto sea una coalición por el simple hecho que no se conoce hasta que punto esto es una estrategia de un solo lado o es una coalición. El segundo es el hecho de como las elecciones en una coalición de un jugador pueden estar relacionadas con las de otro jugador. \\
+
+Bajo este punto, definiremos un juego en el que la estrategia deseable es formar una coalición:\\
+Supongamos un juego de tres jugadores en el que cada jugador elige el número de otro de los jugadores sin conocer lo que han elegido los otros antes. Si dos de ellos se nombran el uno al otro, entonces formarán una pareja y recibirán cada uno medio euro, por el contrario aquel que haya quedado sin pareja pierde un euro. Si ninguno hace una pareja, entonces ninguno gana o pierde nada.\\
+En este juego, la coalición, debe efectuarse previa al juego puesto que dentro del juego no se puede conocer la elección de los jugadores.\\
+Esto es debido a que el juego no necesariamente aporta el mecanismo para llegar a acuerdos.\\
+Notemos que el juego es un juego simétrico en tanto que todos los jugadores recibirán lo mismo si consiguen llevar a cabo una coalición. \\
+En este punto, podemos ver también el carácter irracional que tendría el hecho de que no se formasen coaliciones. Esto es debido a que todos los jugadores obtendrían mayor beneficio de formar una coalición que de no formarla.\\
+
+Supongamos ahora, que este pago equitativo no es tal. Es decir, en la coalición entre los dos primeros jugadores, el primer jugador ganará $\dfrac{1}{2}+\epsilon$ mientras que el segundo jugador ganará $\dfrac{1}{2}-\epsilon$ teniendo en cuenta que $ 0 < \epsilon <\dfrac{1}{2}$. Teniendo que en el resto de coaliciones se respetarían las reglas de un inicio. \\
+En este caso podemos observar que el primer jugador parte de una posición aparentemente ventajosa. Si nos fijamos en detalle, al jugador 1 le conviene realizar la coalición con el jugador dos ya que le es más ventajosa, si pone su empeño en ello, entonces dejará apartada la posible coalición con 3 puesto que es menos ventajosa. En ello, a 2 le conviene más una coalición con 3 puesto que le reporta mayor beneficio que su coalición con 1, y teniendo en cuenta que 3 no tiene ningún impedimento para aliarse con 2, tenemos que la resolución lógica del problema lleva a que 1 no solo gana más si no que pierde una moneda al formarse la coalición 2,3. Para evitar esto y poder formar una coalición con 2, entonces 1 deberá hacer la coalición 1,2 igual de atractiva que la 2,3 para 2. Esto se conseguirá si le retorna el $\epsilon$ que ha obtenido de más. Además, si en algún caso 1 intentase quedarse con una parte de $\epsilon$ esto generaría la misma situación que al inicio, es decir, que se formaría la coalición 2,3.\\
+
+Otra posible variante es que esta partición se diera a lo largo de todas las coaliciones(en las coaliciones 1,2; 1,3 el valor $\epsilon$ se lo lleva 1 mientras que en las coaliciones 2,3 la cantidad también se divide), de esta forma ni 2 ni 3 tendrían inconveniente en aliarse con 1. Pudiendo 1 hacer más deseable su alianza si ofrece una parte de $\epsilon$ a su compañero o incluso la totalidad.\\
+
+Otro caso puede ocurrir que la coalición 1,2 sea como en las reglas originales, mientras que en la coalición 1,3 y 2,3 los jugadores 1 y 2 ganen un $\epsilon$. En este caso ambos jugadores se encontrarán luchando por conseguir la coalición deseable con 3, mientras que perderán interés por su propia coalición 1,2. Esta competición se resolvería devolviendo íntegramente a 3 el $\epsilon$ que habían obtenido extra, en cuyo caso, la coalición 1,2 volverá a ser deseable.\\
+La forma de resolver este problema sería devolviendo el $\epsilon$ a 3, ya que cada jugador irá dando un poquito más que el otro jugador para convencer a 3 de que forme alianza con él. Esto terminará en el punto en el que uno de los dos jugadores le ofrezca la devolución integra de el $\epsilon$ que había obtenido de más por la construcción del problema.\\
+
+Vemos con esto que lo que un jugador puede obtener en una coalición depende no solo de cuanto le ofrezcan las reglas del juego por esa coalición , si no también de las otras posibles coaliciones para sus compañeros. Esto hará que las posibles compensaciones a los compañeros en la coalición dependan de las otras alternativas abiertas a los otros jugadores.\\
+
+Supongamos ahora un nuevo juego, en el que la coalición 1,2 obtendrán como mucho c del jugador 3. Asimismo, 1,3 obtendrá como mucho b del jugador 2 y por último, 2,3 obtendrá como mucho a del jugador 1. No se especifica cuanto obtiene cada uno de los jugadores de la coalición.\\ 
+Bajos estos términos, si el primer jugador quiere obtener seguro una cantidad de x, entonces para el jugador dos quedaría una cantidad de c-x y para el 3 una de b-x, si estas cantidades son menores que lo que pueden obtener realizando la coalición 2,3 entonces es claro que 1 no conseguirá formar una coalición.\\
+
+\textbf{Nota:} Es obvio que un jugador solo entrará en una coalición ,si entrando en ella puede obtener más que jugando solo.\\
+
+Notemos también, que si los jugadores 1,2 deciden colaborar sin determinar cual será el reparto final, es decir, pase lo que pase, entonces entraríamos en un juego de suma cero bipersonal, donde el primer jugador sería la coalición 1,2 y el segundo jugador sería el jugador 3.\\
+
+Vista la situación anterior, podemos observar que el primer jugador puede obtener jugando por su cuenta, es decir, sin formar coaliciones la cantidad $-a$, análogamente, el segundo jugador podría obtener la cantidad $-b$ y el tercero la cantidad $-c$. Esto implica que los jugadores 1 y 2 podrían obtener entre ello $-(a+b)$ en el caso de que fallasen cooperando. Teniendo en cuenta que el máximo que pueden obtener cooperando es c, entonces tenemos que $c \geqq -a -b $ y por tanto $\delta= c + a + b \geqq 0$. Vemos como en este caso tenemos dos posibles opciones. O bien $\delta =0$ o bien $\delta > 0 $. \\
+1) Si $\delta=0$ entonces la coalición no tiene razón de ser ya que cada jugador puede obtener lo mismo por sus propios medios. En este caso es posible asumir un único valor para cada juego para cada jugador que es cero. \\
+Este tipo de juegos se llamaran prescindibles por el hecho de que es innecesaria una coalición.\\
+2) Si $\delta >0$ en este caso se induce a que se forme la coalición debido a que el jugador puede obtener más formando la coalición que jugando por su cuenta.\\
+Este tipo de juegos se denominan esenciales puesto que las coaliciones son necesarias.\\
+
+\section{N-personales}
+
+Supongamos un juego con $1 \ldots n$ jugadores. Estos jugadores pueden formar coaliciones, es decir, el juego permite las coaliciones. \\
+Supongamos que tenemos a todos estos jugadores recogidos en un conjunto S. Y supongamos nuevamente que dividimos este subconjunto S en dos subconjuntos disjuntos $s_1$ y $s_2$ . Supongase, que los jugadores correspondientes al primer subconjunto cooperan plenamente entre ellos, y equivalentemente entre los del segundo subconjunto. Bajo estas condiciones, podemos observar como nos encontramos ante un juego bipersonal de suma nula. Donde $s_1$ y $s_2$ son los dos jugadores.\\
+
+Teniendo esto se hace necesaria la definición del valor de la partida para la coalición, es decir, como de interesante es que esto pase para los jugadores.\\ 
+Para ello definiremos la función característica de un juego.\\
+
+\subsubsection{Función característica de un juego}
+
+Cada jugador $k=1,2, \ldots , n$ elige una variable $\tau_k$(teniendo en cuenta que la elección de cada jugador se hace sin tener información sobre la alternativa elegida por cada uno de los n-1 restantes jugadores), obteniendo así la cantidad $\mathbb{H}_k(\tau_1,\tau_2, \ldots, \tau_n)$.\\
+
+Al ser un juego de suma nula, la suma de la ganancia de todos los jugadores es 0, es decir:
+\begin{center}
+$\Sigma^n_{k=1}\mathbb{H}_k(\tau_1,\tau_2, \ldots, \tau_n) \equiv 0 $
+\end{center}
+
+Notar, que los jugadores pueden elegir la variable en el dominio:\\
+
+$\tau_k=1, \ldots, \beta_k$ para cada $k=1,2, \ldots ,n$.\\
+Teniendo que $\beta_k$ no es más que el número de alternativas que tiene el jugador k. Es decir, un jugador elige una alternativa, entre el conjunto total de opciones que tiene.\\
+
+Notemos ahora, que la coalición de la que hablábamos antes, es un conjunto formado por las decisiones de cada uno de los jugadores que la componen. Estas decisiones será necesarias notarlas como una sola variable. Por ello, el conjunto agregado de decisiones de los jugadores del primer conjunto $s_1$ se denotará como $\tau^{s_1}$, mientras que el conjunto agregado de las decisiones del segundo conjunto de jugadores se denotará como $\tau^{s_2}$.\\
+
+Bajo estas condiciones, podemos ofrecer la cantidad que obtiene el primer jugador(la primera coalición):\\
+
+\begin{center}
+
+$ \bar{\mathbb{H}}(\tau^{s_1},\tau^{s_2})=\Sigma_{k \thinspace in \thinspace  s_1} \mathbb{H}_k(\tau_1,\tau_2, \ldots, \tau_n) = - \Sigma_{k \thinspace in \thinspace s_2} \mathbb{H}_k(\tau_1,\tau_2, \ldots, \tau_n)$
+
+\end{center}
+
+Todas las posibles estrategias mixtas de la primera coalición de jugadores es un vector $\overrightarrow{\epsilon}$ de componentes que denotaremos por $\epsilon_{\tau^{s_1}}$. Donde este conjunto de posibles estrategias es del conjunto $S_{\beta^{s_1}}$, donde $\beta^{s_1}$ no es más que el conjunto de posibles agregados $\tau^{s_1}$, es decir, es el conjunto de todas las posibles estrategias seguidas por todos y cada uno de los jugadores.\\
+
+Este vector $\overrightarrow{\epsilon}$ verifica las siguientes propiedades:\\
+
+\begin{center}
+
+$ \epsilon_{\tau^{s_1}} \geqq 0, \quad \Sigma_{\tau^{s_1}}\epsilon_{\tau^{s_1}}=1$
+
+\end{center}
+
+De forma análoga, podemos definir el vector de estrategias mixtas de la segunda coalición de jugadores como $\overrightarrow{\eta}$ cuyos componentes serán denotados por $\eta_{\tau^{s_2}}$. Definiéndose en  $S_{\beta^{s_2}}$ . Además, este vector verifica las siguientes propiedades:\\
+
+\begin{center}
+
+$\eta_{\tau^{s_2}} \geqq, \thinspace \Sigma_{\tau^{s_2}}\eta_{\tau^{s_2}}=1$
+
+\end{center}
+
+Con lo anterior podemos formar la forma bilinear $K(\overrightarrow{\epsilon},\overrightarrow{\eta})$, donde esta función se define como:\\
+\begin{center}
+
+$K(\overrightarrow{\epsilon},\overrightarrow{\eta})=\Sigma_{\tau^{s_1},\tau^{s_2}} \bar{\mathbb{H}}(\tau^{s_1},\tau^{s_2})\epsilon_{\tau^{s_1}}\eta_{\tau^{s_2}}$
+
+\end{center}
+
+Finalmente con lo anterior podemos formar ya la función característica de un juego $v(s_1)$.\\
+
+\begin{center}
+
+$v(s_1) = Max_{\overrightarrow{\epsilon}} Min_{\overrightarrow{\eta}} K(\overrightarrow{\epsilon},\overrightarrow{\eta}) =  Min_{\overrightarrow{\eta}} Max_{\overrightarrow{\epsilon}} K(\overrightarrow{\epsilon},\overrightarrow{\eta})$
+
+\end{center}
+
+Notemos que $Max_{\overrightarrow{\epsilon}}$ implica maximizar la función $K(\overrightarrow{\epsilon},\overrightarrow{\eta})$ en $\overrightarrow{\epsilon}$. Análogamente para $\eta$.\\
+
+Esta función esta definida para todos los subconjuntos de S y tiene como valores números reales. Además cumple las siguientes propiedades:\\
+
+1) $v(\emptyset) = 0$\\
+2) Sea $s_1$ un subconjunto del conjunto S. Podemos denotar el conjunto $S - s_1$ como $-s_1$ siendo este subconjunto disjunto con $s_1$. Entonces $v(-s_1)=-v(s_1)$.\\
+\textbf{Nota:} Notar que al conjunto $-s_1$ antes lo habíamos denotado por $s_2$\\
+3) Sea $T$ otra coalición, entonces $v(s_1 \cup T) \geqq v(s_1) + v(T)$, si $s_1 \cap T$\\
+
+De esto podemos extraer unas propiedades generales de la función característica:\\
+1)$v(S)=0$\\
+2)$v(s_1 \cup \ldots \cup s_p) \geqq v(s_1)+ \ldots + v(s_p) $ si $s_1, \ldots , s_p$ son disjuntos dos a dos.\\
+3) $v(s_1)+ \ldots + v(s_p)  \leqq 0$ si $s_1, \ldots , s_p$ son una descomposición de S.\\
+
+Para cualquier función numérica $v_0(s)$ que cumpla las propiedades:\\
+1) $v(\emptyset) = 0$\\
+3) Sea $T$ otra coalición, entonces $v(s_1 \cup T) \geqq v(s_1) + v(T)$, si $s_1 \cap T$\\
+Entonces existe un juego n-personal de suma cero, tal que $v_0(s)$ es la función característica del juego.\\
+
+Sea $\Gamma$ un juego n-personal de suma cero con función característica v(S). Sea también, un conjunto de números $\alpha^0_1, \ldots, \alpha^0_n$.\\
+Notemos ahora dos juegos $\Gamma$ y $\Gamma^{'}$ que son exactamente iguales salvo por el detalle de que, mientras en $\Gamma$ el jugador al terminar el juego recibe un pago, en $\Gamma^{'}$ recibe ese pago más una constante $\alpha^0_k$. Notar que esta constante es fija, es decir, siempre vale lo mismo. Además, cada jugador tiene asignada una de las constantes, es decir, cada jugador recibirá siempre la misma cantidad, que no tiene porque ser igual a la cantidad que reciban otros jugadores.\\
+Es claro que $\Gamma^{'}$ es un juego de suma nula si y solo si $\Sigma^n_{k=1} a^0_k=0$ lo cual lo asumiremos(asumiremos que se cumple eso).\\
+Si denotamos la función característica de $\Gamma^{'}$ por $v^{'}(S)$ entonces tenemos que:\\
+
+\begin{center}
+
+$v^{'}(S)=v(S)+ \Sigma_{k \thinspace  in \thinspace S}a^0_k$
+
+\end{center}
+
+Esta relación, la denominaremos equivalencia estratégica.\\
+
+Vemos como las estrategias posibles, las posibilidades de formar una coalición etc quedan totalmente inalteradas. \\
+
+
+Por ello, $v^{'}(S)$ y $v(S)$ están relacionadas, lo que implica que cualquier juego con la función característica $v(S)$ es equivalente desde el punto de vista estratégico a un juego con la función característica $v^{'}(S)$ y viceversa. Es decir, $v^{'}(S)$ y $v(S)$ describen dos estrategicamente equivalentes familias de juegos. Dicho de otro modo,$v^{'}(S)$ y $v(S)$ deben considerarse como equivalentes. \\
+
+
+Es interesante coger de cada familia de funciones características v(S) en equivalencia estrategia un representante $\bar{v}(S)$. \\
+Teniendo así que si $\bar{v}(S)$ y $\bar{v}^{'}(S)$ son los representantes de v(S) y de $v^{'}(S)$ respectivamente, entonces v(S) y $v^{'}(S)$ estarán en una equivalencia estratégica si $\bar{v}(S)$ y $\bar{v}^{'}(S)$ son idénticos.\\
+
+Tendremos en cuenta para la cuestión la ecuación:\\
+
+
+\begin{center}
+
+$v^{'}(S)=v(S)+ \Sigma_{k \thinspace  in \thinspace S}a^0_k$
+
+\end{center}
+
+La cual es condición suficiente y necesaria.\\
+Con esta ecuación, podemos ver que los representantes deseados están sujetos a n-1 ecuaciones.  Así elegimos la ecuación:\\
+
+\begin{center}
+
+$\bar{v}((1))=\bar{v}((2))= \ldots = \bar{v}((n))$
+
+\end{center}
+
+Visto esto, podemos denominar a la función característica $\bar{v}(S)$ reducida si y solo si verifica la ecuación anterior. Por tanto, cada función característica v(S) es una equivalencia estratégica, con una función reducida $\bar{v}(S)$. Recibiendo $\bar{v}(S)$ el nombre de forma reducida de v(S).\\
+
+La función reducida es el representante que estábamos buscando.\\
+
+Consideremos ahora $\bar{v}(S)=\gamma$ para cualquier conjunto de (n-1) elementos de S. Teniendo que $-\gamma = \bar{v}((1))= \ldots = \bar{v}((n))$\\
+
+De esto al igual que hacíamos en el capitulo sobre n=3 jugadores, podemos distinguir dos tipos de juegos, los esenciales y los inesenciales.\\
+
+Cuando $\gamma=0$ entonces el juego es inesencial, esto es debido a que cada jugador jugará su mano por su cuenta, es decir, no hay lugar para las coaliciones en tanto que no proporcionan ninguna ventaja al jugador.\\
+
+Por el contrario, si $\gamma \geq 0$ entonces el juego sera esencial, por el hecho de que los jugadores buscaran una coalición ya que esta les reportará más beneficio que jugando en solitario. En este caso el jugador que juega solo perderá la cantidad $\gamma$  mientras que los jugadores que juegan en coalición tendrán que repartirse esta cantidad.\\
+
+Por tanto el juego será inesencial si y solo si:\\
+
+\begin{center}
+
+$\Sigma^{n}_{j=1} v((j)) =0 $
+
+\end{center}
+
+Y será esencial si y solo si 
+
+\begin{center}
+
+$\Sigma^{n}_{j=1} v((j)) \leq 0 $
+
+\end{center}
+
+Podemos formular además el criterio de inesencialidad de la siguiente forma:\\
+Un juego es inesencial si y solo si la función característica v(S) tiene la siguiente forma:\\
+
+\begin{center}
+
+$v(S) \equiv \Sigma_{k \thinspace  in \thinspace S} \alpha^{0}_{k} $
+
+\end{center}
+
+
+Podemos ver como solo encontramos aditiva la función característica únicamente en el caso inesencial, mientras que no es aditiva en el caso esencial.\\
+
+Además, podemos hacer una serie de observaciones sobre el caso esencial.\\
+1) Si $\gamma \geq 0$ esto implica necesariamente que las coaliciones son preferibles. Al ser las coaliciones preferibles y encontrarnos en un juego de suma nula, entonces debe haber jugando al menos 3 jugadores puesto que de otra forma, es decir si hubiesen dos jugadores, les convendría formar una coalición pero esto es contradictorio con el hecho de que el juego es de suma nula, es decir, lo que gana uno lo pierde el otro.\\
+
+2) Las coaliciones podrán ser de a lo sumo n-1 jugadores en el caso de tener n jugadores, esto es , en un juego de tres jugadores, el tamaño máximo de la coalición será 2. Esto es nuevamente debido a que es de suma nula.\\
+
+Por último algunas consideraciones necesarias sobre la función característica es que permite el análogo a la multiplicación por un escalar y a la suma de vectores. Esto es:\\
+
+Sea $t \geqq 0$ y una función característica v(S) entonces $ tv(S) \equiv u(S)$ es también una función característica.\\
+
+Sean dos funciones característica v(S) y w(S) entonces $v(S) + w(S) \equiv z(S)$ es también una función característica.\\
+
+
+La interpretación de estas operaciones es clara. \\
+Primero para el caso de la multiplicación por un escalar.\\
+	- Si $t=0$ entonces tendríamos el caso de un juego inesencial, en el que no es interesante para los jugadores formar coaliciones.\\
+	Vemos como esto no tiene efecto en si sobre la función característica a parte de un mero cambio de unidades.\\
+	- Por el contrario, para $t >0 $ tenemos que esto genera que la unidad en la que se encuentra la utilidad cambie.\\
+
+Si continuamos con la adicción de funciones características. Esto sería como si un jugador estuviese jugando dos juegos simultáneamente. Teniendo que lo que haga en un juego no afectará al otro. Entonces la utilidad que espera obtener de ambos juegos es la suma de las utilidades de cada uno de ellos.\\
+
+Notemos que ambas operaciones pueden combinarse, dando lugar a un cambio de unidades en dos juegos que son independientes uno del otro, sumándose así la utilidad esperada por el jugador que juega ambos juegos. \\
+
+
+Una repercusión que tiene todo esto, es si recordamos la formulación de dos juegos equivalentes. 
+
+
+\begin{center}
+
+$v^{'}(S)=v(S)+ \Sigma_{k \thinspace  in \thinspace S}a^0_k$
+
+\end{center}
+
+y la formulación descrita anteriormente para indicar que un juego es inesencial.
+
+
+\begin{center}
+
+$v(S)= \Sigma_{k \thinspace  in \thinspace S}a^0_k$
+
+\end{center}
+
+Tenemos entonces que el primero puede denotarse como una suma de dos juegos, uno de los cuales es esencial y el otro inesencial. Es decir, podemos notar al juego inesencial como w(S) y tendríamos:\\
+
+
+\begin{center}
+
+$v^{'}(S)=v(S)+ w(S)$
+
+\end{center}
+
+Teniendo que un juego inesencial es aquel en que las coaliciones no juegan ningún papel, la interpretación de esta adicción sería:\\
+
+La superposición de un juego inesencial a otro juego, no disturba la estrategia de equivalencia , es decir no afecta a la estructura del juego.\\
+
+
+\subsubsection{Juegos simétricos}
+
+Veremos ahora el papel que juega la simetría en un juego n-personal. Este estudio tendrá que hacerse de forma más sistemática al realizado para n=2. \\
+
+Si consideremos los n símbolos $1, \ldots ,n$. Para cualquier permutación P de estos símbolos, podemos escribir P como:\\
+
+\begin{center}
+
+$P: i \rightarrow i^P$
+
+\end{center}
+
+Podemos definirlo también como sigue:\\
+
+\begin{equation}
+	P:\begin{pmatrix}
+		1, 2 \ldots, n \\
+		1^P, 2^P, \ldots ,n^P
+	\end{pmatrix}
+\end{equation}
+
+Notar una serie de propiedades:\\
+
+1) La identidad $I_n$ que deja cada i inmutable puede expresarse como:\\
+\begin{center}
+
+$i \rightarrow i^{I_n} =i $
+
+\end{center}
+
+Matricialmente podemos expresarlo como:\\
+
+\begin{equation}
+	I_n:\begin{pmatrix}
+		1, 2 \ldots, n \\
+		1, 2, \ldots ,n
+	\end{pmatrix}
+\end{equation}
+
+2) Dadas dos permutaciones P,Q, su producto PQ, que consiste en realizar primero la permutación P y después la permutación Q, viene dado por:\\
+
+\begin{center}
+
+$i \rightarrow i^{PQ} =(i^P)^Q $
+
+\end{center}
+
+El número de posibles permutaciones es el factorial de n, siendo n el número de jugadores.\\
+
+Notar que los símbolos $1, \ldots n$ denotan a los jugadores del juego.\\
+
+Si denotamos $\Gamma$ a un juego y $\Gamma^P$ al juego con la permutación de algún jugador.\\
+Entonces diremos que $\Gamma$ es invariante o simétrico respecto de P si $\Gamma$ coincide con $\Gamma^P$. \\
+En este caso la función característica del conjunto permutado coincidiría con la del conjunto inicial, es decir:\\
+
+\begin{center}
+
+$v(S^p) \equiv v(S)$
+
+\end{center}
+
+Tenemos además, que podemos considerar dos extremos:\\
+1)Si cada permutación P cambia el juego $\Gamma$ entonces decimos que el juego $\Gamma$ es totalmente asimétrico. \\
+2) Por el contrario, si para cada permutación P, el juego no cambia, entonces decimos que el juego $\Gamma$ es totalmente simétrico.\\
+
+Notemos, que obviamente hay muchos casos en medio de estos dos extremos.\\
+
+Si nos centramos en el conjunto de aquellos P que hace que $\Gamma$ sea simétrico, entonces tenemos que v(S) depende solo de los elementos de S. Esto implica:\\
+
+\begin{center}
+
+$v(S)=v_p$
+
+\end{center}
+
+donde p es el número de elementos en S.\\
+
+Este $v_p$ cumple una serie de propiedades:\\
+
+1) $v_0=0$\\
+2) $v_{n-p}=-v_p$\\
+3) $v_{p+q} \geqq v_p + v_q$ para $p + q \leqq n $\\
+
+La propiedad $v(S)=v_p$ es una consecuencia de la simetría, pero tiene importantes repercusiones:\\
+
+Si consideramos el caso n=2, implica que $v^{'}$ desaparece. Esto implica que el juego es justo.\\
+Para el juego n-personal, decimos que es justo si su función característica cumple la propiedad anterior. \\
+Es necesario recordar que el concepto de justicia de un juego puede o no implicar que todos los individuos de un juego puedan esperar el mismo destino en su función de pago. Esto, se cumple cuando n=2 puesto que al ser un juego de suma nula con simetría, ambos esperaran obtener lo mismo, pero esto no tiene porque cumplirse para $ n \geq 3$.\\
+
+Vistos todos los conceptos necesarios para juegos de suma nula, y antes de continuar con aquellos juegos de suma general. Es necesario que hagamos una parada para explicar como resolver los problemas sin puntos de equilibrio usando programación lineal. Para ello primero introduciremos una serie de elementos claves para el tratamiento de la cuestión.\\
+
+
+
+\chapter{Linealidad y Convexidad}
+
+Nos basaremos en un espacio lineal n-dimensional, es decir en un espacio euclídeo. Este espacio esta descrito por n coordenadas. De acuerdo con esto podemos definir $L_n$ con $n=1 \ldots$ como un conjunto de n-tuplas de números reales. $L_n$ cumple que es el espacio de funciones numéricas más simples cuyo dominio es un conjunto finito. En este espacio podemos decir que $(x_1, \ldots , x_n ) = (y_1, \ldots , y_n )$ si y solo si $x_i=y_i$ para todo $i=1, \ldots n$.\\
+La n-tuplas consideradas anteriormente podemos denominarlas también como puntos o vectores. Pudiéndose escribir como \\
+$\overrightarrow{x}=(x_1, \ldots , x_n )$\\
+Los $x_i$ con $i=1 , \ldots, n $ son las componentes del vector.\\
+
+Esto es útil a la hora de tener un sistema de referencia.\\
+Bajo este sistema de referencia tenemos pues un origen. Este origen es el vector cero, denotado como $\overrightarrow{0}=(0, \ldots , 0 )$\\
+Es decir, es un vector con sus n componentes iguales a cero.\\
+
+\section{Operaciones con vectores}
+
+Una de las operaciones más importantes con vectores es el producto por un escalar, es decir, por un número. Definiendo esta formalmente como:\\
+$ t(x_1, \ldots , x_n )=(tx_1, \ldots , tx_n)$\\
+La segunda operación más importantes es la suma de dos vectores. Formalmente definimos esta como:\\
+$(x_1, \ldots , x_n )+ (y_1, \ldots , y_n ) = (x_1 + y_1, \ldots ,x_n + y_n )$\\
+
+Otro concepto importante es la longitud del vector, la longitud del vector la denotamos por $ | \overrightarrow{x} | $ y viene dada por:\\
+$ | \overrightarrow{x} | = \sqrt{\Sigma^{n}_{i=1}}x^2_i$\\
+Es decir, es la raíz cuadrada de la suma de sus componentes al cuadrado.\\
+ 
+
+Un conjunto convexo es aquel que para dos puntos cuales quiera $\overrightarrow{x}$, $\overrightarrow{y}$ contenidos en el conjunto, también contiene su intervalo $[\overrightarrow{x},\overrightarrow{y}]$. Es decir, si pensamos en el plano, para dos puntos cualesquiera de un conjunto convexo, también esta en el conjunto el segmento que los une.\\
+
+\textbf{Propiedades de los conjuntos convexos:}\\
+1) La intersección de conjuntos convexos es convexo.\\
+Como consecuencia, dados cualquier número de puntos/vectores $\overrightarrow{x^{1}} \ldots \overrightarrow{x^{n}}$ entonces existe un menor conjunto convexo que los contiene a todos. Y esto no es más que la intersección de los conjuntos convexos que los contienen.\\
+
+2) Sea un conjunto de vectores $\overrightarrow{x^{1}} \ldots \overrightarrow{x^{p}}$. Sea un vector $\overrightarrow{y}$ que o pertenece al conjunto convexo C generado por $\overrightarrow{x^{1}} \ldots \overrightarrow{x^{n}}$ o bien existe un hiperplano que contiene a $\overrightarrow{y}$, de tal forma que el C esta contenido en una de las mitades del hiperplano. \\
+
+Esto es cierto también si es un conjunto convexo cualquiera.\\
+
+
+
+\chapter{Programación lineal}
+
+Pasemos ahora por el planteamiento de los problemas de programación lineal. \\
+Notar que la base de los mismo son los conjuntos convexos de los que hemos hablado anteriormente.\\
+
+Un problema de programación lineal es aquel cuyo objetivo es maximizar o minimizar el valor de una función lineal denominada la función objetivo. Esto se hace sujeto a unas restricciones que también son lineales.\\
+
+Supondremos en este caso un problema de programación lineal con la siguiente forma:\\
+
+
+$$\begin{array}{lc}
+\mbox{Maximizar} & \Sigma^m_{i=1} c_ix_i \\
+\mbox{Sujeto a:}  \\
+&  \Sigma a_{ij}x_i \leq b_j \quad j=1,\ldots, n\\
+&x_i \geq 0, \quad  i=1, \ldots ,m.
+\end{array}$$
+
+A este tipo de problemas los llamaremos el primal.\\
+
+Notar que existen otro tipo de problemas de programación lineal. Así, podríamos tener un problema de minimizar. En ese caso, no nos causaría muchos problemas, ya que minimizar la función objetivo del problema sería lo mismo que maximizar menos la función objetivo.\\
+
+Además, podemos tener otro tipo de inecuaciones como podrían ser aquellas con $\geq$ las cuales se resolverían metiendo variables artificiales.\\
+Por último podríamos tener variables que tomaran valores negativos, lo cual podríamos resolverlo poniéndola como una resta de dos variables ambas positivas.\\
+
+Vistos estos pequeños remarques, definiremos el conjunto de soluciones.\\
+
+\textit{\textbf{Definición 2.4}} Tenemos que el conjunto de puntos que satisfacen las restricciones se llamará el conjunto factible del problema. Aquellos puntos que generen el máximo valor serán la solución del problema.\\
+
+Llamaremos problemas duales de los anteriores al siguiente tipo de problemas:\\
+
+
+
+$$\begin{array}{lc}
+\mbox{Minimizar} & \Sigma^n_{i=j} b_ju_j\\
+\mbox{Sujeto a:}  \\
+&  \Sigma u_ja_{ij} \geq c_i \quad j=1,\ldots, m\\
+&u_j \geq 0, \quad i=1, \ldots ,n
+\end{array}$$
+
+
+Si al problema dual le calculamos nuevamente su dual, entonces obtendremos el primer tipo de problema.\\
+
+Recordemos ahora algunas propiedades sobre los problemas duales y primales.
+
+1) Si el primal no es acotado, entonces el dual será infactible.\\
+2) Ambos son infactibles.\\
+3) Ambos son factibles y acotados.\\
+
+Notemos que en el caso de ambos sean factibles y acotados, entonces el valor de la función objetivo coincide para ambos problemas.\\
+
+Notemos ahora que el método que usualmente se usa para la resolución de los problemas de programación lineal esta basado en las siguientes observaciones:\\
+
+1) El conjunto factible es una intersección de diversas mitades de espacies. Como cada una de estas mitades es convexa, el conjunto factible es un conjunto convexo hiperpolihedrico.\\
+
+2) Como el conjunto factible es convexo y la función objetivo es lineal, entonces un extremo local será un extremo global. Es decir, si buscamos el máximo, tendremos que un máximo local será un máximo global. Aboliendo así el riesgo de quedarnos atrapados en un máximo local sin saber que puede haber uno que mejore el valor de la función objetivo.\\
+
+3) Como la función objetivo es lineal, un extremo se obtendrá en los puntos extremos del conjunto factible.\\
+
+Tras dar las observaciones pertinentes, pasaremos a una breve descripción del método usado. Este método es conocido por el nombre de algoritmo del simplex. Veamos pues la descripción geométrica de su funcionamiento.\\
+
+Partamos de un vértice del conjunto de hiperpolihedros(este puede calcularse mediante métodos analíticos). Consideraremos ahora todas las aristas que se unen con dicho vértice. Si la función objetivo no puede mejorarse moviéndose a lo largo de una de las aristas, entonces tenemos que el vértice inicial es un extremo local y por tanto un extremo global. Si por el contrario, la función objetivo puede mejorarse moviéndose a lo largo de una de las aristas, seguiremos esa arista hasta el próximo vértice, es decir, el vértice que se haya en el otro extremo de la arista. \\
+El proceso anterior se repetirá hasta llegar al vértice final. \\
+Notemos que como en cada paso mejora el valor de la función objetivo, entonces el algoritmo no puede volver a un vértice anterior.\\
+Notemos también que como tenemos un conjunto finito de vértices (esto es debido a que hemos supuesto que el problema estaba acotado) entonces el algoritmo terminará en un número finito de pasos.\\
+
+
+Hemos visto las nociones básicas que necesitamos para la resolución de los problemas mixtos mediante un problema de programación lineal. Veremos a continuación como trasladar un juego a un problema de programación lineal. Asimismo, mostraremos algún ejemplo ilustrativo.\\
+
+\chapter{Resolución juegos de suma nula mediante programación lineal}
+\markboth{CAPÍTULO 6. Resolución mediante programación lineal}{}
+
+Asumiremos un juego de dos personas de suma nula (A,B,M). Donde $A=\{\alpha_1, \ldots ,\alpha_n\}$ es el conjunto de estrategias posibles por el primer jugador, $B=\{\beta_1, \ldots ,\beta_n\}$ es el conjunto de posibles estrategias del segundo jugador. Y por último M es la matriz de pago del juego de donde $a_{ij}=M(a_i,b_j)$ es el pago que recibe el primer jugador si el elige su estrategia ith y el segundo jugador elige la jth estrategia. \\
+Recordar que lo que recibe el jugador B sería -$a_{ij}$.\\
+
+Supondremos además, que todo valor $a_{ij}$ es positivo para todo i y j.\\
+Esto último no supone perdida de generalidad puesto que si existe alguna entrada negativa, con añadir la misma cantidad pero en positivo a toda matriz esto conseguiría que fuera positivo y no alteraría la estructura estrategia del juego.\\
+
+El primer jugador, puede garantizarse para el mismo al menos $v^{*}$ (con $v^{*}>0$) si existe $\vec{x}=(x_1, \ldots , x_m)$ tales que verifican:\\
+
+\begin{center}
+
+$x_i \geq 0 \newline
+\Sigma^m_{i=1} x_i=1$
+
+\end{center}
+
+De tal forma que 
+\begin{center}
+
+$M(\vec{x},\beta_j) \geq v*, \quad \mbox{Para } j=1,2 \ldots n$
+
+\end{center}
+
+Esto es equivalente a: 
+
+\begin{center}
+
+$\Sigma^m_{i=1} a_{ij}x_i \geq v*, \quad \mbox{Para } j=1,2 \ldots n$
+
+\end{center}
+
+Si dividimos esta última ecuación por $v*$ y denotamos al cambio de variable $x_i/v*=u_i$. Entonces el primer jugador podrá obtener al menos $v*$ si hay un u de forma que:\\
+
+\begin{center}
+
+$\vec{u}=(u_1,u_2, \ldots ,u_m) \quad \mbox{donde} \newline
+u_i \geq 0 \quad \mbox{para } i=1,2 \ldots m \newline 
+\mbox{y } \Sigma_i u_i=1/v*$
+
+\end{center}
+
+De tal forma que obtenemos la siguiente inecuación:\\
+
+\begin{center}
+
+$\Sigma^m_{i=1} a_{ij}u_i \geq 1, \quad \mbox{Para } j=1,2 \ldots n$
+
+\end{center}
+
+Podemos por tanto escribir el problema del primer jugador de la siguiente forma:\\
+
+Sea U el conjunto de m-tuplas $\vec{u}=(u_1,u_2, \ldots ,u_m)$ tal que:\\
+
+\begin{center}
+
+$u_i \geq 0 \quad \mbox{para } i=1,2 \ldots m \newline 
+\Sigma^m_{i=1} a_{ij}u_i \geq 1, \quad \mbox{Para } j=1,2 \ldots n$
+
+
+\end{center}
+
+Para encontrar $\vec{u}$ perteneciente a U tal que haga $\Sigma^m_{i=1}u_i$ mínimo.
+
+Vamos a ir explicando que hemos ido haciendo antes de continuar. \\
+
+El primer jugador tiene la garantía de obtener una cantidad determinada, a la que hemos denominado como $v*$, está cantidad, es aquella que el jugador quiere maximizar. Notemos que esta cantidad es desconocida.\\
+Tenemos un conjunto de estrategias puras $a_{ij}$ las cuales las elegiremos con la probabilidad $x_i$, construyendo así una estrategia mixta.\\
+Nos interesa conocer que valores de $x_i$ necesitamos para obtener lo máximo que podamos, es decir, para obtener un valor mayor al $v*$. Pero como hemos mencionado anteriormente, este valor es desconocido, por lo que tendremos que hacer un cambio de variable en la restricción para que el vector de términos independientes(es decir, el elemento a la derecha de la inecuación) sea un número y no una variable a averiguar.\\
+
+Para esto hemos dividido por el valor seguro $v*$. Al dividir por el valor seguro, hemos realizado un cambio de nombre para facilitar la resolución del problema.\\
+
+Por último, hemos indica que queremos encontrar aquellos valores para esta nueva variable $\vec{u}$ tales que la minimicen. \\
+
+Hemos indicado que queremos minimizar $\Sigma^m_{i=1}u_i$ lo cual es equivalente a maximizar $\dfrac{1}{\Sigma^m_{i=1}u_i}$\\
+
+Y esto podemos observar que es un problema de programación lineal como los que introducíamos en el capitulo anterior.\\
+
+Es decir, el problema en la forma expresada en capítulos anteriores sería:\\
+
+$$\begin{array}{lc}
+\mbox{Minimizar} & \Sigma^m_{i=1}u_i\\
+\mbox{Sujeto a:}  \\
+&  \Sigma^m_{i=1} a_{ij}u_i \geq 1, \quad \mbox{Para } j=1,2 \ldots n\\
+&u_i \geq 0, \quad i=1, \ldots ,m
+\end{array}$$
+
+Hagamos aquí unos breves apuntes. El primer jugador tiene asegurado al menos obtener $v*$, pero su interés es maximizar esta cantidad. Por lo que el problema original es de maximizar. Pero una vez hecho el cambio de variable en el que teníamos que $x_i/v*=u_i$, ahora el maximizar $v*$ al estar dividiendo es equivalente a minimizar $u_i$. Y por esto nuestro problema se ha convertido a uno de minimizar.\\
+
+
+Veamos ahora la visión del segundo jugador.\\
+
+Nuestro segundo jugador tiene asegurado que le tendrá que dar al primer jugador al menos $v*$ (con $v* >0$) por lo tanto su objetivo será tratar de minimizar esta cantidad.\\
+
+El jugador tiene varias estrategias puras donde elegir, entre las cuales elegirá con probabilidad $y=(y_1,y_2, \ldots y_n)$ teniendo que estas probabilidades verifican:\\
+
+\begin{center}
+
+$y_j \geq 0 \mbox{ para cada } j=1,2\ldots,n \newline
+\Sigma^n_{j=1} y_j=1$
+
+\end{center}
+
+
+De tal forma que 
+\begin{center}
+
+$M(\alpha_i,\vec{y}) \leq v*, \quad \mbox{Para } i=1,2 \ldots m$
+
+\end{center}
+
+Esto es equivalente a: 
+
+\begin{center}
+
+$\Sigma^n_{j=1} a_{ij}y_j \leq v*, \quad \mbox{para } i=1,2 \ldots m$
+
+\end{center}
+
+Equivalentemente podemos ver que el jugador 1 ganará como mucho $v*$ si existe $\vec{w}=(w_1,w_2,\ldots w_n)$ donde $w_j \geq 0 $ para $j=1,2 \ldots ,n $ y $\Sigma_j w_j = 1/v*$ lo cual es equivalente a que $y_j/v*=w_j$ de tal forma que obtenemos la siguiente inecuación:\\
+
+\begin{center}
+
+$\Sigma^n_{j=1} a_{ij}w_j \leq 1, \quad \mbox{para } i=1,2 \ldots m$
+
+\end{center}
+
+Podemos por tanto escribir el problema del segundo jugador de la siguiente forma:\\
+
+Sea W el conjunto de n-tuplas $\vec{w}=(w_1,w_2,\ldots w_n)$ tal que:\\
+
+\begin{center}
+
+$w_j \geq 0 \quad \mbox{para } j=1,2 \ldots n \newline 
+\Sigma^n_{j=1} a_{ij}w_j \leq 1, \quad \mbox{para } i=1,2 \ldots m$
+
+
+\end{center}
+
+Para encontrar ese $\vec{w}$ perteneciente a W que hace $\Sigma_j w_j$ máximo.\\
+
+Hagamos ahora un breve repaso de esta idea para el segundo jugador.\\
+El segundo jugador trata de minimizar el pago que le dará al primer jugador. \\
+Para ello trata de asignar unas probabilidades a la matriz de pago de tal forma que como mucho pague $v*$ al primer jugador, intentando reducir esta cantidad.\\
+
+Nuevamente con $v*$ es desconocido, haremos un cambio de variable.\\ 
+Este cambio de variable nos llevará a que como antes queríamos minimizar $v*$ es decir, lo que le pagamos al primer jugador, esto ahora tras el cambio será lo mismo que maximizar $\Sigma_j w_j$ o minimizar $\dfrac{1}{\Sigma_j w_j}$\\
+
+Por tanto el problema de programación lineal queda de la forma siguiente:\\
+
+$$\begin{array}{lc}
+\mbox{Maximizar} & \Sigma_j w_j\\
+\mbox{Sujeto a:}  \\
+&  \Sigma^n_{j=1} a_{ij}w_j \leq 1, \quad \mbox{para } i=1,2 \ldots m\\
+&w_j \geq 0, \quad i=1, \ldots ,n
+\end{array}$$
+
+Es necesario hacer un inciso aquí. \\
+
+Esto es un forma especifica, es decir, hemos hecho la construcción a medida que hemos ido desarrollando el problema. Una forma más genérica de la visión del segundo jugador y análogamente del primer jugador sería:\\
+
+$$\begin{array}{lc}
+\mbox{Maximizar} & \Sigma_j b_jw_j\\
+\mbox{Sujeto a:}  \\
+&  \Sigma^n_{j=1} a_{ij}w_j \leq c_i, \quad \mbox{para } i=1,2 \ldots m\\
+&w_j \geq 0, \quad i=1, \ldots ,n
+\end{array}$$
+
+Es decir, hemos introducido unas constantes.\\
+
+El problema del primer jugador y el problema del segundo jugador son duales.\\
+
+Tenemos que realizar otra indicación. Puesto que como mínimo el jugador 1 puede ganar $\dfrac{1}{\Sigma^m_{i=1}u_i}$ y como máximo el jugador dos puede perder $\dfrac{1}{\Sigma_j w_j}$ entonces en base a la linea del teorema MiniMax podemos decir que:\\
+
+\begin{center}
+
+$\dfrac{1}{\Sigma^m_{i=1}u_i} \leq \dfrac{1}{\Sigma_j w_j}$
+
+\end{center} 
+O lo que es lo mismo
+
+\begin{center}
+
+$\Sigma_j w_j \leq \Sigma^m_{i=1}u_i$
+
+\end{center}
+
+A continuación vamos a indicar las fases para la resolución de un juego y tras esta indicación mostraremos la resolución de un juego.\\
+
+\textbf{Pasos para la resolución de un juego:}
+
+\textbf{Paso 1.} Eliminación de estrategias dominadas.\\
+Recordemos para ello:\\
+
+1) Una fila es dominada por otra si todos sus términos son menores.\\
+2) Una columna es dominada por otra si todos sus elementos son mayores.\\
+
+\textbf{Paso 2.} Búsqueda de un punto de equilibrio mediante estrategias puras.\\
+
+Para ello usaremos el teorema MiniMax.\\
+Recordemos que:\\
+$V_I$ era el "gain floor", es decir lo mínimo que podía obtener el primer jugador. Esto se calculaba usando la siguiente formula $Max_iMin_j \Pi_{ij}$ donde $\Pi_{ij}$ era la matriz de pagos.\\
+
+$V_S$ era el "loss ceiling", es decir, lo máximo que podía perder el segundo jugador. Esto se calculaba de la siguiente forma $Min_jMax_i \Pi_{ij}$\\
+
+Por último remarquemos que existía equilibrio con estrategias puras si $V_I=V_S$.\\
+
+\textbf{Paso 3.} En el caso de que no haya equilibrio puro, buscaremos el equilibrio mixto pasando el juego a un problema de programación lineal.\\
+
+
+Veamos ahora un ejemplo:\\
+
+$$
+\left(
+\begin{array}{cccc}
+3 & 2 & 5 \\
+2 & -1 & 3\\
+0 & 4 & 1\\
+\end{array}
+\right)
+$$
+
+Primero iniciaremos con el primer paso, es decir, buscaremos las filas y columnas dominadas y las eliminaremos.\\
+
+Podemos observar que la última columna es más grande termino a termino que la primera, es decir la tercera estrategia del segundo jugador esta dominada por la primera columna(primera estrategia del jugador). Por tanto eliminaremos la tercera estrategia puesto que el jugador nunca la usará.\\
+
+Observemos que la segunda fila esta dominada por la primera, por lo que podemos eliminarla ya que el primer jugador no la elegirá nunca.\\
+
+Podemos observar que no son necesarios más cambios. Veamos como queda nuestra matriz después de estos cambios.\\
+
+$$
+\left(
+\begin{array}{cccc}
+3 & 2  \\
+0 & 4 \\
+\end{array}
+\right)
+$$
+
+Vayamos ahora al segundo paso, vamos ver si existe un equilibrio en estrategias puras.\\
+Para ello vamos a comprobar si los valores de "gain floor", y "loss ceiling", coinciden.\\
+
+Podemos observar como el mínimo valor para cada una de las filas es 2 y 0 respectivamente, por lo que el máximo de ambos es 2. Por tanto $V_I=2$.\\
+
+Vemos ahora que el máximo por columnas es 3 y 4 respectivamente por lo que el mínimo de ambos es 3. Por tanto $V_S=3$.\\
+
+Podemos observar que ambos valores no coinciden por lo que el juego no tiene estrategias puras y por tanto no posee un punto de equilibrio para las mismas.\\
+
+Pasemos por tanto al tercer y último paso.\\
+
+Podemos observar como todos los elementos de la matriz de pago son positivos por lo que no es necesario implementar ningún cambio.\\
+
+El problema para el primer jugador será:\\
+
+$$\begin{array}{lc}
+\mbox{Minimizar} & u_1 + u_2\\
+\mbox{Sujeto a:}  \\
+&  3u_1 \geq 1\\
+& 2u_1 + 4u_2 \geq 1 \\
+&u_i \geq 0, \quad i=1,2
+\end{array}$$
+
+Vamos a ver esto en detalle.\\
+Recordemos que nuestro objetivo era minimizar la suma de las $u_i$ que es justo lo que tenemos aquí. \\
+Recordemos también que teníamos un $u_i$ por cada una de las estrategias que tenía el primer jugador.\\
+
+Por último, recordemos que sumábamos el valor de cada una de las filas multiplicado por $u_i$ para cada uno de los j. Esto quiere decir, que para cada columna hay una restricción nueva. Por tanto para la primera fila corresponde los $u_1$, para la segunda fila corresponde los $u_2$ etc. Y la primera restricción sería la primera columna puesto que es la primera j.\\
+
+Visto esto, el del jugador dos tendría una interpretación análoga. Veamos como quedaría:\\
+
+$$\begin{array}{lc}
+\mbox{Maximizar} & w_1 + w_2\\
+\mbox{Sujeto a:}  \\
+&  3w_1 + 2w_2 \leq 1\\
+&  4w_2 \leq 1 \\
+&w_j \geq 0, \quad j=1,2
+\end{array}$$
+
+En este caso, cada $w_j$ corresponde a una de las columnas.\\
+Y la suma la realizamos por filas, es decir, hay tantas restricciones como filas hay en la matriz de pagos.\\
+
+
+Veamos otro ejemplo, en este segundo ejemplo veremos como no será necesaria la aplicación de este método.\\
+
+Sea el juego:\\
+
+
+$$
+\left(
+\begin{array}{cccc}
+35 & 15 & 60  \\
+45 & 58 & 50 \\
+38 & 14 & 70\\
+\end{array}
+\right)
+$$
+
+Primero veamos nuestro primer paso.\\
+Podemos observar como la tercera columna, es decir, la tercera estrategia del jugador es dominada por la primera estrategia. Por lo que la eliminaremos ya que el jugador nunca la elegirá. \\
+
+Podemos observar que las filas ninguna de ellas es dominada, por lo que ya habríamos terminado y la matriz quedaría:\\
+
+$$
+\left(
+\begin{array}{cccc}
+35 & 15  \\
+45 & 58  \\
+38 & 14 \\
+\end{array}
+\right)
+$$
+
+Continuemos ahora por el segundo paso.\\
+
+Podemos observar como el mínimo valor que puede obtener por cada una de las ilas es 15,45 y 14. De los cuales el máximo es 45. \\
+
+Veamos ahora por columnas. Podemos observar que el máximo por columnas es 45 y 58. De los cuales el mínimo es 45.\\
+
+Podemos observar que ambos valores coinciden por lo que en este caso existen las estrategias puras. Estas estrategias serían que el primer jugador jugase su segunda estrategia y que el segundo jugador jugase su primera estrategia.\\
+
+
+
+Vista la resolución de los juegos usando programación lineal, vamos a introducir ahora el concepto de función de utilidad. Este concepto nos será útil más adelante cuando hablemos de juegos cooperativos bipersonales y cuando hablemos del problema de la negociación en general.\\
+
+
+\chapter{Función de utilidad}		
+	
+
+Hemos realizado previamente alguna mención de la función de utilidad. Vemos que  dicha función de utilidad incluye el concepto de valor personal de cada una de las alternativas. Así por ejemplo, para un hombre rico ganar 1000 € más, no es lo mismo que para una persona de clase media. Esta función de utilidad define la preferencia o la indiferencia de cada uno de los jugadores con respecto a una serie de alternativas.\\ 
+Así por ejemplo entre A = " quedarme como estoy ",  B =" estar enfermo "  el jugador 1, siendo una persona con buen estado de salud, puede preferir A frente a B lo cual se indica como ApB. \\
+Esto es debido a que la opción estar enfermo empeora su situación actual, ya que en la actualidad el individuo esta sano y sin ninguna enfermedad, por lo que prefiere seguir sano antes que enfermar.\\
+Asimismo un jugador 2, que se encuentre ya enfermo, puede resultar indiferente a cualquiera de las dos opciones, lo cual es indicado como A i B\\
+Esto es debido a que en este caso estar enfermo y quedarme como estoy implican ambas la misma opción puesto que el segundo jugador ya esta enfermo, por lo que ambos se corresponden con su estado actual. Por ello, le resulta indiferente cual opción elegir.\\
+Este sistema de preferencias e indiferencias cumplen una serie de propiedades:\\
+
+1) El sistema de preferencias e indiferencias, es un sistema de orden total, es decir, podemos ordenar cualquier par de elementos perteneciente a este conjunto de tal forma que únicamente una de las siguientes afirmaciones es verdadera:
+Sea A y B , entonces o bien A p B, B p A o bien A i B. Esto indicaría que o bien A es preferible a B, o bien B es preferible a A, o bien es indiferente la elección.\\
+
+Además, cumple la propiedad conmutativa, es decir, si AiB entonces es equivalente a BiA.\\
+
+\textbf{Nota:} Un conjunto X es de orden total si cumple cuatro propiedades:\\
+\hfill 1)Reflexiva: Si $a \in X$, entonces $a \leq a$\\
+\hfill 2) Transitiva: Sea $a,b,c \in X$ si $a \leq b$ y $b \leq c$ entonces $a \leq c$\\
+\hfill 3)Antisimétrica: Sea $a,b \in X$ si $a \leq b$ y $b \leq a$ entonces $a=b$\\
+\hfill 4)Conexa: Sea $a,b \in X$ entonces $a \leq b$ o bien $b \leq a$\\
+
+
+Si cumple las propiedades reflexiva, antisimétrica y transitiva, es decir, las tres primeras propiedades, entonces decimos que es un orden parcial.\\
+
+Si cumple las cuatro propiedades decimos que es un orden total.\\
+
+Decimos que es un preorden o un cuasiorden cuando cumple las propiedades reflexivas y transitivas.\\
+
+Decimos además, que es de orden estricto si verifica que es transitivo y además cumple otra propiedad:\\
+\hfill 5) Asimetrico: Sea $a,b \in X$ si $a \leq b$ entonces no se cumple que $ b \leq a$
+
+
+2) Propiedad de transitividad\\
+
+Sea A, B y C. Si AiB y BiC entonces AiC. Es decir, se cumple la transitividad para la indiferencia. Pero también se cumple para la preferencia, es decir, si ApB y BpC entonces ApC.\\
+Además, también cumplen la transitividad mezclándolos, es decir, si ApB y BiC entonces ApC.\\
+
+3) Si BpA entonces $\alpha * A +(1-\alpha)* B p A$ \\
+Esto implica que si B es preferible a A, cualquier combinación de la forma anterior será preferible a A. La combinación anterior solo es igual a A en el caso en que $\alpha = 1.$
+
+Recordemos que $\alpha$ toma valores en [0,1], ya que esta generando un combinación lineal convexa, en los puntos de A y B pertenecientes a los extremos del segmento cerrado.
+
+4) Del anterior, podemos obtener su dual. Teniendo que si Si ApB entonces $A p \alpha * A +(1-\alpha)*B$
+
+5) Existencia de una continuidad. Es decir, si BpCpA entonces existe algún $\alpha \in$[0,1] tal que C i ${\alpha * A +(1-\alpha)* B}$. Esto se cumple siempre y cuando $\alpha$ sea grande. Vemos que si $\alpha = 0$, entonces no se cumple ya que BpC. Equivalentemente si $\alpha = 1$ entonces no se cumple ya que la lotería sería igual a A, y tenemos que CpA. A medida que variamos $\alpha$ , la preferencia de esta igualdad va variando.\\
+Recordemos que en $\alpha * A +(1-\alpha)* B$ si $\alpha = 0$ entonces esta lotería es igual a B.\\ 
+Notar, que el $\alpha$ que consigue que se cumpla C i ${\alpha * A +(1-\alpha)* B}$ es único.\\
+Podemos pues modificar las probabilidades de la lotería anterior, para que ambas opciones sean equivalentes para un determinado jugador. 
+
+
+Esto ApB indica que se tiene preferencia de A sobre B, o lo que es lo mismo, A tiene más utilidad que B. Pero esto no nos informa sobre cuanto más es preferible A sobre B. \\
+Esto no supone un problema si únicamente tenemos que elegir entre dos elementos o si nuestra elección consiste en teniendo ApBpC, elegir entre A y la lotería (B,C) porque en este caso, A es preferible a cualquiera de las dos opciones de la lotería sin importar cuanto. Pero en cuanto la elección involucra un riesgo es necesario conocer cuanto mayor es esta preferencia. Así, por ejemplo si ApBpC y tenemos que elegir entre B y la lotería {A,C}(se elige una de ambas con, supongamos por simplicidad, la misma probabilidad), en este caso es necesario saber si la preferencia de A respecto de B es tan grande como para correr el riesgo de elegir la opción de la lotería.  Asimismo, cualquier elección dentro de la posibilidad mencionada anteriormente nos aportaría nueva información sobre cuanto más preferible es una opción a la otra.\\
+
+Veamos un ejemplo para ilustrar esto, supongamos que A = "ganar 100 euros", B="ganar 99 euros", y C="ganar 1 euro". Vemos que A es preferible a B porque yo lo que quiero es ganar cuanto más mejor. Y por eso mismo B es preferible a C. Pero en este caso, B es mucho más preferible a C que lo que lo es A respecto de B, esto es debido a la gran diferencia entre ambas opciones. Mientras de B a A solo mejoro un euro, de C a B mejoro en 98 euros. Así, en este caso entre elegir B o elegir la lotería (A,C) , teniendo en cuenta que en la lotería pueden salir ambas opciones con la misma probabilidades, nos es más preferible B, ya que lo que estaríamos perdiendo es un euro frente a un 50$\%$ de posibilidades de perder 98. \\
+Por el contrario, si nos encontramos en la situación, A="ganar 100 euros", B="ganar 10 euros", y C="ganar 9 euros". Vemos como nuevamente A es preferible a B, y B es preferible a C. Pero hay un cambio respecto de la situación anterior. Ahora A es 10 veces más preferible que B, mientras que B solo supera en un euro a C. En esta situación, la lotería (A,C) se ve más ventajosa que elegir B. Porque si sale C, solo pierdo una unidad monetaria, pero si sale A gano 90 euros. (Suponiendo nuevamente que ambos pueden salir con la misma probabilidad)\\
+Pero y si ahora tenemos la situación A="ganar 100 euros", B="ganar 99 euros", y C="ganar 98 euros".Suponiendo que podemos elegir entre B y la lotería (A,C), siendo las probabilidades de la lotería la misma para ambas opciones. ¿Qué sería preferible en este caso?¿La lotería entre A y C o por el contrario la opción B?¿Y si las probabilidades cambian?¿Y si el jugador le tiene aversión al riesgo?\\
+Esto podemos verlo en la representación gráfica de la función de utilidad mostrada a continuación:\\
+
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.5]{Función_de_utilidad_gráfica.png}
+\caption{Función de utilidad de von Neuman Y Morgenstern}
+\end{figure} 
+
+
+
+En la imagen anterior tenemos expresada la riqueza del individuo (W) frente a la utilidad del dinero en función de su riqueza (U(W)).\\
+
+En este caso la primera gráfica corresponde a alguien que tiene aversión por el riesgo.\\
+La segunda gráfica corresponde alguien con indiferencia al riesgo.\\
+Y la última gráfica corresponde con alguien con gusto por el riesgo.\\
+
+Vayamos analizando cada una de estas gráficas:\\
+
+Primero, es una gráfica cóncava, esto indica que dicho individuo, preferirá elegir una cantidad fija de dinero por ejemplo 50€ antes que arriesgarse entre la lotería de obtener 0 o 100€.\\
+Esto se refleja en el nivel de utilidad.\\
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.5]{Aversion_Riesgo.png}
+\caption{Función de utilidad de una persona adversa al riesgo}
+\end{figure} 
+
+Imaginemos que los extremos de la gráfica anterior corresponden con 0€ y 100€ respectivamente. Y que la linea marcada en verde corresponde con 50€. En este caso el valor deterministico es decir, seguro, son 50€ donde su valor en cuanto a utilidad que le proporciona al individuo viene determinado por la linea cóncava. Por el contrario, si tenemos en cuenta la lotería entre 0€ y 100€ con supongamos 50$\%$ de probabilidades para cada uno, entonces podemos observar siguiendo la linea rosa, el punto en el que corta con la linea azul(aquella que contiene las diferentes probabilidades que se pueden poner) es inferior a la linea cóncava que teníamos. Esto nos quiere decir que la utilidad esperada por el individuo es mayor con el valor deterministico que con la lotería(linea azul).\\
+
+
+
+Segundo, la gráfica lineal , en la que tenemos que a mayor cantidad de dinero, la utilidad es lineal. En este caso, al tener una lotería el aumento o disminución de la probabilidad de cada una de las posibilidades, llevaría consigo un aumento o disminución equivalente de la utilidad.\\
+
+Por último, tenemos una gráfica convexa, en este caso, el individuo preferirá la lotería antes que una cantidad fija de dinero. Viendo esto gráficamente y siguiendo con el ejemplo propuesto para la función cóncava:\\
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.5]{Gusto_Riesgo.png}
+\caption{Función de utilidad de una persona con gusto por el riesgo}
+\end{figure} 
+
+Vemos como la utilidad de la cantidad deterministica, es decir 50€ marcado por la linea verde, es inferior a la utilidad recibida por la lotería 50$\%$-50$\%$, entre 0€ y 100€, indicada con la línea azul. Por eso, este individuo tiene gusto por el riesgo, porque la utilidad que le provoca el riesgo es mayor que la utilidad que le provoca una cantidad fija de dinero.\\
+
+
+Veamos ahora la construcción de estas gráficas.\\
+
+Supondremos tres jugadores distintos, uno es adverso al riesgo, el otro es gustoso por el riesgo y el último no tiene ni aversión al riesgo ni gusto por el riesgo.\\
+
+Supondremos además, que todos los jugadores deben elegir entre un valor fijo y la lotería (10.000, 0), con probabilidad p de que salga 10.000 y con probabilidad 1-p de que salga 0.\\
+
+Comencemos el estudio de la gráfica por el jugador que no tiene aversión ni gusto por el riesgo.\\
+
+Imaginemos que le ofrecemos 10.000 de valor fijo, entonces la probabilidad que le tenemos que asignar a la lotería sería p=1 para que fuera indiferente la lotería respecto al valor fijo.\\
+
+Si ahora el valor fijo es 0, entonces para que sea igual de preferible este valor fijo al valor de la lotería, entonces p=0.\\
+
+Por último, si ahora asignamos un valor arbitrario entre los dos extremos posibles(son los extremos porque es lo máximo y lo mínimo que toma de valores la lotería) por ejemplo 1.000, entonces la probabilidad asignada a la lotería para que haga indiferente la lotería del valor fijo debe ser aquella con la que la esperanza de la lotería sea igual a la del valor fijo. En este caso este valor sería $p=\dfrac{1}{10}$.\\
+
+Esto es, para este ejemplo, una persona normal asignará las probabilidades a la lotería en base a la siguiente formula:\\
+
+\begin{center}
+
+$E(L)=p*10.000+(1-p)*0=p*10.000 = \mbox{Valor fijo}$
+
+\end{center}
+
+\textbf{Nota:} Hemos denotado a la lotería como L.\\
+
+Por ello su representación gráfica es una recta. Esto es debido a que la utilidad es lineal, es decir, la probabilidad va creciendo linealmente en función del valor fijo ofrecido para que ambos valores (lotería y valor fijo) resulten indiferentes.\\
+
+Esto es debido a que para esta persona, si tienen el mismo valor esperado entonces tienen la misma utilidad.\\
+
+Continuemos por el estudio de la gráfica de la función de utilidad del adverso al riesgo.\\
+
+Imaginemos un mendigo, para el cual el dinero tiene mucha utilidad.\\
+En este caso, si le damos de valor fijo 10.000, el valor que tenemos que asignar a la probabilidad p, correspondiente a que salga el valor 10.000 en la lotería, es p=1, para que le sea indiferente la lotería del valor fijo. Es decir, si le ofrezco 10.000 euros como valor fijo, para que este valor fijo sea indiferente a la lotería, entonces p=1. Esto es debido a que si esta probabilidad es menor, entonces al jugador no le resultará tan útil la lotería respecto al valor fijo, porque puede perder todo el dinero sin poder obtener nada a cambio por ese riesgo que estaría corriendo.\\
+
+Si ahora el valor fijo es cero, entonces para que le sea indiferente la lotería del valor fijo, la probabilidad debe de ser p=0. Esto es debido a que si la probabilidad es mayor, entonces será preferible la lotería puesto que tiene posibilidades de obtener más de lo que esta obteniendo como valor fijo, que es 0 y que coincide con el valor mínimo de la lotería.\\
+
+Así, podemos ver que estos dos puntos extremos coinciden con los de una persona normal, es decir, que no tenga ni aversión al riesgo ni gusto por el riesgo.\\
+
+Veamos que pasará si de valor fijo le damos otras posibilidades:\\
+
+Ahora supongamos que de valor fijo le ofrecemos 500 euros. Aquí la probabilidad que se le asigne a la lotería tiene que ser tal que el valor esperado de la lotería sea mayor que el valor fijo. Esto es debido a que solo si el valor esperado es mayor, le convendrá el riesgo a nuestro jugador. \\ 
+
+Por ello, como indicación general para un adverso al riesgo la probabilidad asignada a cada uno de los elementos de la lotería debe verificar que el valor esperado de la lotería sea mayor que el valor esperado del valor fijo para que al jugador puede resultarle preferible o indiferente la lotería. Puesto que recordemos que al ser un jugador adverso al riesgo, si el valor esperado es el mismo que el valor fijo, entonces preferirá el valor fijo ya que es un valor seguro.\\
+
+Formulando lo anterior bajo nuestro ejemplo, teniendo que denominaremos L a la lotería, tenemos que:\\
+
+\begin{center}
+
+$E(L)=p*10.000 +(1-p)*0 = p*10.000 \geq \mbox{Valor fijo}$
+
+\end{center}
+
+Dándose el igual únicamente en los extremos. \\
+
+Esta gráfica es cóncava debido a que la utilidad de la lotería debe ser mayor a la del valor fijo, es decir, el valor esperado de la lotería debe ser mayor, para que el jugador decida correr el riesgo de enfrentarse a la lotería.\\
+
+Por último realizaremos el estudio de la gráfica de alguien gustoso por el riesgo.\\
+
+En este caso imaginemos a una persona rica. Para esta persona, que le demos la cantidad de 500 euros no supone nada respecto de su fortuna, por lo que le reporta mayor utilidad los 10.000, es decir, como para este jugador los 500 es lo mismo que nada, preferirá jugar la lotería antes que elegir esta cantidad fija de dinero.\\
+
+Así, volviendo a mirar los valores extremos, nuevamente coinciden con los de una persona normal, en tanto que si la probabilidad es p=0 y el valor fijo ofrecido es 0, entonces la lotería y el valor fijo le serán indiferentes.\\
+Por el contrario, si el valor fijo es 10.000 entonces para que le resulte indiferente la probabilidad debe ser p=1, porque si no estaría perdiendo dinero.\\
+
+Por último, como ya hemos remarcado antes, este jugador prefiere el riesgo antes que elegir un valor fijo, ya que en general el valor máximo que puede obtener en la lotería le reporta mayor utilidad que el valor fijo.\\
+
+Vemos que la función que sigue este último jugador es:\\
+
+\begin{center}
+
+$E(L)=p*10.000+(1-p)*0=p*10.000 \leq \mbox{Valor fijo}$
+
+Esto quiere decir que el valor esperado de la lotería en muchos casos es menor que el del valor fijo pero esto no lo implica menos deseable para el jugador.\\
+
+La igualdad solo se da en los extremos.\\
+
+Notar que nuevamente hemos denotado a la lotería como L.\\
+
+\end{center}
+
+Por esto, la gráfica de este jugador es convexa, esto es debido a que su utilidad por el valor fijo es menor que la utilidad que representa para él la lotería.\\
+
+
+
+Tras este inciso sobre la construcción de la función de utilidad teniendo en consideración algunos aspectos de los jugadores, volvamos a algunas propiedades de la función de utilidad.\\
+
+Supongase que un jugador debe elegir entre una opción fija B y la lotería (A,C), donde ambas tienen igual probabilidad. Notese que ApBpC.\\
+
+Entonces en la lotería anterior, si sustituimos C por D siendo CiD obtenemos una lotería equivalente. Es decir,\\
+{rA+(1-r)C} i {rA+(1-r)D} si CiD con r$\in$[0,1]. \\
+
+
+Estas loterías cumplen las leyes de la aritmética, es decir, la propiedad conmutativa y distributiva. Además, podemos anidar loterías en nuestras elecciones:\\
+	- Propiedad conmutativa: $\alpha * A +(1-\alpha)* B=(1-\alpha)* B + \alpha * A$ \\
+	- Loterías anidadas: $\alpha * A +(1-\alpha)*{sB + (1-s)C}$ aplicando la propiedad distributiva, $\alpha * A +(1-\alpha)*{sB + (1-s)C} =\alpha * A +(1-\alpha)sB+(1-\alpha)(1-s)C$    \\
+	-$\alpha * A+(1-\alpha)A=A$	\\
+
+Con $\alpha$ y s $\in$[0,1].\\
+
+
+\textbf{Nota:} La función de utilidad no es única. Sea u una función de utilidad, entonces $au+b$ también lo es. Teniendo que " b " es un constante real y " a " es una constante real positiva. \\ 
+
+Denotemos como u() a la función de utilidad, es una función que cumple:\\
+	- u(A)>u(B) si y solo si A p B \\
+	- u(r * A + (1-r)B)=r * u(A)+(1-r)u(B)\\
+Esto para cualesquiera dos eventos A y B, con r$\in$[0,1] una probabilidad.\\
+La función u() es única salvo transformaciones lineales. Es decir, si existe una función v() tal que cumple las dos propiedades anteriores, entonces existe $\alpha >0 , \beta $ tal que para un evento A, $v(A)= \alpha u(A) + \beta$ . \\
+
+Recordemos que por definición la función de utilidad es lineal con las loterías. El hecho de que una lotería con dos posibles resultados,el primer resultado pueda pueda obtener una probabilidad entre 0 y 1, implica que el rango de la función de utilidad es un conjunto convexo de la linea real, es decir, un intervalo.\\
+
+Para diferentes opciones en economía, se suele suponer que esta función es monótona, y en muchos casos se supone continua. Lo que la hace derivable, pudiendo así obtener los precios sombra de los productos, mediante el empleo de estas derivadas, se puede apreciar si un producto es sustituible por otro o por el contrario son complementarios. Si el aumento del precio sombra de un producto, implica el decrecimiento del precio sombra de otro entonces estos vienes son sustitutivos, si por el contrario lo aumenta también, entonces estos vienes son complementarios.\\
+
+
+Con la utilidad podemos ver si una opción ayuda más a un jugador A de lo que perjudica a otro B, en este caso lo que usamos es una comparación entre la funciones de utilidad de ambos jugadores normalizada(entre 0 y 1) teniendo que suponemos que todas las funciones de utilidad deben por ende tener limite superior e inferior(estar acotadas).	
+
+
+	 
+\newpage
+
+
+\chapter{Juegos de suma general}
+
+\section{Juegos bipersonales}
+
+No es cierto en general que los intereses de dos jugadores sean exactamente opuestos, como sucedía en los juegos de mesa o en aquellos juegos en los que la utilidad es cercana a ser lineal, muy frecuentemente ambos jugadores pueden ganar cooperando. Esto es debido a que la suma de ambos jugadores no tiene porque ser necesariamente cero.\\
+
+Este tipo de juegos son denominados de suma general y incluyen los juegos de suma cero como caso particular.\\
+
+
+En general, un juego finito bipersonal de suma general se puede expresar como un par de matrices m*n, $A=(a_{ij})$ y  $B=(b_{ij})$ , donde todas sus entradas son un par ordenado $(a_{ij},b_{ij})$.\\
+Cada entrada $a_{ij}$ y $b_{ij}$ es el pago o la utilidad para el jugador uno y dos respectivamente, suponiendo que el primer jugador elige su ith pura estrategia y el jugador dos la jth.\\
+En la primera de las matrices se encuentra recogida la utilidad para el primer jugador y en la segunda la del segundo jugador, ambas utilidades no tienen porque coincidir.\\
+A esta forma se la denomina juegos bimatriz.\\
+
+Podemos distinguir dos tipos de casos en función de si la cooperación esta permitida o no:\\
+1) Cooperativos, son aquellos en los que la cooperación entre jugadores esta permitida\\
+2) No cooperativos, son aquellos en los que está prohibido la cooperación entre los jugadores\\
+
+
+
+Primero hablaremos del caso de no cooperación para posteriormente pasar a tratar el caso de cooperación.\\
+
+\subsection{No Cooperativos}
+
+En este caso al igual que en los casos de suma cero, los jugadores pueden tener estrategias mixtas.\\
+
+
+\textit{\textbf{Definición 2.5}} Un par de estrategias mixta $(x^{*},y^{*})$ de un juego bimatriz, se dice que esta en equilibrio, si para cualquier otra estrategia mixta $x$ e $y$ se cumple:\\
+
+\begin{center}
+
+$xAy^{*T} \leq x^{*}Ay^{*T}$\\
+$x^{*}By^{T} \leq x^{*}By^{*T}$
+
+\end{center}
+
+Dicho de otra forma, el máximo valor que pueden obtener el primer y el segundo jugador de la función de pago, viene dado por la estrategia mixta $(x^{*},y^{*})$ y es aquel que sea cual sea cualquier otra combinación mixta de estrategias, siempre dará el mejor valor de la función de pago.\\
+
+El siguiente teorema nos asegura la existencia de dichos puntos.\\
+
+\textit{\textbf{Teorema 2}} Cada juego bimatriz tiene al menos un punto de equilibrio.\\
+
+\textbf{Nota:} Notar que la prueba de este teorema es una prueba existencial, es decir, nos dice que existe pero no nos proporciona un método para su calculo.\\
+
+Otro elemento a tener en cuenta es que para los juegos de suma nula, los pares de equilibrio eran intercambiables y equivalentes. Es decir, si teníamos dos pares de equilibrios (x,y) y $(x^{'},y^{'})$ entonces también eran pares de equilibrio $(x^{'},y)$ y $(x,y^{'})$. En los juegos bimatriz esto no es cierto.\\ Veamos un ejemplo de ello.\\
+
+\begin{equation}
+	\begin{pmatrix}
+		(4,1) & (0,0) \\
+		(0,0) & (1,4)
+	\end{pmatrix}
+\end{equation}
+
+Es obvio que las estrategias puras son x=(1,0) e y=(1,0), es decir que el primer jugador elija su primera estrategia con probabilidad 1, y que el segundo jugador elija su segunda estrategia con probabilidad 1.\\
+Tenemos además, que $x^{'}=(0,1)$ y $y^{'}=(0,1)$ son también pares de equilibrio.\\
+Podemos observar como las estrategias x=(1,0) e $y^{'}=(0,1)$ no son pares de equilibrio, tampoco lo es la estrategia  $x^{'}=(0,1)$ e y=(1,0).\\
+Es más la función de pago de ambos puntos de equilibrio es distinta. Esto puede hacer que un jugador prefiera una posibilidad y el otro otra, lo que puede hacer que estos pares de equilibrio no sean del todo estables, ya que un jugador decida cambiar su estrategia con la esperanza de que el otro la termine cambiando y así encontrarse en una mejor posición.\\
+Esto es, como el jugador 1 prefiere la primera estrategia es decir, que se este en la posición $a_{11}$ frente a el jugador dos que prefiere que se este en la segunda, es decir en la posición $a_{22}$. Puede ocurrir, que el jugador dos aun perdiendo dinero, decida cambiar de estrategia si están en $a_{11}$ con la esperanza de que el primer jugador decida cambiarla también para mejorar su función de pago. Pudiendo así pasar a la posición $a_{22}$.\\
+
+
+\subsection{Cooperativos}
+
+Consideramos ahora los juegos en los que los jugadores pueden colaborar. Esto implica que las estrategias correlacionadas están permitidas, es decir, que lo que elija uno dependerá de lo que elija el otro por el pacto realizado. Además, la utilidad puede ser transferida de un jugador a otro, esto puede darse en aquellos casos en los que un jugador esta dispuesto a pagar una cantidad a su compañero ya que el beneficio que obtendrá de ello es mayor que si no lo hace.\\
+
+Existe un conjunto de posibles resultados que puede ser obtenido por ambos jugadores actuando juntos. Esto lleva a que la elección de un par de utilidades constituye un conjunto que puede ser mapeado en un espacio euclídeo.\\
+
+
+En este caso, existe un subconjunto de punto, denominado el conjunto factible. Siendo factible en el sentido de que es posible obtener por dos jugadores actuando en conjunto dos utilidades u y v respectivamente, perteneciendo cada una de ellas a este subconjunto.\\
+
+En un problema de negociación surge de forma natural preguntarse cuánto esta dispuesto a pagar o a recibir como mínimo cada uno de los jugadores. Es decir, cual es el precio a aceptar por su cooperación. Existe una función para cada juego de negociación que responde a esta pregunta, teniendo en cuenta que:\\
+
+1)	El individuo es racional\\
+2)	El conjunto es factible\\
+3)	Cualquier elemento del conjunto es el mínimo par posible que podemos obtener, es decir si existen (u,v) pertenecientes a S, y $(u,v) \geq (\bar{u},\bar{v})$ entonces $(u,v)=(\bar{u},\bar{v})$\\
+4)	Existe independencia entre alternativas que son irrelevantes\\
+5)	Existe independencia por transformaciones lineales, es decir, la solución seguirá siendo la misma aunque la multipliquemos por una constante.\\
+6)	Existencia de simetría, es decir, si (u,v) pertenece al conjunto factible, entonces (v,u) también pertenece al conjunto factible.\\
+
+Notar, que el axioma 5 es válido si asumimos que cualquier función de utilidad es buena. Si usamos el valor absoluto como función de utilidad, esto puede abrir una crítica. Además, el axioma 6 es aceptable si consideramos que los negociadores son dos entidades iguales. Esto no sería aceptable para entidades desiguales como puede ser una persona frente a toda una comunidad de vecinos.\\
+
+Debido al siguiente teorema no serán necesarios más axiomas:\\
+
+\textit{\textbf{Teorema 3}} Existe una única función definida en todos los problemas de negociación, que satisface los axiomas 1 a 6.\\
+
+\textbf{Nota:} Estos axiomas se atribuyen a John Nash.\\
+
+Al equilibrio de Nash sobre negociación se puede poner la pega de que no se tiene en cuenta la existencia de amenazas. \\
+Imaginémonos un trabajador que tiene la elección de trabajar para ganar el salario de subsistencia, haciendo que su jefe obtenga 10 euros de beneficio. O por el contrario, elija no trabajar pero se muera de hambre(en este caso el jefe no obtiene beneficios). Además, el jefe puede si quiere darle una parte de su beneficio al trabajador.\\
+En este caso para Nash la solución al problema de negociación es que el jefe le diera la mitad de su beneficio al trabajador. Esto no tiene en cuenta que la posición del jefe es mucho más fuerte que la del empleado. Esto es debido a que no puede evitar que el jefe obtenga ese beneficio, el único caso en que lo conseguiría es muriéndose de hambre, lo cual no es una posición muy deseable.\\
+
+Tenemos que tener en cuenta ciertos aspectos de las amenazas, de normal, la amenaza es efectiva si es creíble. Además, estas tratan de mejorar la posición de la persona que amenaza respecto a la persona amenazada.\\
+
+Por esto una amenaza para matar a alguien tiene más efecto que una amenaza para enfadarse, esto es debido a las posibles consecuencias que tiene para el amenazado. Por el contrario, la amenaza de destruir el mundo entero no será demasiado eficaz ya que no resulta demasiado creíble.\\
+
+Nash, sugiere 3 pasos para un esquema de negociación:\\
+1)	El jugador uno anuncia una estrategia de amenaza x. \\
+2)	El jugador dos en ignorancia de la estrategia seguida por uno, anuncia su estrategia de amenaza y.\\
+3)	Ambos jugadores negocian, si se llega a un acuerdo, entonces el acuerdo es el que se realiza. Si no se llega al acuerdo entonces ambos deberán usar sus estrategias de amenaza.\\
+
+En algunos casos puede pensarse que si un jugador hace una amenaza muy loca, puede encontrarse en la situación de sufrir una fuerte repulsión a tener que llevarla a cabo. Por ello, supondremos que cada jugador esta acotado por su amenaza en cierta medida.\\
+
+Imaginemos un ejemplo práctico para escenificar lo dicho anteriormente, supongamos dos empresas, una primera empresa ofrece una alianza a la segunda para repartir la cuota de mercado a la que ambas optan. Si ambas llegan a un acuerdo entonces fantástico, pero en el caso de no llegar a un acuerdo, supongamos que la primera empresa decide hacer es una gran campaña publicitaria para quitarle todo el mercado a la segunda empresa, y supongamos que la segunda empresa lo que hace es rebajar los precios aun estando a perdidas para así quitarle la cuota de mercado a la primera empresa.\\
+En este caso la estrategia de aumentar la campaña publicitaria es la estrategia predefinida oculta por el primer jugador, para llevar a cabo el trato. Es decir, en caso de que no se realice el trato, esto es lo que procede a hacer la empresa de forma que fuerza el trato. Equivalentemente con la estrategia planteada por el segundo jugador.\\
+
+En ambos casos, la estrategia es, o nos aliamos o te destruyo.\\
+
+\textit{\textbf{Teorema 4}} Cualquier juego bimatriz tiene al menos un par de equilibrio de estrategias de amenaza (x,y).\\
+
+Notar que las estrategias de los jugadores son complemente opuestas.\\
+
+
+\textit{\textbf{Teorema 5}} Sean dos pares de equilibrio $(x^{'},y^{'})$ y $(x^{''},y^{''})$, de estrategias de amenaza, entonces también lo serán $(x^{'},y^{''})$ y $(x^{''},y^{'})$. Teniendo que la función de pago para las dos primeras estrategias es la misma.\\
+
+Esto nos permite hablar de estrategia óptima en vez de simplemente puntos de equilibrio.\\
+
+En general la resolución de estos problemas computacionalmente es bastante complicada debido a que depende no solo del número de estrategias si no también de la forma Pareto-óptima de las fronteras del conjunto(teniendo en cuenta que al conjunto lo único que se le requiere es que sea convexo), un caso en el que resulta simple es aquel en que la utilidad se transfiere de forma lineal entre los jugadores.\\
+
+Notar que la estrategia óptima de amenaza en un juego bimatriz (A,B) es el mismo que la estrategia óptima en un juego de suma cero A-B(El cual sabemos como resolver).\\
+ 
+ 
+Tras este repaso por la teoría supongamos un ejemplo que nos indicará porque la teoría de nash no es una verdad absoluta:\\
+
+Supongamos un juego en el que dos jugadores o bien se dividen 100 € entre ellos si llegan a un acuerdo o bien no ganan nada ninguno de lo dos. La posible región de reparto es la siguiente:\\
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.5]{Negociaion_dos_jugadores.png}
+\caption{Negociación dos jugadores}
+\end{figure} 
+
+Si se ponen de acuerdo a lo largo de esta región, entonces el jugador uno recibirá el valor de la primera coordenada, y el jugador dos recibirá el valor de la segunda coordenada. Si no, ambos recibirán cero.\\
+
+Si asumimos que la utilidad es lineal con el dinero, entonces la solución de Nash sería (50,50).\\
+	
+Por el contrario, si suponemos asimetría en los roles económicos de los jugadores, es decir, el primer jugador es rico y el segundo pobre. Entonces la división podría ser (75,25) teniendo que la utilidad del segundo jugador para los 25 es la misma que la del primer jugador para los 75.\\
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.5]{Tabla_utilidad_negociacion.png}
+
+\end{figure} 
+
+Veamos la interpretación de estos números.\\
+
+Los valores de 0 y 1 son lo valores extremos, esto se supondrá sin perdida de generalidad debido a que pueden realizarse transformaciones de la función de utilidad.\\
+
+Para el primer jugador el valor fijo de 75 € le es indiferente ante la lotería (100,0) con probabilidad para el primer valor de 0.75. Asimismo, el segundo jugador, es indiferente entre el valor fijo 25 € y la lotería (100,0) con probabilidad para el primero de ellos 0.73.\\
+
+Podemos observar como la asimetría en los roles de los jugadores entra en la solución. Vemos que la asimetría económica juega en detrimento del hombre pobre en favor del hombre rico. \\
+
+Si recordamos nuestro ejemplo de las funciones de utilidad, el hombre rico era aquel que tenía gusto por el riesgo, mientras que el hombre pobre era aquel que era adverso al riesgo, por lo tanto, podemos observar como el adverso al riesgo es penalizado.\\
+
+Notemos que si cambiásemos la función de utilidad del jugador rico, podríamos conseguir el resultado justo de (50,50).\\
+
+Otra queja que se le puede hacer a los axiomas de Nash, es que no recoge la comparación entre los jugadores.\\
+
+Supongamos un juego parecido al anterior, en el que dos jugadores deben ponerse de acuerdo respecto al reparto en una región. Pero ahora supongamos que la región en cuestión es la siguiente:\\
+
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.5]{Comparacion_dos_jugadores.png}
+\caption{Comparacion dos jugadores}
+\end{figure}
+
+
+	
+Si suponemos que la utilidad de cada jugador es lineal entonces la solución de Nash sería (5,50).\\
+
+\textbf{Nota:} Supongamos que ambos jugadores se encuentran en la misma posición económica.\\
+
+En este caso el primer jugador podría indicar el punto (9.09,9.09) en el que ambos jugadores obtienen el mismo beneficio.\\
+
+Este jugador se basaría en la siguiente amenaza. \\
+Primero, si el segundo jugador quiere la solución (5,50) el primer jugador amenazará con dejar la coalición puesto que el segundo jugador perdería más que el primero. Es decir, su amenaza es que si se separan el otro pierde más.\\
+
+Por lo que en este caso, el primer jugador podría indicar que estaría perdiendo una cantidad de dinero dejando que el otro consiguiera más sin obtener nada a cambio.\\
+
+En este caso, ambos jugadores comparan su utilidad, esto es debido a que el primer jugador observa que lo que gana, por la asimetría, del juego es muchísimo menor que lo que gana el otro jugador. Y reclama que sea una solución simétrica amenazando así con romper la coalición si el segundo jugador no accede a ello.\\
+ 
+
+Puede ocurrir que los jugadores no encuentren un óptimo de Pareto puesto que a pesar de llegar a un acuerdo y de haber implementado sus estrategias de amenaza, hayan ocultado sus utilidades reales.\\
+
+Este último caso no se tendrá en cuenta ya que violaría el principio de racionalidad de los jugadores.\\
+
+Pero una duda nos surge después de todo este análisis. Y es que, que jugador deberá hacer la concesión.\\
+
+En este caso si las funciones de pago que apoya el primer jugador son $(u^{'}_1,u^{'}_2)$ y el segundo jugador esta demandando $(u^{''}_1,u^{''}_2)$ entonces en este caso el jugador uno deberá hacer la concesión si se verifica:\\
+
+\begin{center}
+
+$\dfrac{u^{'}_1-u^{''}_1}{u^{'}_1} \leq \dfrac{u^{''}_2-u^{'}_2}{u^{''}_2}$
+
+\end{center}
+Y será el segundo jugador el que la haga si la inecuación está revertida.\\
+
+Notemos que la concesión no tiene porque implicar que se acepte la demanda del otro jugador, si no que se sugiera otra alternativa que haga que posteriormente no tenga que hacer más concesiones.\\
+
+
+Por último, remarcar que la negociación puede llegar a tener lugar bajo diferentes condiciones de información por parte de ambos jugadores.\\
+
+Supongamos ahora un ejemplo en el que hay comparación interpersonal entre los jugadores. Supongase un juego bipersonal.\\
+
+Supongamos Lucas y Marcos dos estudiantes universitarios que ocupan dos pisos independientes de una misma casa.\\
+Supongase que esa casa fue divida en dos pisos, ignorando el arquitecto cualquier consideración acústica entre los pisos.\\
+Notar que ningún sonido sale a la calle.\\
+
+Supongamos que Lucas puede escuchar cualquier sonido que provenga del piso de Marcos mayor que una conversación. Esto mismo le ocurre a Marcos.\\
+
+Supongamos que es legalmente imposible para ambos prevenir que el otro haga tanto ruido como quiera. Y que es económicamente imposible mudarse de piso.\\
+
+Supongamos nuevamente que cada uno de ellos tiene únicamente una hora de recreo entre las 9 y las 10 de la noche.\\
+
+Supongamos que Lucas es aficionado a tocar el piano y Marcos es aficionado a tocar la trompeta.\\
+
+Y supongamos que cada una de las tardes es independiente de la anterior.\\
+
+Supongase además, que la satisfacción de tocar el instrumento viene dada por la interferencia que pueda causar el otro, es decir, a mayor interferencia menor satisfacción.\\
+
+La pregunta aquí es como deberían dividir la proporción de los días para que ambos puedan tocar solos.\\
+
+Supongamos que la matriz de estrategias sería:\\
+
+\begin{center}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		 & Tocar trompeta & No tocar trompeta\\
+		\hline
+		Tocar piano & (1,2) & (7,3) \\
+		\hline
+		No tocar piano & (4,10) & (2,1) \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Cada uno de los pagos asociados a cada jugador podría multiplicarse por una constante positiva sin alterar la estructura del juego.\\
+
+Podríamos modificar esta matriz de pago, poniendo la peor opción como 0 y la mejor opción como 1. \\
+
+
+\begin{center}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		 & Tocar trompeta & No tocar trompeta\\
+		\hline
+		Tocar piano & (0, 1/9) & (1,2/9) \\
+		\hline
+		No tocar piano & (1/2,1) & (1/6,0) \\
+		\hline
+	\end{tabular}
+\end{center}
+
+
+Ahora lo que tendremos que hace es obtener la solución y tras esto volveremos a cambiarla a la escala original. (Notemos que hemos hecho un cambio de escala)\\
+
+Resumamos en que consiste el procedimiento:\\
+Cogemos la matriz original y realizamos un cambio de unidades de tal forma que el valor más preferido obtiene un valor de 1 y el menos preferido obtiene el valor de 0. Tras esto se busca la solución y por último se vuelve a la escala original.\\
+
+Esto tiene dos puntos interesantes:\\
+El primero es que da una solución que es invariantes respecto al origen y a las unidades utilizadas para medir.\\
+El segundo es que satisface todos los axiomas de Nash.(Salvo el de independencia frente a alternativas irrelevantes)\\
+
+
+Hemos podido observar a lo largo de este subcapitulo, que existen juegos en los que al negociar los dos jugadores, uno obtiene ventaja de esta negiciación. Teniendo esto en cuenta surge de forma natural la siguiente pregunta.\\
+
+¿Porque algunos jugadores obtienen más ventaja de la negociación que otros?\\
+
+Para responder a esta pregunta primero tenemos que tener en cuenta el concepto de simetría y asimetría de un juego. Este concepto juega un papel clave en el reparto del producto a cada uno de los jugadores.\\
+
+1) Los juegos simétricos son aquellos que podemos expresar de la forma:\\
+
+\begin{center}
+
+$a_1 + a_2=D$
+
+\end{center}
+
+donde $a_1$ y $a_2$ es la parte que le corresponde al primer y al segundo jugador respectivamente. Mientras que D es la cantidad a repartir.\\
+
+Está ecuación, se denomina función de coalición o recta de reparto eficiente.\\
+
+El nombre de está recta ya nos esta indicando una de las propiedades que debe cumplir este reparto para que sea simétrico. Veamos pues a continuación cuales son estas propiedades.\\
+
+	1) Eficiencia: Esto implica que la cantidad D debe repartirse completamente entre los dos jugadores.\\
+
+Tener en cuenta que a la hora del reparto, ambos jugadores pueden distribuirse la cantidad D integra o puede ocurrir que el reparto sea menor en suma que la cantidad D. Para que este reparto sea eficiente, lo que requerimos es que esta cantidad se reparta integra.\\
+	
+	2) Simetría: Ambos jugadores deberán ganar lo mismo.\\
+Esta propiedad no es más que requerir $a_1=a_2$, y es obvia en si misma ya que estamos indicando la forma de un juego simétrico.\\
+
+
+Pero no nos engañemos, los juegos simétricos son un caso particular de los siguientes juegos:\\
+
+2) Juegos asimetricos. Esta asimetría puede deberse a diferentes causas.\\
+
+La primera de estas causas es que la unidad de medida de las utilidades de cada jugador sean distintas. \\
+
+Este caso tiene la sencilla solución de pasarlo todo a la misma unidad de medida, calcular el punto optimo y después volverlo a pasar a la unidad original.\\
+
+En este punto recuerden el ejemplo de los dos vecinos con afición a la música. En ese juego la resolución empleaba esto, es decir, en aquel momento teníamos un juego con asimetría en la medida.\\
+
+La segunda causa puede deberse a una distinta actitud frente al riesgo de los jugadores.\\
+
+Veamos que ocurre en este caso. \\
+
+Partamos de la misma recta de simetría que usabamos para los juegos simétricos.\\
+
+\begin{center}
+
+$a_1 + a_2=D$
+
+\end{center}
+
+Y supongamos dos jugadores, uno neutral ante el riesgo cuya utilidad la podemos expresar como $u_1=a_1$ y un segundo jugador adverso al riesgo, cuya utilidad podemos expresar como $u_2=(a_2)^\beta$ con $\beta < 1$.\\
+
+Como teníamos la expresión anterior, si ahora queremos expresarla en función de la utilidades, tendremos que despejar $a_2$, quedando nuestra ecuación de la forma:\\
+
+\begin{center}
+
+$u_1 + (u_2)^{1/\beta}=D$
+
+\end{center}
+
+Podemos observar que bajo esta condición el juego se ha convertido en asimetrico. Siendo ahora el adverso al riesgo la parte débil de la negociación, teniendo así menores ganancias.\\
+
+Ahora la condición de eficiencia que pedíamos para los juegos simétricos se sigue manteniendo pero la condición de simetría no tiene sentido alguno. En su lugar, requerimos una nueva condición. \\
+
+	2) Dominancia en riesgo. Esto implica que se debe máximizar el producto de las utilidades, es decir , max $u_1 u_2$.\\
+
+Por tanto, si partimos de la función de utilidad \\
+
+\begin{center}
+
+$u_1 + (u_2)^{1/\beta}=D \rightarrow u_2=(D-u_1)^\beta$ 
+
+\end{center}
+
+y se la aplicamos a la condición de dominancia.\\
+
+\begin{center}
+
+$max u_1 u_2 = max u_1(D-u_1)^\beta$
+
+\end{center}
+
+Si ahora derivamos esta segunda expresión (obviando lo de maximizar) obtenemos:\\
+
+\begin{center}
+
+$(D-u_1)^\beta - u_1b(D-u_1)^{\beta-1} $
+
+\end{center}
+
+Si igualamos a cero y multiplicamos ambos miembros por $(D-u_1)^{1-\beta}$ obtenemos:\\
+
+\begin{center}
+
+$D-u_1-bu_1=0$
+
+\end{center}
+
+De donde despejando $u_1$ obtenemos el valor de la utilidad para el primer jugador bajo la condición de asimetría:\\
+
+
+\begin{center}
+
+$u_1=\dfrac{D}{1+\beta}$
+
+\end{center}
+
+Y si despejamos de la ecuación original, obtendremos la formula para calcular el valor de la utilidad del segundo jugador, es decir, cuánto recibirá.\\
+
+
+\begin{center}
+
+$u_2=(\dfrac{\beta D}{1+\beta})^\beta$
+
+\end{center}
+
+Podemos observar que como $\beta<1$ entonces mientras más adverso al riesgo sea el segundo jugador, menor será $\beta$ y por tanto menos recibirá.\\
+
+Viendo esto, nos viene a la cabeza el ejemplo comentado anteriormente en este subcapitulo sobre el hombre rico y el hombre pobre. Donde al tener el hombre pobre mayor aversión por el riesgo, obtenía menos beneficio también. Y veíamos como para igualar la cantidad que ambos obtenían, teníamos que hacer al hombre rico igual de adverso al riesgo que al hombre pobre.\\
+
+\textbf{Nota:} No se tendrá en cuenta en la solución de esta ecuación el caso en que $u_2=0$ ya que no sería óptimo para el segundo jugador.\\
+
+
+Otra forma de asimetría ocurre cuando ambos jugadores obtienen diferentes consecuencias del desacuerdo.\\
+
+Supongase que el primer jugador obtiene una cantidad $d_1$ si no se llega a un acuerdo, y que el segundo jugador obtiene una cantidad $d_2$. Para la resolución de este problema de forma justa, se sustraen los valores de las alternativas externas al valor del juego y lo que quede se reparte de forma equitativa entre los jugadores.\\
+
+Esto estaría aplicando los criterios de eficiencia y dominancia en riesgo vista para los juegos asimetricos por actitud frente al riesgo, pero con una ligera modificación, ahora lo que trataría es de $max(u_1-d_1)(u_2-d_2)$\\
+
+
+
+
+
+
+
+\newpage
+
+\chapter{El problema de la negociación}
+
+
+Para el estudio de este problema, supondremos que los jugadores pueden negociar entre ellos con una perfecta comunicación. Además, pueden llegara a una estabilidad basada en los conjuntos de amenazas que tienen.\\
+
+Además, el conjunto de todos los conjuntos estables es denominado el conjunto de negociación.\\
+
+Consideremos un juego n-personal cooperativo, que es descrito por su función característica.\\
+Y sea $N=\{1,2 \ldots ,n\}$ el conjunto de los n jugadores del juego.
+
+Sea el conjunto $\{B\}$ de subconjuntos no vacíos B de N, conteniendo este conjunto a todas las coaliciones permitidas. Además, el valor de una coalición B perteneciente a $\{B\}$ vendrá dado por v(B) y este se repartirá entre todos los jugadores que participen de esa coalición.\\
+
+Por simplicidad supondremos que el pago obtenido por una coalición de una sola persona será cero. Por esto mismo, el valor de cualquier coalición perteneciente a $\{B\}$ será de la forma:\\
+
+\begin{center}
+
+$v(B) \geq 0 , \quad B \in \{B\}$
+
+\end{center}
+
+Pero la pregunta es como se repartirá el beneficio. Para ello, recogemos a continuación la configuración de la función de pago:\\
+
+\begin{center}
+
+$(x;B)=(x_1,x_2,\ldots,x_n;B_1,B_2,\ldots ,B_m)$
+
+\end{center}
+
+Donde $B_1,B_2,\ldots ,B_m$ son conjuntos mutuamente excluyentes de B, cuya unión es N.\\
+Y donde $x_i$ son números reales que satisfacen:\\
+
+\begin{center}
+
+$\Sigma_{i \in B_j} x_i= v(B_j); \quad j=1,2 \ldots ,m$
+
+\end{center}
+
+En general, los jugadores trataran de obtener la mayor cantidad que ellos creen que pueden obtener. Por ello es razonable que algunas coaliciones nunca se formen ya que si para un coalición un jugador $i_0$ espera obtener un valor $x_{i_0} <0 $ entonces esta coalición nunca se formará puesto que el jugador puede obtener más si juega el solo.\\
+
+Por ello un requerimiento obvio será que cada individuo sea racional. Esto implica que para todo $ B \in \{B\}$ se cumpla que:\\
+
+\begin{center}
+
+$ \Sigma_{i \in B} x_i \geq v(B)$
+
+\end{center}
+
+Es decir, supondremos que una coalición no se formará si alguno de sus miembros puede obtener más por separado que entrando en la coalición.\\
+
+Esto implica que cualquier coalición cuyo valor sea menor que la suma de valores que se pueden obtener con subcoaliciones de ella no se formará nunca.\\
+
+En general los jugadores trataran de unirse a aquellas coaliciones que les reporte mayor beneficio. Pero al mismo tiempo tienen la posibilidad de entrar en una coalición segura.\\
+
+Esta seguridad puede implicar que si alguien no se encuentra lo suficientemente seguro con una coalición, entonces no llegará a entrar en la misma aunque el beneficio que le reporte sea mayor que el que le reporten otras más seguras.\\
+
+En general, si todas las cosas son iguales, todos los jugadores en una coalición obtendrán el mismo beneficio. Es decir,el beneficio se reparte de forma justa y equitativa entre todos los jugadores de la coalición.\\
+
+Si no todas las cosas son iguales, los jugadores estarán contentos en continuar en la coalición si están de acuerdo en que los compañeros más fuertes obtengan más.\\
+
+Esto hará que durante las negociaciones los jugadores traten de demostrar que son más fuerte que aquellos con los que negocian. Para ello muchas veces se usa el hecho de que un jugador tenga mejores alternativas que esa coalición.\\
+
+Vemos como de esta forma resulta una negociación en amenazas y contra amenazas o objeciones y contra objeciones.\\
+
+Estas contra objeciones, suelen ser jugadores que ofrecen al menos lo que el jugador que obyecta ofrece. Además, en estos casos si uno pone una objeción puede salir perjudicado de ella.\\
+
+Sea k un subconjunto no vació de jugadores de N. Un jugador i será denominado como un compañero de k en una configuración de pago $(x;\beta)$ si es miembro de una coalición $\beta$ que interseca con k. Podemos definir el conjunto de todos los compañeros de k, $P[k; (x;\beta)] $ como sigue:\\
+
+\begin{center}
+
+$P[k; (x;\beta)]=\{i| i \in B_j , B_j \cap K \neq  \emptyset \}$
+
+\end{center}
+
+\textit{\textbf{Definición 2.6}} Sea $(x;\beta)$  una configuración de pago de una coalición racional. Y sean K y L dos subconjuntos disjuntos de $B_j$ que aparece en $(x;\beta)$ . Una objeción de K contra L en $(x;\beta)$  será una configuración de pago de una coalición racional de la forma:\\
+\begin{center}
+
+$(y;C)=(y_1,y_2, \ldots ,y_n; C_1, C_2, \ldots C_l)$
+
+\end{center}
+
+Para los cuales se verifica:\\
+
+\begin{center}
+
+$P[K;(y;C)] \cap L = \emptyset \newline
+y_i > x_i \thinspace \mbox{Para todo } i,i \in K. \newline
+y_i \geq x_i \thinspace \mbox{Para todo } i,i \in P[K;(y;C)]$
+
+\end{center}
+
+
+Básicamente en la objeciones lo que hace el jugador es decir que sin un subconjunto de los jugadores de la coalición denominado L, el podría obtener más. Además, la nueva situación es razonable porque sus nuevos compañeros no obtienen menos que lo que obtenían previamente.\\
+
+
+\textit{\textbf{Definición 2.7}} Sea $(x;\beta)$  una configuración de pago de una coalición racional. Y sea (y;C) una objeción del conjunto K contra L en $(x;\beta), K,L \in B_j$. Una contraobjección de L contra K es una configuración de pago de una coalición racional de la forma: \\
+\begin{center}
+
+$(z;D)=(z_1,z_2, \ldots ,z_n; D_1, D_2, \ldots D_k)$
+
+\end{center}
+
+Para los cuales se verifica:\\
+
+\begin{center}
+
+$P[L;(z;D)] \not\supset K, \newline
+z_i > x_i \thinspace \mbox{Para todo } i,i \in P[L;(z;D)]. \newline
+z_i \geq y_i \thinspace \mbox{Para todo } i,i \in P[L;(z;D)] \cap P[K;(y;C)]$
+
+\end{center}
+
+
+
+En una contra objeción los jugadores del subconjunto L comunican a sus socios de que con ellos pueden conseguir al menos lo que ya tienen. Además, si es necesario, no se le ofrecerá menos que lo que se le había ofrecido en la objeción a los compañeros de k. Pero no usaran a todos los miembros de k\\
+
+Veamos un ejemplo de los dos párrafos anteriores:\\
+
+Consideremos el juego simétrico de tres persona considerado en capítulos anteriores. Si se forma la coalición de los jugadores 1 y 2, podemos ver que el vector de pagos viene dado por $(\dfrac{1}{2},\dfrac{1}{2},0)$.\\
+Sin embargo ambos jugadores de la coalición pueden pedir más al otro amenazando con unirse al tercer jugador. Imaginemos entonces que el jugador 1 amenaza con unirse al jugador 3 obteniendo el pago $(\dfrac{3}{4},0,\dfrac{1}{4})$. Entonces el jugador dos puede hacer una contra amenaza diciendo que el haría una coalición con 3 ofreciéndole la cantidad de $\dfrac{1}{2}$ de tal forma que la función de pago sería ahora $(0,\dfrac{1}{2},\dfrac{1}{2})$. Así, el jugador 2 ha realizado una contra amenaza que protege su pago de $\dfrac{1}{2}$.\\
+
+
+Diremos que una coalición es estable si para toda objeción existe una contra objeción.\\
+Las coaliciones estables formarán el conjunto de negociación. El cual nunca es vacío.\\
+
+Notemos que un jugador puede sacrificar algo de su beneficio con el fin de asegurar que entra en una coalición.\\
+
+Notemos además que un jugador solitario no tiene efectos sobre el conjunto de negociación. Esto es porque no participará en ninguna objeción y tampoco será necesario para ninguna contraobjeción.\\
+
+El conjunto de negociación no usa comparaciones interpersonales de utilidades y es indiferente a los nombre de cada uno de los jugadores.\\
+
+
+\textit{\textbf{Teorema 6}} El conjunto de negociación de un juego puede ser representado como un conjunto de soluciones de un sistema lineal de inecuaciones que incluye $x_i$ desconocidos. Es por tanto la unión de un número finito de conjuntos poliédricos en el espacio euclídeo.\\
+
+Por ejemplo en un juego bipersonal tenemos:\\
+
+Sea el conjunto de negociación de un juego:\\
+
+\begin{center}
+
+$v(1)=v(2)=0 \quad v(12)=a \geq 0 $
+
+\end{center}
+
+Teniendo que el problema podemos escribirlo como:\\
+
+$x_1 + x_2 =a \quad x_1 \geq 0 , x_2 \geq 0 $\\
+
+
+Una condición necesaria y suficiente para que el primer jugador tenga una objeción con la coalición 1,2 es que $x_1 < v(13)$. Esto implica que está obteniendo menos que lo que podría obtener si se une con el tercer jugador.\\
+
+
+
+\textit{\textbf{Definición 2.8}} Una coalición permisible en un juego será denominada efectiva, si es posible dividir el valor obtenido por la coalición entre todos los miembros de tal forma que ninguna subcoalición pueda obtener más.\\
+
+Asumiremos que todos los subconjuntos de N son coaliciones permisibles y que aquellas con un valor positivo serán las efectivas. Las coaliciones cuyo valor sea cero serán denominadas coaliciones triviales.\\
+
+Notemos, que todas aquellas coaliciones que en general obtenga un peor valor, serán eliminadas del conjunto de negociación.\\
+
+
+
+\newpage
+
+\chapter{Aplicaciones}
+
+Hemos desarrollado anteriormente los conceptos fundamentales para la comprensión de la teoría de juegos. En este apartado nos centraremos en mostrar ejemplos de aplicación de esta teoría.\\
+
+
+\section{Crisis de los misiles en cuba}
+
+Empezaremos las aplicaciones viendo como un problema militar de tal magnitud como fue la crisis de los misiles de cuba se pudo resolver gracias a la aplicación de la teoría de juegos.\\
+
+Veremos a continuación como este problema se resolvió gracias a la teoría de la negociación de Nash.\\
+
+El 14 de octubre de 1962,  la CIA descubrió que en cuba existían misiles nucleares de la URSS apuntando hacia estados unidos. \\
+Recordemos que en aquel entonces, se hayan ambos países en la denominada Guerra fría. Además, recordemos que en esos momentos cuba estaba bajo el mandato del dictador Fidel Castro, el cual era afín a la URSS.\\
+
+Notemos también, que en esos momentos estados unidos tenia en la bases de Italia y Turquía misiles nucleares con capacidad de alcanzar Moscu.(Recordemos que Italia y Turquía pertenecían a la OTAN)\\
+
+
+Puesto el contexto del conflicto, veamos como se resolvió siguiendo las bases de la teoría de la negociación de Nash.\\
+
+Primer paso: \\
+Mostrar la estrategia de amenaza del primer jugador:\\
+En este caso, estados unidos indico a la unión soviética, que no quería misiles apuntando a estados unidos, por lo que amenazó con un bloqueo marítimo y con destruir las bases de cuba.\\
+
+Podemos observar que la estrategia de amenaza seguida por estados unidos era realizar un bloqueo a los buques soviéticos y además llevar a cabo la destrucción de las bases militares de cuba.\\
+
+Segundo paso:\\
+El segundo jugador muestra su estrategia de amenaza.\\
+
+En este caso la unión soviética replico que si atacaba cuba sería como atacarles a ellos.\\
+
+Esto último implica que la estrategia de amenaza de la unión soviética era declarar la guerra a estados unidos si atacaba cuba. Teniendo en cuenta las posibles consecuencias nucleares que esto podía causar.\\
+
+Llegamos a la tercera fase, en la que ambos jugadores negocian y o llegan a un acuerdo o usan sus estrategias de amenaza.\\
+
+En este caso, la unión soviética paró el envió de barcos de suministros mientras se llevaba a cabo el acuerdo. \\
+
+Para que se llevase a termino el acuerdo, estados unidos exigía la desmantelación de los misiles nucleares de cuba. Asimismo, la unión soviética exigió lo propio con los misiles en Italia y Turquía. \\
+
+Por último, el 28 de octubre de ese mismo año se acordó la retirada de los misiles nucleares por parte de la URSS de cuba, y de la retirada de los misiles nucleares de Italia y Turquía por parte de estados unidos. Además, estados unidos renunció a acabar por la fuerza con el régimen cubano.\\
+
+
+Vemos como en la última fase se llego a un acuerdo y no fue necesaria la aplicación de la amenaza, que en este caso llevaba a la destrucción mutua provocada por una guerra nuclear.\\
+
+
+\section{Control del Sinai}
+
+Hemos visto una ejemplo de resolución de un conflicto, si seguimos en línea con esta tendencia de resolución de conflictos podemos observar este nuevo ejemplo.\\
+
+Consideremos ahora el conflicto entre Israel y Egipcio en 1978 por el control del Sinai.\\
+
+En este caso los intereses de ambos países aparentemente eran completamente opuestos puesto que ambos querían el control del Sinai. \\
+
+Podemos observar de ello, que era un juego de suma cero, ya que uno ganaba (se quedaba con su control) y el otro perdía.\\
+
+Finalmente este conflicto fue resuelto usando la teoría de la negociación de Nash.\\
+
+En este conflicto, Israel quería seguridad, es decir, no quería tanques cerca de la frontera. Por el contrario, Egipcio quería soberanía, es decir, mantener la integridad de las antiguas fronteras.\\
+
+Para ello ambos amenazaban con una guerra.\\
+
+Finalmente la situación se resolvió obteniendo Egipcio el control del Sinai, pero teniendo que desmilitarizarlo.\\
+
+Podemos observar que el conflicto paso por todas las etapas de la negociación. \\
+Los primeros pasos fue mostrar la estrategia de amenaza, en la que en este caso ambos coincidían. Esta no era otra que iniciar una guerra por el control del Sinai.\\
+
+A continuación, se llevan a cabo las negociaciones sabiendo cada parte que es lo mínimo que va a aceptar para evitar el conflicto.\\
+
+Llegado al acuerdo, ambas partes están contentas con el pago obtenido y como se ha dado el acuerdo, no será necesario aplicar la estrategia de amenaza, es decir, entrar en guerra.\\
+
+
+
+
+\section{La batalla de los sexos}
+
+Veremos ahora un nuevo conflicto, aunque esta vez, el conflicto sale del plano militar para introducirse en el plano familiar. Aquí una pareja luchará por conocer quien logra llevar a cabo su plan para el fin de semana.\\
+
+Supongamos que tenemos la siguiente matriz de pagos:\\
+
+
+\begin{center}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		M / H & Estrategia1 & Estrategia2 \\
+		\hline
+		Estrategia1 & (2,1) & (-1,-1) \\
+		\hline
+		Estrategia2 & (-1,-1) & (1,2) \\
+		\hline
+	\end{tabular}
+\end{center}
+
+
+En la batalla de los sexos, tenemos una pareja que esta tratando de decidir el plan para el fin de semana.\\
+El hombre, el cual será el primer jugador prefiere ir al cine. Por el contrario, la mujer que será el segundo jugador prefiere ir a la bolera.\\
+
+Notar que para ambos es más importante ir juntos que ir a su entretenimiento preferido.\\
+
+Notemos que la primera estrategia para cada uno será ir a la bolera y la segunda ir al cine. \\
+
+Veamos algunas características de este juego que nos irán dando formas de resolverlo:\\
+
+\textbf{El poder de ser terco}
+
+Podemos ver en la matriz de pagos como el primer jugador estará contento con la opción de ir a la bolera($a_{11}$) pero que preferirá ir al cine.\\
+
+Si la mujer anuncia que elegirá ir a la bolera pase lo que pase y nada ni nadie le hará cambiar de opinión entonces si el hombre tiene la certeza acerca de la terquedad de su pareja, entonces no tendrá más remedio que elegir ir a la bolera también.\\
+
+Por lo tanto vemos que es una buena estrategia decir primero que vamos a seguir nuestra estrategia preferida y tener fama de tercos.\\
+
+
+\textbf{La competición}
+
+Puede ocurrir ahora, que la mujer para asegurar su intención de ir a la bolera, le muestre a su pareja que tiene ya los tickets comprados. Esto puede provocar dos efectos:\\
+
+1) Que el ceda como en el caso anterior.\\
+2) Que se revele contra el espíritu dictatorial de su pareja, llegando incluso a cambiar su matriz de pagos.\\
+
+En este caso podemos ver que existen dos estrategias con equilibrios puros. Esta son que ambos elijan la bolera o que ambos elijan el cine. \\
+
+Pero supongamos ahora que no hablan entre ellos para decidir que hacer.\\
+Entonces ambos se encontraran en la siguiente tesitura:\\
+
+Pongámonos en el caso del hombre, este razonaría de la siguiente forma:\\
+
+Yo prefiero que vayamos los dos al cine, pero mi pareja prefiere claramente que ambos vayamos a la bolera. Si yo elijo ir al cine y ella a la bolera entonces ambos perdemos. Si por el contrario, yo decido ir a la bolera y ella también entonces ambos estamos ganando más que si no nos ponemos de acuerdo.\\
+
+Si ahora estos jugadores piensan en una estrategia segura mediante una estrategia mixta, entonces podemos observar como la estrategia mixta para el hombre sería (2/5,3/5).\\
+
+Y por tanto el podría asegurarse 1/5. Pero si sigue el hombre razonando puede pensar que si su pareja averigua que el jugará a lo seguro entonces ella elegirá ir a la bolera y por tanto ganará 4/5. \\
+
+
+
+\section{El penalty de Nash}
+
+
+Supongamos ahora que la pareja anterior no ha conseguido ponerse de acuerdo, y decide de mutuo acuerdo quedarse viendo un partido de fútbol en casa.\\ 
+
+En este tendremos en cuenta como juego el lanzamiento de un penalti dentro de un partido de fútbol profesional, es decir, imaginemos que nuestra pareja esta viendo jugar a la selección española por ejemplo.\\
+
+Recordemos antes de comenzar con el análisis como funciona un penalti:\\
+
+1) La pelota en la marca de penalti dentro del área de penalti.\\
+2) El jugador que lanza el penalti está perfectamente identificado.\\
+3) El portero se encuentra en la linea de gol enfrente del lanzador y entre los postes(a una distancia equidistante de ambos) hasta que la pelota ha sido lanzada.\\
+4) Los demás jugadores están dentro del campo pero alejados al menos 9 metros del área de penalti.\\
+
+
+Cada penalti involucra dos jugadores, el lanzador y el portero.\\
+Habitualmente el tiempo que tarda la pelota en llegar a la portería es menor que 3 segundos, lo cual es mucho menor que el tiempo de reacción de un portero. Esto implica que ambos jugadores deben realizar su elección a la vez.\\
+
+Recordemos que solo hay dos resultados posibles, o marca o no marca.\\
+
+
+Tenemos que los lanzadores tratan de maximizar la probabilidad esperada de marcar, mientras que los porteros tratan de maximizar la probabilidad esperada de que no marque.\\
+
+Además, recordemos un punto importante, el jugador puede elegir lanzar a la izquierda o a la derecha y el portero puede decidir tirarse a la izquierda o a la derecha.\\
+
+Por lo que en este juego las dos posibles estrategias son:\\
+1) Lanzarse/Tirar a la izquierda(left)\\
+2) Lanzarse/Tirar a la derecha(right).\\
+
+Podemos observar que la matriz de pago de estos jugadores sería de la forma:\\
+
+
+
+\begin{center}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		i / j & L & R\\
+		\hline
+		L & $\pi_{LL}$ & $\pi_{LR}$ \\
+		\hline
+		R & $\pi_{RL}$ & $\pi_{RR}$ \\
+		\hline
+	\end{tabular}
+\end{center}
+
+
+En este caso, el único equilibrio de Nash sería cuando:\\
+
+\begin{center}
+
+$ \pi_{LR} > \pi_{LL} < \pi_{RL} \newline
+  \pi_{RL} > \pi_{LL} < \pi_{RL}$
+
+\end{center}
+
+
+Denotando $\pi_{ij}$ la probabilidad del lanzador de anotar, teniendo que $i=\{L,R\}$ denota a las posibles elecciones del lanzador y donde $j=\{L,R\}$ denota a las posibles alternativas del portero.\\
+
+Es obvio que ambos pueden elegir el centro, en este caso por simplicidad no lo recogemos debido a que en el estudio de Palacios Huertas puede observarse como la frecuencia con la que el lanzador decide lanzar al centro o el portero decide quedarse en el centro son insignificantes.\\
+
+En este estudio, podemos observar como los jugadores pueden ser zurdos o diestros de pies. Esta diferencia es remarcable puesto que aquellos jugadores cuyo pie dominante es el izquierdo, suelen tener más tendencia a lanzar hacia la izquierda. Por tanto se ve una tendencia a lanzar más hacia la izquierda de los jugadores de pie zurdo y más a la derecha de los jugadores de pie diestro. Asimismo, podemos observar que la probabilidad de acierto es mayor cuando lanzan hacia el lado que corresponde en función de su tendencia natural.\\
+
+Podemos observar como el lanzamiento del penalti tiene un único equilibrio de Nash y que este se encuentra cuando ambos jugadores juegan una estrategia mixta.\\
+
+Para que se de este equilibrio, las probabilidades de cada una de las elecciones para cada jugador deben ser las mismas.\\
+Asimismo, estas probabilidades en cada juego deben ser independientes de los penaltis lanzados anteriormente.\\
+
+Del estudio empírico de Palacios Huertas, podemos observar que las probabilidades asociadas a cada una de las opciones de cada uno de los jugadores por parte de las predicciones realizadas para las estrategias mixtas en equilibrio de Nash, son prácticamente idénticas a aquellas que se dieron de forma empírica.\\
+
+
+
+Podemos ver tras este breve estudio de los penaltis, como ambos jugadores están enfrentados en un juego de suma nula en los que ambos aplican la estrategia MaxiMin para tratar de maximizar la función de pago. Además, en esta estrategia ninguno de los jugadores tiene en cuenta las elecciones previas, tanto suyas como del oponente.\\
+
+
+
+
+\section{El reparto de la tarta}
+
+Puede que durante el partido a nuestra pareja le entrase hambre, vamos a ver como podrían repartir una tarta entre ambos para que ambos estuvieran contentos.\\
+
+En este juego, la idea es repartir una tarta entre un conjunto de comensales de tal forma que todos crean que han recibido la misma porción de tarta, es decir, repartirla de forma justa.\\
+
+Supondremos que la tarta tiene un único sabor y que es del gusto de todos los comensales.\\
+
+Además, supondremos que la solución del problema es aditiva, es decir, si tenemos dos trozos de tarta, siendo la utilidad de ambos $x_1$ y $x_2$ respectivamente, entonces la utilidad de ambos en conjunto será $x_1 + x_2$. Esto implica que si pegamos todos los trozos de la tarta obtendremos la tarta original.\\
+
+Comenzaremos viendo el funcionamiento de este juego para dos jugadores.\\
+
+\textbf{n=2}
+
+El primer pensamiento que podemos tener es que el primero que elige no puede ser el mismo que corte la tarta, puesto que es claro que cortaría el pedazo más grande para él.\\
+
+Por tanto en este caso se aplicaría el "tu lo cortas y yo elijo", en este caso si el jugador que corta trata de obtener más de la mitad de la tarta, estaría incurriendo en el riesgo de obtener menos. Asimismo, el segundo jugador, es decir, el que elije, podría en ese caso obtener más tarta sin incurrir en riesgo alguno.\\
+
+Por lo que bajo estas condiciones, el equilibrio entre ambos se daría cuando ambos tienen exactamente la mitad de la tarta.\\
+
+
+\textbf{n>2}
+
+Veamos ahora un forma de corte para más de dos jugadores.\\
+
+Aquí se supone que el cuchillo se desplaza a velocidad constante a lo largo de la tarta. En cada instante el cuchillo se para y corta una única porción de la tarta.\\
+
+Si un jugador indica que esta satisfecho con la porción, entonces se la queda y continuará el juego con los n-1 comensales restantes y con la parte que resta de la tarta.\\
+
+Asimismo, si dos jugadores muestran su conformidad simultáneamente, solo uno de ellos se lleva el pedazo de tarta.\\
+
+
+Podemos ver que esta estrategia reporta a cada uno de los comensales al menos $1/n$ parte de tarta. Esto lo lleva a ser un reparto justo entre todos ellos.\\
+
+
+Otra forma que existe de dividir la tarta para n comensales es la siguiente:\\
+
+Para este caso necesitamos numerar los jugadores de la A a la N.\\
+
+Supongamos que el primer jugador el A, corta un trozo del pastel. Entonces el siguiente jugador B cortará también un trozo del pastel pero además tiene el derecho de cortar un trozo del pastel de A y devolverlo a la tarta.\\ 
+Así sucesivamente hasta el último.\\
+
+El último deberá aceptar la pieza restante como la parte que le pertenece(no podrá cortar más los trozos).\\
+Así, el juego vuelve a empezar de la misma forma hasta que la tarta quede completamente repartida.\\
+
+
+
+
+\section{Campaña publicitaría}
+
+
+La publicidad es muy importante en ciertos modelos de oligopolio donde el cliente tiene información incompleta respecto a las características del producto.\\
+
+Supondremos que la empresa respecto a la publicidad tiene un presupuesto fijo.\\
+
+Cuando una empresa tiene un solo competidor, su objetivo será quitarle la mayor cantidad de cuota de mercado que pueda.\\
+
+Supondremos dos empresas que tienen un millón de euros para gastar en publicidad de sus productos.\\
+Para la publicidad pueden utilizar, radio, televisión o prensa.\\
+
+Esta publicidad va dirigida a tres grupos de clientes potenciales.\\
+
+El efecto esperado que producirá las distintas posibilidades de publicidad viene recogido en la siguiente matriz de pagos.\\
+
+
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.5]{Tabla_publicidad_uno.png}
+\end{figure} 
+
+Cada una de las componentes es un vector que indica los ingresos extra que obtiene cada uno de los jugadores cuando se gastan el dinero en los diferentes medios.\\
+
+En este caso, tenemos que ambos jugadores tienen la posibilidad de usar el dinero solo en una de las opciones, o repartirlo entre todas ellas. En el caso de poder repartir el dinero, el primer jugador tendrá un vector $x=(x_1,x_2,x_3)$ en el que se indique la cantidad asignada a cada uno de los tipos de prensa.  Por el contrario, si tiene que poner todo el dinero en una única opción entonces estos valores serán la probabilidad que el primer jugador le de a poner el dinero en esa opción.\\
+
+
+Este juego lo podemos descomponer en las siguientes matrices.\\
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=0.5]{Matriz_publicidad_uno.png}
+\end{figure} 
+
+
+En este caso, estamos suponiendo que la primera matriz corresponde a lo que ganaría o perdería en el primer segmento de la población la primera empresa.\\
+
+Esto puede interpretarse como tres juegos independientes en los cuales las reglas son las mismas.\\
+
+Recordemos que como teníamos dos empresas en competición, esto será un juego de suma nula, es decir, toda la cuota de mercado que gane una la perderá la otra.\\
+
+Así, una estrategia para el primer jugador podría ser:\\
+
+\begin{center}
+
+$x=(\dfrac{4}{9},\dfrac{5}{9},0)$
+
+\end{center}
+
+Esto indica que el primer jugador no invertirá nada en prensa escrita.\\
+
+\chapter{Bibliografía}
+
+[1] von Neumann, J., y  Morgenstern, O. (1953). Theory of games and economic behavior. Princeton University Press.\\
+
+
+[2] Owen, G. (1982). Game Theory, Second Edition. Academic Press.\\
+
+[3] R. Duncan Luce y Howard R. (1957). Games and Decisions: Introduction and Critical Survey. John Wiley y Sons,Inc.\\
+
+[4] Rufián Lizana. A (2017). La búsqueda del equilibrio en la teoría de juegos Nash. RBA coleccionables.\\
+
+[5] Rufián Lizana, A., Ruiz Garzón, G., y Osuna Gómez, R. (2011). Métodos de optimización matemática: [manual para la resolución de problemas de optimización aplicados a la toma de decisiones empresariales]. Alvalena.\\
+
+[6] Claude E, Shannon. (1949) XXII. Programming a Computer for Playing Chess.  Philosophical Magazine. 
+\\
+
+[7] Walker, P y Schwalbe, U. (1999). Zermelo and the Early History of Game Theory. https://people.math.harvard.edu/~elkies/FS23j.03/zermelo.pdf \\
+
+[8] NÚMEROS NATURALES Y SISTEMAS DE NUMERACIÓN: OPERACIONES Rodríguez Vallejo, R. (2014).NÚMEROS NATURALES Y SISTEMAS DE NUMERACIÓN: OPERACIONES. Conjuntos numéricos, estructuras algebraicas y fundamentos de álgebra lineal. Volumen I: conjuntos numéricos, complementos: ( ed.). Editorial Tébar Flores. https://elibro.net/es/ereader/bibliotecaus/51977?page=65. \\
+
+[9] Roman, S. (2008). Partially Ordered Sets. Lattices and Ordered Sets (pp 2-26). Springer\\
+
+[10] Stefani Chavez, E y Milanesi, G y Pesce, G. (2017). FUNCIONES DE UTILIDAD Y ESTIMACIÓN DE LA AVERSIÓN AL RIESGO: REVISIÓN DE LA LITERATURA. Escritos Contables y de Adminstración, vol. 7, n.° 2, 2016, págs. 97 a 118,
+ISSN 1853-2063 (impreso) ISSN 1853-2055 (en línea). \\
+
+[11] Sturmfels, B. (2002). Chapter 6. Polynomial Systems in Economics. Solving systems of polynomial equations. \\
+
+[12] Skyrms, Brian y Zambrano, Xavier, tr (2007). La caza del ciervo y la evolución de la estructura social. Barcelona : Melusina \\
+
+[13] Aracil, Mª José y Basañez, F. La tragedia de los comunes: estudio mediante un modelo de simulación. \\
+https://idus.us.es/bitstream/handle/11441/97199/la_tragedia_de_los_comunes_estudio_mediante.pdf?sequence=1&isAllowed=y \\
+
+[14] JOHN N ASH: U NA MENTE MARAVILLOSA. L A GACETA DE LA RSME, Vol. 5.3 (2002), Págs. 559–587. https://gaceta.rsme.es/abrir.php?id=292 \\
+
+[15] Dresher, M , Lloyd S. Shapley and William Tucker, A. (1964). The Bargaining Set for Cooperative Games . Advances in Game Theory. (AM-52), Volume 52. https://doi.org/10.1515/9781400882014 \\
+
+[16] Nash, J. (1951). Non-Cooperative Games. Source:
+Annals of Mathematics , Sep., 1951, Second Series, Vol. 54, No. 2 (Sep., 1951), pp.286-295. Published by: Mathematics Department, Princeton University. Stable URL: https://www.jstor.org/stable/1969529\\
+
+[17]  Nash, J.(Jan., 1953). Two-Person Cooperative Games. Econometrica , Jan., 1953, Vol. 21, No. 1 , pp. 128-140. The Econometric Society. \\
+https://www.jstor.org/stable/1906951\\
+
+[18] R. Cohen,T.Conflict Resolution. The Corsini Encyclopedia of Psychology, 4th edition, Volume 1 (pp.390-391). 10.1002/9780470479216.corpsy0219\\
+
+[19] PALACIOS-HUERTA, I. (2002). Professionals Play Minimax. http://www.palacios-huerta.com/docs/professionals.pdf \\
+
+[20] John F. Nash, Jr.(1950). The Bargaining Problem. Econometrica, Vol. 18, No. 2 , pp. 155-162 (8 pages). https://doi.org/10.2307/1907266 \\
+
+[21] H. Steinhaus. (1949). Sur la division pragmatique. Econometrica , Jul., 1949, Vol. 17, Supplement: Report of the Washington Meeting (Jul., 1949), pp. 315-319. The Econometric Society. https://www.jstor.org/stable/1907319 \\
+
+[22] L. E. Dubins & E. H. Spanier. (1961). How to Cut A Cake Fairly. Taylor & Francis, Ltd. on behalf of the Mathematical Association of America. \\
+https://www.jstor.org/stable/2311357 \\
+
+[23] Mármol Conde, A.M., y Monroy Berjillos, L. (1999). Aplicaciones economicas. En Avances en teoría de juegos con aplicaciones económicas y sociales (pp. 73-88). Sevilla: Universidad de Sevilla \\
+
+
+
+
+	
+\end{document}
