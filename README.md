@@ -22,9 +22,9 @@ This work is primarily grounded in game theory, and addresses topics such as:
 
 
 
-## 📜 Licencia
+## 📜 Licencia/License
 GNU General Public License v3.0
 
-## 👩‍💻 Autor
+## 👩‍💻 Autor/Author
 
 Nerea Almenta Camacho
