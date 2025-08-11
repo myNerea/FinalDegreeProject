@@ -19,3 +19,12 @@ This work is primarily grounded in game theory, and addresses topics such as:
 - Utility functions
 - Nash equilibria
 - Applications
+
+
+
+## 📜 Licencia
+GNU General Public License v3.0
+
+## 👩‍💻 Autor
+
+Nerea Almenta Camacho
